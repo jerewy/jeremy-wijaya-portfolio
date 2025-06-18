@@ -445,7 +445,7 @@ export default function Portfolio() {
             Get In Touch
           </h2>
           <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            I'm always excited to connect, collaborate on innovative AI
+            I&apos;m always excited to connect, collaborate on innovative AI
             projects, or discuss new opportunities in AI engineering. Feel free
             to reach out through any of the channels below!
           </p>
