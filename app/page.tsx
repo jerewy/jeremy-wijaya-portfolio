@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
+import Image from "next/image";
 
 export default function Portfolio() {
   const [mounted, setMounted] = useState(false);
@@ -38,7 +39,9 @@ export default function Portfolio() {
       title: "Jernih - AI-powered Water Quality Analysis Platform",
       summary:
         "Co-developed a full-stack web platform for water contamination analysis, achieving 85.37% ML model accuracy on 3278 measurements.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/jernih.png",
+      width: 500,
+      height: 300,
       liveLink: "https://jernih.vercel.app/",
       githubLink: "https://github.com/jerewy/jernih-repo",
       tags: ["Next.js", "Python", "ML", "Supabase"],
@@ -46,19 +49,23 @@ export default function Portfolio() {
     {
       title: "AI-driven Health Predictors",
       summary:
-        "Developed & deployed interactive ML models for diabetes risk (Streamlit) and heart disease prediction using large datasets.",
-      image: "/placeholder.svg?height=300&width=500",
+        "Developed & deployed interactive ML models for diabetes risk (Streamlit) using large datasets.",
+      image: "/glucoguard_cropped.png",
+      width: 500,
+      height: 300,
       liveLink: "https://glucoguard-app.streamlit.app/",
-      githubLink: "https://github.com/jerewy/health-predictors-repo",
+      githubLink: "https://github.com/jerewy/diabetes-risk-predictor",
       tags: ["Python", "Streamlit", "Healthcare AI"],
     },
     {
       title: "CodeJoin - Interactive Coding Environment (Work In Progress)",
       summary:
         "Developing web-based coding platform mimicking VS Code/CodeSandbox, integrating AI chatbot features with LLMs.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/code_join_cropped.png",
+      width: 500,
+      height: 300,
       liveLink: null,
-      githubLink: "https://github.com/jerewy/codejoin-repo",
+      githubLink: "https://github.com/jerewy/codejoin-new",
       tags: ["React", "Monaco Editor", "AI Integration", "WebRTC"],
     },
   ];
@@ -110,7 +117,7 @@ export default function Portfolio() {
     },
     {
       category: "Databases & Tools",
-      skills: ["MySQL", "Supabase", "Git", "Docker"],
+      skills: ["MySQL", "Supabase", "Git"],
     },
   ];
 
@@ -357,14 +364,23 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 cursor-hover transform"
+                className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 cursor-hover transform pt-0"
               >
-                <CardHeader className="p-0">
+                {/* <CardHeader className="p-0">
                   <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-t-lg flex items-center justify-center">
                     <Code className="w-16 h-16 text-blue-400" />
                   </div>
+                </CardHeader> */}
+                <CardHeader className="p-0 overflow-hidden rounded-t-lg">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={project.width}
+                    height={project.height}
+                    className="w-full h-auto object-cover rounded-t-lg"
+                  />
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="pt-0">
                   <CardTitle className="text-xl mb-3 text-gray-100">
                     {project.title}
                   </CardTitle>
