@@ -43,7 +43,7 @@ export default function Portfolio() {
       width: 500,
       height: 300,
       liveLink: "https://jernih.vercel.app/",
-      githubLink: "https://github.com/jerewy/jernih-repo",
+      githubLink: "https://github.com/Allen-pie/Jernih_Frontend",
       tags: ["Next.js", "Python", "ML", "Supabase"],
     },
     {
