@@ -8,8 +8,14 @@ type CursorPosition = {
 };
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState<CursorPosition>({ x: -100, y: -100 });
-  const [trailPosition, setTrailPosition] = useState<CursorPosition>({ x: -100, y: -100 });
+  const [position, setPosition] = useState<CursorPosition>({
+    x: -100,
+    y: -100,
+  });
+  const [trailPosition, setTrailPosition] = useState<CursorPosition>({
+    x: -100,
+    y: -100,
+  });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const livePosition = useRef<CursorPosition>(position);
