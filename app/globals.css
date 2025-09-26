@@ -40,9 +40,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Hide default cursor when custom cursor is active */
-.cursor-hidden,
-.cursor-hidden * {
+html.cursor-hidden,
+html.cursor-hidden * {
   cursor: none !important;
 }
 

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { type CSSProperties, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";

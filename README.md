@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jeremy Wijaya Portfolio
+
+A single-page portfolio site built with Next.js and Tailwind CSS to highlight Jeremy Wijaya's engineering journey. The landing page blends a responsive UI with a three.js hero scene so the robot guide follows your pointer without obscuring the copy.
+
+## Features
+
+- **Immersive hero** – A custom three.js robot (`HeroScene`) tracks the visitor's cursor, paired with a dark glassmorphism layout for readable hero messaging.
+- **Gradient navigation** – Fixed pill navigation emphasises "Let's collaborate" while collapsing into a compact mobile bar.
+- **Hard-skill marquee** – `SkillSlider` renders a continuous ticker with direction controls so every featured technology gets time in view.
+- **Projects & contact grid** – Project cards surface live demos and GitHub links; contact methods become full-card links that adapt from grid to stack layouts.
+- **Cursor & particle effects** – A trailing-glow cursor activates only when scripts load, while `AnimatedBackground` draws lightweight connective particles behind the content.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.18 or newer (Next.js 15 requirement)
+- npm 9+ (bundled with the recommended Node.js version)
+
+### Installation
+
+```bash
+npm install
+```
+
+### Local development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Navigate to [http://localhost:3000](http://localhost:3000) to view the site. Edits to files under `app/` trigger hot reloads.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+### Linting
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+app/
+  components/
+    animated-background.tsx  # Canvas particle network with requestAnimationFrame cleanup
+    custom-cursor.tsx        # Pointer-following glow cursor with class-based cursor fallback
+    hero-scene.tsx           # @react-three/fiber robot that looks toward the visitor
+    skill-slider.tsx         # Continuous marquee for hard skills with direction controls
+  globals.css                # Tailwind layers, scroll behaviour, marquee keyframes
+  layout.tsx                 # Root layout and font wiring
+  page.tsx                   # Portfolio content, sections, and data arrays
+components/ui/               # Reusable button, card, badge primitives
+lib/utils.ts                 # `cn` helper for conditional Tailwind classes
+```
 
-## Deploy on Vercel
+## Customising Content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Hero copy & stats** – Update hero text, stats, project listings, and contact links directly inside `app/page.tsx`.
+- **Skills** – Add or remove entries in the `hardSkillSlides`, `quickSkills`, and `softSkills` arrays.
+- **Assets** – Place images in `public/` and reference them from the `projects` array for automatic optimisation via `next/image`.
+- **Cursor appearance** – Tweak colours, shadows, and animation speeds inside `app/components/custom-cursor.tsx`. The cursor only hides the native pointer while `isVisible` is true.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Accessibility Notes
+
+- The animated background stops its `requestAnimationFrame` loop when the component unmounts to avoid background CPU usage.
+- The custom cursor toggles an `html.cursor-hidden` class so the system cursor remains available if JavaScript fails or visitors disable effects.
+- Section headings use semantic HTML and responsive typography for legibility across devices.
+

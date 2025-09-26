@@ -13,6 +13,7 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const livePosition = useRef<CursorPosition>(position);
+  const hasShownRef = useRef(false);
 
   useEffect(() => {
     livePosition.current = position;
@@ -22,6 +23,10 @@ export default function CustomCursor() {
     const updatePosition = (event: MouseEvent) => {
       const next = { x: event.clientX, y: event.clientY };
       setPosition(next);
+      if (!hasShownRef.current) {
+        hasShownRef.current = true;
+        setTrailPosition(next);
+      }
       setIsVisible(true);
       if (!isVisible) {
         setTrailPosition(next);
@@ -30,10 +35,13 @@ export default function CustomCursor() {
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
-    const handleMouseOut = () => setIsVisible(false);
+    const handleMouseExit = () => {
+      hasShownRef.current = false;
+      setIsVisible(false);
+    };
 
     document.addEventListener("mousemove", updatePosition);
-    document.addEventListener("mouseout", handleMouseOut);
+    document.addEventListener("mouseleave", handleMouseExit);
 
     const interactiveElements = document.querySelectorAll(
       '.cursor-hover, button, a, [role="button"]'
@@ -43,13 +51,41 @@ export default function CustomCursor() {
       element.addEventListener("mouseleave", handleMouseLeave);
     });
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        hasShownRef.current = false;
+        setIsVisible(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       document.removeEventListener("mousemove", updatePosition);
-      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mouseleave", handleMouseExit);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       interactiveElements.forEach((element) => {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);
       });
+      frame = window.requestAnimationFrame(animateTrail);
+    };
+
+    frame = window.requestAnimationFrame(animateTrail);
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isVisible) {
+      root.classList.add("cursor-hidden");
+    } else {
+      root.classList.remove("cursor-hidden");
+    }
+
+    return () => {
+      root.classList.remove("cursor-hidden");
     };
   }, [isVisible]);
 
@@ -72,19 +108,6 @@ export default function CustomCursor() {
 
     return () => window.cancelAnimationFrame(frame);
   }, []);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isVisible) {
-      root.classList.add("cursor-hidden");
-    } else {
-      root.classList.remove("cursor-hidden");
-    }
-
-    return () => {
-      root.classList.remove("cursor-hidden");
-    };
-  }, [isVisible]);
 
   if (!isVisible) return null;
 
