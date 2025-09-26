@@ -2,74 +2,85 @@
 
 ## Overview
 
-- Single-page portfolio built with Next.js App Router (React 19 + TypeScript) showcasing Jeremy Wijaya's academic background and project work.
-- Optional motion layer (aurora particles + custom cursor) can be toggled off by visitors and respects `prefers-reduced-motion`.
-- Portfolio copy and metadata live in `app/content/portfolio-data.ts`, keeping the layout component slim.
+- Next.js 15 (App Router) single-page portfolio for Jeremy Wijaya.
+- React 19 + TypeScript with Tailwind CSS for styling and shadcn-inspired UI primitives.
+- Focused on immersive-yet-readable presentation: animated hero robot, marquee skill slider, responsive project and contact sections.
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript + JSX
-- **Styling:** Tailwind CSS + class-variance-authority + tailwind-merge + tailwindcss-animate
+- **Framework:** Next.js 15.3 (app directory)
+- **Runtime:** React 19, TypeScript 5
+- **Styling:** Tailwind CSS, tailwind-merge, class-variance-authority
+- **3D / Motion:** three.js via @react-three/fiber and @react-three/drei
 - **Icons:** lucide-react
-- **Font:** Inter via `next/font`
 
-## Key Files
+## Directory Guide
 
-```
+```text
 app/
-  page.tsx                        # Hero, about, projects, contact sections with motion toggle
-  content/portfolio-data.ts       # Projects, stats, skills, contact data
+  layout.tsx                     # Root layout, font setup, metadata
+  globals.css                    # Tailwind layers, marquee animation, cursor class
   components/
-    animated-background.tsx       # Canvas particle field (accepts `enabled`)
-    custom-cursor.tsx             # Trailing cursor with ripple feedback (accepts `enabled`)
-    reveal.tsx                    # Intersection-observer reveal wrapper
-  globals.css                     # Tailwind base + aurora styling + mobile adjustments
-components/ui/                    # shadcn-inspired UI primitives
-lib/utils.ts                      # `cn` helper
+    animated-background.tsx      # Canvas particle network with cleanup on unmount
+    custom-cursor.tsx            # Pointer-following glow cursor + cursor fallback handling
+    hero-scene.tsx               # @react-three/fiber scene for the robot hero
+    skill-slider.tsx             # Continuous marquee slider for hard skills
+  page.tsx                       # Portfolio sections, data arrays, CTA markup
+components/ui/                   # Button, card, badge primitives
+lib/utils.ts                     # `cn` helper
 ```
 
-## Page Flow (`app/page.tsx`)
+## Page Composition (`app/page.tsx`)
 
-1. Reads data from `portfolio-data.ts` and maps icon strings to lucide components.
-2. Stores a persisted `effectsEnabled` flag (localStorage) that controls `AnimatedBackground` and `CustomCursor`.
-3. Renders four narrative sections:
-   - **Hero:** introduction, current areas of focus, CTA buttons.
-   - **About:** stats, education highlight, technical toolkit, collaboration style.
-   - **Projects:** equal-height cards with tags and external links.
-   - **Contact:** contact methods with icons and hover states.
-4. Footer prints the current year dynamically.
+1. Declares arrays for projects, stats, and skills directly inside the component for easy edits.
+2. Renders the following sections in order:
+   - **Fixed navigation** – Gradient pill on desktop with CTA, compact bar on mobile.
+   - **Hero** – Headline, supporting copy, CTA buttons, and the `HeroScene` canvas background.
+   - **About** – Stats grid, qualifications card, faux terminal snippet, descriptive copy, hard-skill slider, quick-view badges, and soft-skill bullets.
+   - **Projects** – Responsive cards featuring project imagery, tech badges, and links.
+   - **Contact** – Clickable cards that open mail, LinkedIn, GitHub, or phone actions.
+   - **Footer** – Simple copyright notice.
+3. Mounts shared motion layers (`CustomCursor`, `AnimatedBackground`) at the top level.
 
 ## Interactive Components
 
-- **AnimatedBackground**
-  - Seeds particles based on viewport size, handles window resize/mouse/scroll, and pauses when disabled or when `prefers-reduced-motion` is true.
 - **CustomCursor**
-  - Lerps toward the pointer, changes glow states on hover/press, emits ripple effects on clicks, and disconnects listeners when disabled.
-- **Reveal**
-  - Adds `reveal-visible` when elements intersect ~18% of the viewport (optional delay support) for subtle fade-up motion.
+  - Tracks mouse movement, animates a trailing glow via `requestAnimationFrame`, and toggles the `html.cursor-hidden` class only while the custom cursor is active.
+  - Attaches hover listeners to `.cursor-hover` targets, anchors, buttons, and role="button" elements to enlarge the cursor on interaction.
+  - Resets visibility when the pointer leaves the document or the page loses visibility.
 
-## Styling Notes
+- **AnimatedBackground**
+  - Seeds lightweight particles and connects nearby nodes with lines.
+  - Stores the RAF handle and cancels it during cleanup to prevent background CPU usage.
+  - Responds to window resize and pointer movement for gentle parallax.
 
-- CSS custom properties define the dark palette; mobile breakpoint softens the background gradient.
-- Utility helpers like `.bg-glass` and aurora classes provide reusable visual elements.
-- Tailwind config extends keyframes (aurora, float, fade-up, ripple, etc.) and glow shadows to keep motion language consistent.
+- **HeroScene**
+  - Three.js robot built from primitives that follows pointer coordinates.
+  - Includes ambient/spot/point lighting and background stars for depth.
+  - Applies a dark gradient overlay so hero text stays readable over the canvas.
 
-## Accessibility & Performance
+- **SkillSlider**
+  - Duplicates the slides array to create an infinite marquee.
+  - Direction buttons flip the animation direction; hover pauses the ticker.
+  - Uses Tailwind + CSS custom animation (`skill-marquee`) defined in `globals.css`.
 
-- Motion toggle allows visitors to disable cursor + particles; preference is remembered across sessions.
-- Components guard against SSR/hydration issues by checking `window` and clearing listeners on cleanup.
-- Hero uses balanced typography and compact copy for readability on smaller screens.
+## Styling & UX Notes
+
+- Tailwind tokens keep spacing consistent; gradient borders/glass panels are built with utility classes.
+- `html` smooth scrolling enables nav anchors without jump cuts.
+- Contact cards use full-card anchors for a larger tap target and accessible link semantics.
+- Badges and marquee cards rely on uppercase tracking to match the visual brand.
+
+## Development Tips
+
+- Update imagery in `public/` and adjust metadata in `app/page.tsx` or `app/layout.tsx`.
+- When adding new interactive elements, append `.cursor-hover` to opt into custom cursor hover states.
+- If you create additional sections, consider wrapping them in cards or gradients consistent with existing components for continuity.
 
 ## Scripts
 
-- `npm run dev` � start development server
-- `npm run build` � production build
-- `npm run start` � serve production build
-- `npm run lint` � ESLint with Next.js configuration
+- `npm run dev` – start the development server
+- `npm run build` – generate the production bundle
+- `npm run start` – serve the production build
+- `npm run lint` – run ESLint with the Next.js config
 
-## Future Ideas
-
-- Plug the data module into a CMS or JSON feed for easier updates.
-- Add automated visual/UI smoke tests (Playwright/Cypress) for the motion toggle and section reveals.
-- Introduce lightweight case-study subpages for deeper dives into individual projects if needed.

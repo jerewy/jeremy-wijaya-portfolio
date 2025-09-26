@@ -33,17 +33,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    cursor: none;
   }
 }
 
 html {
   scroll-behavior: smooth;
-  cursor: none;
 }
 
-/* Hide default cursor */
-* {
+html.cursor-hidden,
+html.cursor-hidden * {
   cursor: none !important;
 }
 
@@ -63,4 +61,13 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
+}
+
+@keyframes skill-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
