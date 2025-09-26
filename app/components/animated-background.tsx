@@ -33,7 +33,7 @@ export default function AnimatedBackground() {
     const colors = ["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981"];
 
     // Create particles
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 40; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -68,8 +68,8 @@ export default function AnimatedBackground() {
         const dy = mouseY - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 100) {
-          const force = (100 - distance) / 100;
+        if (distance < 140) {
+          const force = (140 - distance) / 140;
           particle.vx += (dx / distance) * force * 0.01;
           particle.vy += (dy / distance) * force * 0.01;
         }
@@ -98,12 +98,12 @@ export default function AnimatedBackground() {
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (distance < 120) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
             ctx.strokeStyle = `rgba(59, 130, 246, ${
-              0.1 * (1 - distance / 100)
+              0.08 * (1 - distance / 120)
             })`;
             ctx.lineWidth = 1;
             ctx.stroke();
@@ -125,7 +125,7 @@ export default function AnimatedBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-0 opacity-70 mix-blend-screen"
       style={{ background: "transparent" }}
     />
   );
