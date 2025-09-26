@@ -1,73 +1,127 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+type CursorPosition = {
+  x: number;
+  y: number;
+};
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState<CursorPosition>({ x: -100, y: -100 });
+  const [trailPosition, setTrailPosition] = useState<CursorPosition>({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const livePosition = useRef<CursorPosition>(position);
 
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    livePosition.current = position;
+  }, [position]);
+
+  useEffect(() => {
+    const updatePosition = (event: MouseEvent) => {
+      const next = { x: event.clientX, y: event.clientY };
+      setPosition(next);
       setIsVisible(true);
+      if (!isVisible) {
+        setTrailPosition(next);
+      }
     };
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
     const handleMouseOut = () => setIsVisible(false);
 
-    // Add event listeners
     document.addEventListener("mousemove", updatePosition);
     document.addEventListener("mouseout", handleMouseOut);
 
-    // Add hover listeners to interactive elements
     const interactiveElements = document.querySelectorAll(
       '.cursor-hover, button, a, [role="button"]'
     );
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
+    interactiveElements.forEach((element) => {
+      element.addEventListener("mouseenter", handleMouseEnter);
+      element.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
       document.removeEventListener("mousemove", updatePosition);
       document.removeEventListener("mouseout", handleMouseOut);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
+      interactiveElements.forEach((element) => {
+        element.removeEventListener("mouseenter", handleMouseEnter);
+        element.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
+  }, [isVisible]);
+
+  useEffect(() => {
+    let frame: number;
+
+    const animateTrail = () => {
+      setTrailPosition((prev) => {
+        const target = livePosition.current;
+        const next = {
+          x: prev.x + (target.x - prev.x) * 0.18,
+          y: prev.y + (target.y - prev.y) * 0.18,
+        };
+        return next;
+      });
+      frame = window.requestAnimationFrame(animateTrail);
+    };
+
+    frame = window.requestAnimationFrame(animateTrail);
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   if (!isVisible) return null;
 
   return (
     <>
-      {/* Main cursor */}
       <div
-        className="fixed pointer-events-none z-[60]"
-        style={{
-          left: position.x - 12,
-          top: position.y - 12,
-          transform: `scale(${isHovering ? 1.5 : 1})`,
-          transition: "transform 0.2s ease-out",
-        }}
+        className="fixed z-[60] -translate-x-1/2 -translate-y-1/2 transform-gpu pointer-events-none"
+        style={{ left: position.x, top: position.y }}
       >
-        <div className="w-6 h-6 border-2 border-blue-400 rounded-full bg-transparent" />
+        <div
+          className="relative flex h-12 w-12 items-center justify-center"
+          style={{ transition: "transform 0.2s ease-out" }}
+        >
+          <div
+            className="absolute inset-0 rounded-full border border-sky-400/60 bg-sky-500/10 backdrop-blur-sm transition-all"
+            style={{
+              boxShadow: isHovering
+                ? "0 0 22px rgba(56, 189, 248, 0.35)"
+                : "0 0 14px rgba(56, 189, 248, 0.18)",
+              transform: `scale(${isHovering ? 1.05 : 0.95})`,
+            }}
+          />
+          <div
+            className="absolute inset-3 rounded-full border border-indigo-400/50 bg-indigo-500/10 mix-blend-screen transition-all"
+            style={{
+              opacity: isHovering ? 0.85 : 0.6,
+              transform: `scale(${isHovering ? 1.08 : 1})`,
+            }}
+          />
+          <div
+            className="absolute h-3 w-3 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]"
+            style={{
+              transform: `scale(${isHovering ? 0.9 : 1})`,
+            }}
+          />
+          <div className="absolute h-16 w-16 rounded-full bg-sky-400/20 blur-2xl" />
+        </div>
       </div>
 
-      {/* Trailing cursor */}
       <div
-        className="fixed pointer-events-none z-[55]"
-        style={{
-          left: position.x - 20,
-          top: position.y - 20,
-          transform: `scale(${isHovering ? 1.8 : 1})`,
-          transition: "transform 0.3s ease-out",
-        }}
+        className="fixed z-[55] -translate-x-1/2 -translate-y-1/2 transform-gpu pointer-events-none"
+        style={{ left: trailPosition.x, top: trailPosition.y }}
       >
-        <div className="w-10 h-10 border border-blue-400/30 rounded-full bg-transparent" />
+        <div
+          className="h-16 w-16 rounded-full bg-gradient-to-br from-sky-500/30 via-indigo-500/20 to-purple-500/10 blur-2xl opacity-80 transition-all"
+          style={{
+            transform: `scale(${isHovering ? 1.15 : 1})`,
+            opacity: isHovering ? 0.9 : 0.7,
+          }}
+        />
       </div>
     </>
   );
