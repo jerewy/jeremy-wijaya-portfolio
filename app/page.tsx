@@ -25,6 +25,8 @@ import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
+import HeroScene from "./components/hero-scene";
+import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import Image from "next/image";
 
 export default function Portfolio() {
@@ -97,28 +99,73 @@ export default function Portfolio() {
     },
   ];
 
-  const hardSkills = [
+  const hardSkillSlides: SkillSlide[] = [
     {
-      category: "Programming Languages",
-      skills: ["Python", "Java", "JavaScript", "C"],
+      name: "Python",
+      description: "Building data pipelines, FastAPI services, and production-ready ML workflows.",
+      category: "AI Engineering",
     },
     {
-      category: "AI/ML Technologies",
-      skills: [
-        "Machine Learning",
-        "Deep Learning",
-        "NLP",
-        "Speech Recognition",
-      ],
+      name: "JavaScript & TypeScript",
+      description: "Crafting performant web apps and design systems across React and Next.js ecosystems.",
+      category: "Frontend/Full-stack",
     },
     {
-      category: "Web Development",
-      skills: ["Next.js", "React", "Tailwind CSS", "Node.js"],
+      name: "Next.js",
+      description: "Designing SSR/ISR experiences, API routes, and AI-enabled dashboards at scale.",
+      category: "Web Platform",
     },
     {
-      category: "Databases & Tools",
-      skills: ["MySQL", "Supabase", "Git"],
+      name: "TensorFlow & PyTorch",
+      description: "Experimenting with deep learning architectures for vision, NLP, and structured data.",
+      category: "Machine Learning",
     },
+    {
+      name: "Supabase",
+      description: "Deploying realtime backends, auth flows, and storage integrations for prototypes.",
+      category: "Backend as a Service",
+    },
+    {
+      name: "Git & Collaboration",
+      description: "Leading version-controlled workflows, code reviews, and GitHub Actions automation.",
+      category: "Team Practices",
+    },
+    {
+      name: "Figma",
+      description: "Translating UX wireframes into polished UI libraries and interaction specs.",
+      category: "Product Design",
+    },
+    {
+      name: "HTML & CSS",
+      description: "Delivering responsive, accessible interfaces with Tailwind CSS and semantic markup.",
+      category: "Frontend Fundamentals",
+    },
+    {
+      name: "C & Java",
+      description: "Grounding AI work with systems-level understanding and object-oriented design patterns.",
+      category: "Software Foundations",
+    },
+    {
+      name: "Add your next skill",
+      description: "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
+      category: "Future Highlight",
+    },
+  ];
+
+  const quickSkills = [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Next.js",
+    "TensorFlow",
+    "PyTorch",
+    "Supabase",
+    "Git",
+    "Figma",
+    "HTML",
+    "CSS",
+    "C",
+    "Java",
   ];
 
   const softSkills = [
@@ -127,6 +174,37 @@ export default function Portfolio() {
     "Collaboration & Communication",
     "Mentorship & Leadership",
     "Strong Work Ethic & Social Responsibility",
+  ];
+
+  const contactMethods = [
+    {
+      label: "Email",
+      value: "jeremywijaya81@gmail.com",
+      href: "mailto:jeremywijaya81@gmail.com",
+      icon: Mail,
+      helper: "Say hello",
+    },
+    {
+      label: "LinkedIn",
+      value: "jeremy-wijaya",
+      href: "https://linkedin.com/in/jeremy-wijaya",
+      icon: Linkedin,
+      helper: "Let’s connect",
+    },
+    {
+      label: "GitHub",
+      value: "jerewy",
+      href: "https://github.com/jerewy",
+      icon: Github,
+      helper: "View my code",
+    },
+    {
+      label: "Phone",
+      value: "+6285817540995",
+      href: "tel:+6285817540995",
+      icon: Phone,
+      helper: "Give me a call",
+    },
   ];
 
   if (!mounted) return null;
@@ -168,15 +246,21 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-16 min-h-screen flex items-center justify-center relative">
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold pb-4 mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
+      <section className="relative flex min-h-screen items-center justify-center pt-16">
+        <HeroScene />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),_transparent_55%)]" />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+          <div className="mx-auto mb-8 flex w-fit items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-5 py-2 text-sm font-medium text-blue-200 shadow-lg backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            Building intelligent products with empathy
+          </div>
+          <h1 className="mb-6 bg-gradient-to-r from-blue-300 via-purple-300 to-cyan-300 bg-clip-text pb-4 text-5xl font-bold text-transparent md:text-7xl">
             Jeremy Wijaya
           </h1>
-          <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
+          <h2 className="mb-8 text-2xl font-light text-gray-200 md:text-3xl">
             Aspiring AI Engineer | Building Impactful Intelligent Systems
           </h2>
-          <p className="text-lg text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-gray-300">
             A driven Computer Science student (Intelligent Systems
             specialization) at BINUS University, completing my second year with
             a passion for developing full-stack AI solutions to solve real-world
@@ -212,7 +296,7 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 relative">
+      <section id="about" className="relative px-4 py-20">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
             About Me
@@ -305,30 +389,30 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
-                  <Cpu className="w-5 h-5" />
-                  Technical Skills
-                </h3>
-                <div className="grid gap-4">
-                  {hardSkills.map((skillGroup, index) => (
-                    <div key={index}>
-                      <h4 className="font-medium text-gray-200 mb-2">
-                        {skillGroup.category}
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {skillGroup.skills.map((skill, skillIndex) => (
-                          <Badge
-                            key={skillIndex}
-                            variant="secondary"
-                            className="bg-gray-800 text-gray-300 cursor-hover hover:bg-blue-600 transition-colors"
-                          >
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+              <div className="space-y-6">
+                <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
+                    <Cpu className="w-5 h-5" />
+                    Technical Skills
+                  </h3>
+                  <SkillSlider slides={hardSkillSlides} />
+                </div>
+
+                <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-6">
+                  <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/70">
+                    Quick View
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {quickSkills.map((skill) => (
+                      <Badge
+                        key={skill}
+                        variant="secondary"
+                        className="bg-gray-800/80 text-gray-200 transition hover:bg-blue-500/80 cursor-hover"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -450,57 +534,38 @@ export default function Portfolio() {
             to reach out through any of the channels below!
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all cursor-hover transform hover:scale-105">
-              <CardContent className="p-6 text-center">
-                <Mail className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 text-gray-100">Email</h3>
-                <a
-                  href="mailto:jeremywijaya81@gmail.com"
-                  className="text-gray-400 hover:text-blue-400 transition-colors break-all cursor-hover"
-                >
-                  jeremywijaya81@gmail.com
-                </a>
-              </CardContent>
-            </Card>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {contactMethods.map((method) => {
+              const Icon = method.icon;
+              const isExternal = method.href.startsWith("http");
 
-            <Card className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all cursor-hover transform hover:scale-105">
-              <CardContent className="p-6 text-center">
-                <Linkedin className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 text-gray-100">LinkedIn</h3>
+              return (
                 <a
-                  href="https://linkedin.com/in/jeremy-wijaya"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors cursor-hover"
+                  key={method.label}
+                  href={method.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="group h-full"
                 >
-                  jeremy-wijaya
+                  <Card className="h-full border-gray-700 bg-gray-900/80 transition-all group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-hover">
+                    <CardContent className="flex h-full flex-col items-center gap-3 p-6 text-center">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 shadow-inner">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h3 className="mb-1 text-lg font-semibold text-gray-100">{method.label}</h3>
+                        <p className="text-sm uppercase tracking-[0.3em] text-blue-400/60">
+                          {method.helper}
+                        </p>
+                      </div>
+                      <p className="break-all text-gray-300 transition group-hover:text-blue-200">
+                        {method.value}
+                      </p>
+                    </CardContent>
+                  </Card>
                 </a>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all cursor-hover transform hover:scale-105">
-              <CardContent className="p-6 text-center">
-                <Github className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 text-gray-100">GitHub</h3>
-                <a
-                  href="https://github.com/jerewy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors cursor-hover"
-                >
-                  jerewy
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all cursor-hover transform hover:scale-105">
-              <CardContent className="p-6 text-center">
-                <Phone className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 text-gray-100">Phone</h3>
-                <p className="text-gray-400">+6285817540995</p>
-              </CardContent>
-            </Card>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -44,30 +44,36 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Main cursor */}
       <div
         className="fixed pointer-events-none z-[60]"
         style={{
-          left: position.x - 12,
-          top: position.y - 12,
-          transform: `scale(${isHovering ? 1.5 : 1})`,
-          transition: "transform 0.2s ease-out",
+          left: position.x - 20,
+          top: position.y - 20,
+          transform: `scale(${isHovering ? 1.15 : 1})`,
+          transition: "transform 0.18s ease-out",
         }}
       >
-        <div className="w-6 h-6 border-2 border-blue-400 rounded-full bg-transparent" />
+        <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-indigo-400 to-purple-500 shadow-[0_0_10px_rgba(59,130,246,0.45)]">
+          <span className="absolute left-3 top-3 h-1.5 w-1.5 rounded-full bg-white" />
+          <span className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-white" />
+          <span
+            className="absolute bottom-3 h-1 w-3 rounded-full bg-white/70 transition-transform"
+            style={{ transform: `scaleX(${isHovering ? 1.2 : 1})` }}
+          />
+          <div className="absolute inset-0 rounded-full border-2 border-white/40" />
+        </div>
       </div>
 
-      {/* Trailing cursor */}
       <div
         className="fixed pointer-events-none z-[55]"
         style={{
-          left: position.x - 20,
-          top: position.y - 20,
-          transform: `scale(${isHovering ? 1.8 : 1})`,
-          transition: "transform 0.3s ease-out",
+          left: position.x - 30,
+          top: position.y - 30,
+          transform: `scale(${isHovering ? 1.4 : 1})`,
+          transition: "transform 0.25s ease-out",
         }}
       >
-        <div className="w-10 h-10 border border-blue-400/30 rounded-full bg-transparent" />
+        <div className="h-16 w-16 rounded-full bg-gradient-to-br from-sky-500/20 to-purple-500/10 blur-md" />
       </div>
     </>
   );
