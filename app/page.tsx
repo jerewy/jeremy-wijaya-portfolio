@@ -96,52 +96,62 @@ export default function Portfolio() {
   const hardSkillSlides: SkillSlide[] = [
     {
       name: "Python",
-      description: "Building data pipelines, FastAPI services, and production-ready ML workflows.",
+      description:
+        "Building data pipelines, FastAPI services, and production-ready ML workflows.",
       category: "AI Engineering",
     },
     {
       name: "JavaScript & TypeScript",
-      description: "Crafting performant web apps and design systems across React and Next.js ecosystems.",
+      description:
+        "Crafting performant web apps and design systems across React and Next.js ecosystems.",
       category: "Frontend/Full-stack",
     },
     {
       name: "Next.js",
-      description: "Designing SSR/ISR experiences, API routes, and AI-enabled dashboards at scale.",
+      description:
+        "Designing SSR/ISR experiences, API routes, and AI-enabled dashboards at scale.",
       category: "Web Platform",
     },
     {
       name: "TensorFlow & PyTorch",
-      description: "Experimenting with deep learning architectures for vision, NLP, and structured data.",
+      description:
+        "Experimenting with deep learning architectures for vision, NLP, and structured data.",
       category: "Machine Learning",
     },
     {
       name: "Supabase",
-      description: "Deploying realtime backends, auth flows, and storage integrations for prototypes.",
+      description:
+        "Deploying realtime backends, auth flows, and storage integrations for prototypes.",
       category: "Backend as a Service",
     },
     {
       name: "Git & Collaboration",
-      description: "Leading version-controlled workflows, code reviews, and GitHub Actions automation.",
+      description:
+        "Leading version-controlled workflows, code reviews, and GitHub Actions automation.",
       category: "Team Practices",
     },
     {
       name: "Figma",
-      description: "Translating UX wireframes into polished UI libraries and interaction specs.",
+      description:
+        "Translating UX wireframes into polished UI libraries and interaction specs.",
       category: "Product Design",
     },
     {
       name: "HTML & CSS",
-      description: "Delivering responsive, accessible interfaces with Tailwind CSS and semantic markup.",
+      description:
+        "Delivering responsive, accessible interfaces with Tailwind CSS and semantic markup.",
       category: "Frontend Fundamentals",
     },
     {
       name: "C & Java",
-      description: "Grounding AI work with systems-level understanding and object-oriented design patterns.",
+      description:
+        "Grounding AI work with systems-level understanding and object-oriented design patterns.",
       category: "Software Foundations",
     },
     {
       name: "Add your next skill",
-      description: "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
+      description:
+        "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
       category: "Future Highlight",
     },
     {
@@ -162,22 +172,6 @@ export default function Portfolio() {
     //     "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
     //   category: "Future Highlight",
     // },
-  ];
-
-  const quickSkills = [
-    "Python",
-    "JavaScript",
-    "TypeScript",
-    "Next.js",
-    "TensorFlow",
-    "PyTorch",
-    "Supabase",
-    "Git",
-    "Figma",
-    "HTML",
-    "CSS",
-    "C",
-    "Java",
   ];
 
   const quickSkills = [
@@ -236,7 +230,10 @@ export default function Portfolio() {
   ];
 
   return (
-    <div id="top" className="min-h-screen bg-gray-950 text-gray-100 relative overflow-hidden">
+    <div
+      id="top"
+      className="min-h-screen bg-gray-950 text-gray-100 relative overflow-hidden"
+    >
       <CustomCursor />
       <AnimatedBackground />
 
@@ -246,13 +243,20 @@ export default function Portfolio() {
           <div className="hidden md:block">
             <div className="rounded-full bg-gradient-to-r from-sky-500/50 via-indigo-500/40 to-purple-500/50 p-[1px] shadow-[0_12px_60px_-25px_rgba(59,130,246,0.65)]">
               <div className="flex items-center justify-between rounded-full bg-gray-950/90 px-6 py-3 backdrop-blur-xl">
-                <a href="#top" className="cursor-hover flex items-center gap-3 text-left">
+                <a
+                  href="#top"
+                  className="cursor-hover flex items-center gap-3 text-left"
+                >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500/80 to-purple-500/80 text-lg font-bold text-white shadow-[0_0_25px_rgba(56,189,248,0.45)]">
                     JW
                   </span>
                   <div className="leading-tight">
-                    <p className="text-sm font-semibold text-slate-100">Jeremy Wijaya</p>
-                    <p className="text-xs uppercase tracking-[0.32em] text-blue-300/70">AI Engineer &amp; Developer</p>
+                    <p className="text-sm font-semibold text-slate-100">
+                      Jeremy Wijaya
+                    </p>
+                    <p className="text-xs uppercase tracking-[0.32em] text-blue-300/70">
+                      AI Engineer &amp; Developer
+                    </p>
                   </div>
                 </a>
                 <div className="flex items-center gap-2 rounded-full bg-gray-900/70 px-6 py-2 text-sm font-medium text-slate-200 shadow-inner">
@@ -289,7 +293,9 @@ export default function Portfolio() {
           <div className="flex items-center justify-between rounded-full border border-slate-800/70 bg-gray-950/90 px-4 py-2 shadow-md md:hidden">
             <span className="text-lg font-semibold text-blue-200">JW</span>
             <div className="flex items-center gap-4 text-sm text-slate-200">
-              <a href="#projects" className="cursor-hover">Work</a>
+              <a href="#projects" className="cursor-hover">
+                Work
+              </a>
               <a
                 href="#contact"
                 className="cursor-hover flex items-center gap-1 rounded-full bg-sky-500/20 px-3 py-1 text-sky-100"
@@ -610,10 +616,12 @@ export default function Portfolio() {
                         <Icon className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="mb-1 text-lg font-semibold text-gray-100">{method.label}</h3>
-                        <p className="text-sm uppercase tracking-[0.3em] text-blue-400/60">
+                        <h3 className="mb-1 text-lg font-semibold text-gray-100">
+                          {method.label}
+                        </h3>
+                        {/* <p className="text-sm uppercase tracking-[0.3em] text-blue-400/60">
                           {method.helper}
-                        </p>
+                        </p> */}
                       </div>
                       <p className="break-all text-gray-300 transition group-hover:text-blue-200">
                         {method.value}
