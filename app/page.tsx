@@ -169,6 +169,22 @@ export default function Portfolio() {
     "Java",
   ];
 
+  const quickSkills = [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Next.js",
+    "TensorFlow",
+    "PyTorch",
+    "Supabase",
+    "Git",
+    "Figma",
+    "HTML",
+    "CSS",
+    "C",
+    "Java",
+  ];
+
   const softSkills = [
     "Problem-Solving & Analytical Thinking",
     "Adaptability & Continuous Learning",
