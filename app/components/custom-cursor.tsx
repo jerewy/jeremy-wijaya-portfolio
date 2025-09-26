@@ -68,12 +68,7 @@ export default function CustomCursor() {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);
       });
-      frame = window.requestAnimationFrame(animateTrail);
     };
-
-    frame = window.requestAnimationFrame(animateTrail);
-
-    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
