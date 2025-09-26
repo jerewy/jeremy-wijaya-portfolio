@@ -23,7 +23,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
 import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
 import HeroScene from "./components/hero-scene";
@@ -31,12 +30,6 @@ import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import Image from "next/image";
 
 export default function Portfolio() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const projects = [
     {
       title: "Jernih - AI-powered Water Quality Analysis Platform",
@@ -217,8 +210,6 @@ export default function Portfolio() {
       helper: "Give me a call",
     },
   ];
-
-  if (!mounted) return null;
 
   return (
     <div
