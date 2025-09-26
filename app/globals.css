@@ -33,17 +33,16 @@
   }
   body {
     @apply bg-background text-foreground;
-    cursor: none;
   }
 }
 
 html {
   scroll-behavior: smooth;
-  cursor: none;
 }
 
-/* Hide default cursor */
-* {
+/* Hide default cursor when custom cursor is active */
+.cursor-hidden,
+.cursor-hidden * {
   cursor: none !important;
 }
 

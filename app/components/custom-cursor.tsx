@@ -73,6 +73,19 @@ export default function CustomCursor() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isVisible) {
+      root.classList.add("cursor-hidden");
+    } else {
+      root.classList.remove("cursor-hidden");
+    }
+
+    return () => {
+      root.classList.remove("cursor-hidden");
+    };
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
   return (
