@@ -12,9 +12,13 @@ function Robot({ pointer }: { pointer: PointerRef }) {
   const leftEye = useRef<THREE.Mesh>(null);
   const rightEye = useRef<THREE.Mesh>(null);
 
-  const headGeometry = useMemo(() => new THREE.BoxGeometry(1.8, 1.4, 1.4), []);
-  const bodyGeometry = useMemo(() => new THREE.BoxGeometry(1.4, 1.6, 1.1), []);
-  const antennaGeometry = useMemo(() => new THREE.CylinderGeometry(0.05, 0.05, 0.8, 16), []);
+  const headGeometry = useMemo(() => new THREE.BoxGeometry(1.9, 1.6, 1.4), []);
+  const bodyGeometry = useMemo(() => new THREE.BoxGeometry(1.5, 1.8, 1.1), []);
+  const jawGeometry = useMemo(() => new THREE.BoxGeometry(1.6, 0.6, 1.1), []);
+  const shoulderGeometry = useMemo(() => new THREE.BoxGeometry(2.8, 0.5, 1.2), []);
+  const antennaGeometry = useMemo(() => new THREE.CylinderGeometry(0.05, 0.05, 0.9, 24), []);
+  const facePlateGeometry = useMemo(() => new THREE.PlaneGeometry(1.45, 1.05, 16, 16), []);
+  const faceGlowGeometry = useMemo(() => new THREE.RingGeometry(0.68, 0.82, 64), []);
 
   useFrame((state) => {
     if (!group.current) return;
@@ -42,23 +46,61 @@ function Robot({ pointer }: { pointer: PointerRef }) {
   });
 
   return (
-    <group ref={group} position={[0, 0, 0]}>
-      <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.5}>
-        <mesh geometry={headGeometry} position={[0, 1.2, 0]}> 
-          <meshStandardMaterial color="#0f172a" metalness={0.2} roughness={0.4} />
+    <group ref={group} position={[0, 0.1, 0]} scale={1.18}>
+      <Float speed={1.1} rotationIntensity={0.22} floatIntensity={0.55}>
+        <mesh geometry={headGeometry} position={[0, 1.2, 0]}>
+          <meshStandardMaterial color="#111c2f" metalness={0.25} roughness={0.35} />
         </mesh>
 
-        <mesh geometry={bodyGeometry} position={[0, -0.1, 0]}>
-          <meshStandardMaterial color="#1e293b" metalness={0.3} roughness={0.4} />
+        <mesh geometry={jawGeometry} position={[0, 0.55, 0.02]}>
+          <meshStandardMaterial color="#0f172a" metalness={0.4} roughness={0.25} />
         </mesh>
 
-        <mesh ref={leftEye} position={[-0.45, 0.2, 0.72]}>
-          <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={0.6} />
+        <mesh geometry={bodyGeometry} position={[0, -0.15, 0]}>
+          <meshStandardMaterial color="#1e293b" metalness={0.32} roughness={0.38} />
         </mesh>
-        <mesh ref={rightEye} position={[0.45, 0.2, 0.72]}>
+
+        <mesh geometry={shoulderGeometry} position={[0, -1, 0]}>
+          <meshStandardMaterial color="#0f172a" metalness={0.28} roughness={0.5} />
+        </mesh>
+
+        <mesh
+          geometry={faceGlowGeometry}
+          position={[0, 1.23, 0.73]}
+          rotation={[0, 0, Math.PI / 2]}
+        >
+          <meshStandardMaterial
+            color="#38bdf8"
+            emissive="#38bdf8"
+            emissiveIntensity={0.45}
+            transparent
+            opacity={0.3}
+          />
+        </mesh>
+
+        <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.71]}>
+          <meshStandardMaterial
+            color="#0ea5e9"
+            emissive="#38bdf8"
+            emissiveIntensity={0.5}
+            transparent
+            opacity={0.26}
+            metalness={0.3}
+            roughness={0.1}
+          />
+        </mesh>
+
+        <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.68]}>
+          <meshStandardMaterial color="#020617" transparent opacity={0.85} />
+        </mesh>
+
+        <mesh ref={leftEye} position={[-0.45, 0.23, 0.74]}>
           <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.6} />
+          <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={0.85} />
+        </mesh>
+        <mesh ref={rightEye} position={[0.45, 0.23, 0.74]}>
+          <sphereGeometry args={[0.18, 32, 32]} />
+          <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.85} />
         </mesh>
 
         <mesh geometry={antennaGeometry} position={[0, 2.2, 0]}>
@@ -69,9 +111,19 @@ function Robot({ pointer }: { pointer: PointerRef }) {
           <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.8} />
         </mesh>
 
-        <mesh position={[0, -1.1, 0]}> 
-          <boxGeometry args={[2.6, 0.35, 1.2]} />
-          <meshStandardMaterial color="#0f172a" metalness={0.3} roughness={0.6} />
+        <mesh position={[0, -1.35, 0]}>
+          <boxGeometry args={[2.8, 0.35, 1.2]} />
+          <meshStandardMaterial color="#0f172a" metalness={0.32} roughness={0.6} />
+        </mesh>
+
+        <mesh position={[0, 0.75, 0.85]}>
+          <boxGeometry args={[0.9, 0.08, 0.1]} />
+          <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={0.6} />
+        </mesh>
+
+        <mesh position={[0, 0.05, 0.82]}>
+          <boxGeometry args={[0.65, 0.05, 0.1]} />
+          <meshStandardMaterial color="#f472b6" emissive="#f472b6" emissiveIntensity={0.5} />
         </mesh>
       </Float>
     </group>
@@ -93,11 +145,19 @@ export default function HeroScene() {
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0.8, 6], fov: 45 }}>
+      <Canvas camera={{ position: [0, 0.7, 4.2], fov: 38 }}>
         <color attach="background" args={["#020617"]} />
         <ambientLight intensity={0.8} />
-        <pointLight position={[3, 4, 4]} intensity={1.1} color="#38bdf8" />
-        <pointLight position={[-4, -2, 3]} intensity={0.6} color="#a855f7" />
+        <spotLight
+          position={[0, 2.6, 4.5]}
+          angle={0.5}
+          intensity={1.2}
+          color="#38bdf8"
+          penumbra={0.5}
+        />
+        <pointLight position={[3, 3, 4]} intensity={1.05} color="#38bdf8" />
+        <pointLight position={[-3.5, 1.5, 4]} intensity={0.9} color="#a855f7" />
+        <pointLight position={[0, 0.5, 3.2]} intensity={0.7} color="#fbcfe8" />
         <Robot pointer={pointer} />
         <Stars
           radius={60}
@@ -113,7 +173,7 @@ export default function HeroScene() {
           <meshStandardMaterial color="#020617" emissive="#0f172a" emissiveIntensity={0.2} />
         </mesh>
       </Canvas>
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-950/60 via-gray-950/80 to-gray-950" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/70 to-gray-950" />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   Mail,
   Phone,
   ExternalLink,
+  ArrowRight,
   Brain,
   Cpu,
   Award,
@@ -168,6 +169,22 @@ export default function Portfolio() {
     "Java",
   ];
 
+  const quickSkills = [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Next.js",
+    "TensorFlow",
+    "PyTorch",
+    "Supabase",
+    "Git",
+    "Figma",
+    "HTML",
+    "CSS",
+    "C",
+    "Java",
+  ];
+
   const softSkills = [
     "Problem-Solving & Analytical Thinking",
     "Adaptability & Continuous Learning",
@@ -210,35 +227,66 @@ export default function Portfolio() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 relative overflow-hidden">
+    <div id="top" className="min-h-screen bg-gray-950 text-gray-100 relative overflow-hidden">
       <CustomCursor />
       <AnimatedBackground />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-gray-950/80 backdrop-blur-md border-b border-gray-800 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold text-blue-400 cursor-hover">
-              JW
+      <nav className="fixed inset-x-0 top-4 z-50 px-4">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-3">
+          <div className="hidden md:block">
+            <div className="rounded-full bg-gradient-to-r from-sky-500/50 via-indigo-500/40 to-purple-500/50 p-[1px] shadow-[0_12px_60px_-25px_rgba(59,130,246,0.65)]">
+              <div className="flex items-center justify-between rounded-full bg-gray-950/90 px-6 py-3 backdrop-blur-xl">
+                <a href="#top" className="cursor-hover flex items-center gap-3 text-left">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500/80 to-purple-500/80 text-lg font-bold text-white shadow-[0_0_25px_rgba(56,189,248,0.45)]">
+                    JW
+                  </span>
+                  <div className="leading-tight">
+                    <p className="text-sm font-semibold text-slate-100">Jeremy Wijaya</p>
+                    <p className="text-xs uppercase tracking-[0.32em] text-blue-300/70">AI Engineer &amp; Developer</p>
+                  </div>
+                </a>
+                <div className="flex items-center gap-2 rounded-full bg-gray-900/70 px-6 py-2 text-sm font-medium text-slate-200 shadow-inner">
+                  <a
+                    href="#about"
+                    className="cursor-hover rounded-full px-3 py-1 transition hover:bg-sky-500/20 hover:text-sky-100"
+                  >
+                    About
+                  </a>
+                  <a
+                    href="#projects"
+                    className="cursor-hover rounded-full px-3 py-1 transition hover:bg-sky-500/20 hover:text-sky-100"
+                  >
+                    Projects
+                  </a>
+                  <a
+                    href="#contact"
+                    className="cursor-hover rounded-full px-3 py-1 transition hover:bg-sky-500/20 hover:text-sky-100"
+                  >
+                    Contact
+                  </a>
+                </div>
+                <a
+                  href="#contact"
+                  className="cursor-hover group flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_35px_-20px_rgba(59,130,246,0.8)] transition hover:shadow-[0_18px_45px_-18px_rgba(59,130,246,0.9)]"
+                >
+                  Let&apos;s collaborate
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
-            <div className="hidden md:flex space-x-8">
-              <a
-                href="#about"
-                className="text-gray-300 hover:text-blue-400 transition-colors cursor-hover"
-              >
-                About
-              </a>
-              <a
-                href="#projects"
-                className="text-gray-300 hover:text-blue-400 transition-colors cursor-hover"
-              >
-                Projects
-              </a>
+          </div>
+
+          <div className="flex items-center justify-between rounded-full border border-slate-800/70 bg-gray-950/90 px-4 py-2 shadow-md md:hidden">
+            <span className="text-lg font-semibold text-blue-200">JW</span>
+            <div className="flex items-center gap-4 text-sm text-slate-200">
+              <a href="#projects" className="cursor-hover">Work</a>
               <a
                 href="#contact"
-                className="text-gray-300 hover:text-blue-400 transition-colors cursor-hover"
+                className="cursor-hover flex items-center gap-1 rounded-full bg-sky-500/20 px-3 py-1 text-sky-100"
               >
                 Contact
+                <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
@@ -246,7 +294,7 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center pt-16">
+      <section className="relative flex min-h-screen items-center justify-center pt-28 md:pt-32">
         <HeroScene />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),_transparent_55%)]" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">

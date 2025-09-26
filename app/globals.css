@@ -64,3 +64,12 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }
+
+@keyframes skill-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
