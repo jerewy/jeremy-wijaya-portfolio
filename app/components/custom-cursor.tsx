@@ -28,6 +28,9 @@ export default function CustomCursor() {
         setTrailPosition(next);
       }
       setIsVisible(true);
+      if (!isVisible) {
+        setTrailPosition(next);
+      }
     };
 
     const handleMouseEnter = () => setIsHovering(true);
@@ -65,12 +68,16 @@ export default function CustomCursor() {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);
       });
+      frame = window.requestAnimationFrame(animateTrail);
     };
+
+    frame = window.requestAnimationFrame(animateTrail);
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
     const root = document.documentElement;
-
     if (isVisible) {
       root.classList.add("cursor-hidden");
     } else {

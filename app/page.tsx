@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Github,
@@ -70,13 +70,13 @@ export default function Portfolio() {
     {
       icon: Award,
       label: "GPA",
-      value: "3.95/4.00",
+      value: "3.96/4.00",
       description: "Academic Excellence",
     },
     {
       icon: Code,
       label: "Projects",
-      value: "10+",
+      value: "5+",
       description: "AI & Web Development",
     },
     {
@@ -144,6 +144,40 @@ export default function Portfolio() {
       description: "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
       category: "Future Highlight",
     },
+    {
+      name: "HTML & CSS",
+      description:
+        "Delivering responsive, accessible interfaces with Tailwind CSS and semantic markup.",
+      category: "Frontend Fundamentals",
+    },
+    {
+      name: "C & Java",
+      description:
+        "Grounding AI work with systems-level understanding and object-oriented design patterns.",
+      category: "Software Foundations",
+    },
+    // {
+    //   name: "Add your next skill",
+    //   description:
+    //     "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
+    //   category: "Future Highlight",
+    // },
+  ];
+
+  const quickSkills = [
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Next.js",
+    "TensorFlow",
+    "PyTorch",
+    "Supabase",
+    "Git",
+    "Figma",
+    "HTML",
+    "CSS",
+    "C",
+    "Java",
   ];
 
   const quickSkills = [
@@ -285,8 +319,8 @@ export default function Portfolio() {
           </h2>
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-gray-300">
             A driven Computer Science student (Intelligent Systems
-            specialization) at BINUS University, completing my second year with
-            a passion for developing full-stack AI solutions to solve real-world
+            specialization) at BINUS University, completing my third year with a
+            passion for developing full-stack AI solutions to solve real-world
             problems and drive positive societal change.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -357,7 +391,7 @@ export default function Portfolio() {
                   <p>
                     <strong>Education:</strong> Bachelor of Computer Science
                     (Intelligent Systems), BINUS University (2023-Present), GPA:
-                    3.95/4.00
+                    3.96/4.00
                   </p>
                   <p>
                     <strong>Certifications:</strong> Microsoft Azure AI
@@ -397,7 +431,7 @@ export default function Portfolio() {
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p>
                   A driven Computer Science student (Intelligent Systems
-                  specialization) at BINUS University, completing my second year
+                  specialization) at BINUS University, completing my third year
                   with a passion for building impactful AI solutions. My journey
                   into AI is fueled by a deep belief in its transformative power
                   to enhance human efficiency, responsibly harness resources,
