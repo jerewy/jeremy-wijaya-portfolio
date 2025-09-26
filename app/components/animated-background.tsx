@@ -55,6 +55,8 @@ export default function AnimatedBackground() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
+    let frameId: number | null = null;
+
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -111,14 +113,20 @@ export default function AnimatedBackground() {
         });
       });
 
-      requestAnimationFrame(animate);
+      frameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    frameId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("mousemove", handleMouseMove);
+      if (frameId !== null) {
+        cancelAnimationFrame(frameId);
+      }
+      particles.length = 0;
+      mouseX = 0;
+      mouseY = 0;
     };
   }, []);
 
