@@ -26,6 +26,7 @@ import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
 import HeroScene from "./components/hero-scene";
+import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import Image from "next/image";
 
@@ -320,8 +321,11 @@ export default function Portfolio() {
           <h1 className="mb-6 bg-gradient-to-r from-blue-300 via-purple-300 to-cyan-300 bg-clip-text pb-4 text-5xl font-bold text-transparent md:text-7xl">
             Jeremy Wijaya
           </h1>
-          <h2 className="mb-8 text-2xl font-light text-gray-200 md:text-3xl">
-            Aspiring AI Engineer | Building Impactful Intelligent Systems
+          <h2 className="mb-8 text-2xl font-light text-sky-100/90 md:text-3xl">
+            <BlurRevealText
+              text="Aspiring AI Engineer | Building Impactful Intelligent Systems"
+              className="text-balance"
+            />
           </h2>
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-gray-300">
             A driven Computer Science student (Intelligent Systems
