@@ -75,7 +75,7 @@ export default function CustomCursor() {
         element.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, []);
+  }, [isVisible]);
 
   useEffect(() => {
     const root = document.documentElement;

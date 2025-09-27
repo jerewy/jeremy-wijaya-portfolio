@@ -2,15 +2,22 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars } from "@react-three/drei";
-import { useEffect, useMemo, useRef, type MutableRefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type MutableRefObject } from "react";
 import * as THREE from "three";
 
-type PointerRef = MutableRefObject<{ x: number; y: number }>;
+type PointerState = { x: number; y: number; pulse: number };
+type PointerRef = MutableRefObject<PointerState>;
 
 function Robot({ pointer }: { pointer: PointerRef }) {
   const group = useRef<THREE.Group>(null);
   const leftEye = useRef<THREE.Mesh>(null);
   const rightEye = useRef<THREE.Mesh>(null);
+  const leftEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+  const rightEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+  const facePlateMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+  const faceGlowMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+  const chestBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+  const voiceBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
 
   const headGeometry = useMemo(() => new THREE.BoxGeometry(1.9, 1.6, 1.4), []);
   const bodyGeometry = useMemo(() => new THREE.BoxGeometry(1.5, 1.8, 1.1), []);
@@ -23,16 +30,25 @@ function Robot({ pointer }: { pointer: PointerRef }) {
   useFrame((state) => {
     if (!group.current) return;
 
-    const { x, y } = pointer.current;
-    const hoverX = THREE.MathUtils.lerp(group.current.rotation.y, x * 0.5, 0.08);
+    const { x, y, pulse } = pointer.current;
+    const time = state.clock.elapsedTime;
+
+    const hoverX = THREE.MathUtils.lerp(group.current.rotation.y, x * 0.6, 0.08);
     const hoverY = THREE.MathUtils.lerp(
       group.current.rotation.x,
-      -y * 0.3 + Math.sin(state.clock.elapsedTime * 0.8) * 0.05,
+      -y * 0.35 + Math.sin(time * 0.8) * 0.08,
       0.08
     );
 
     group.current.rotation.y = hoverX;
     group.current.rotation.x = hoverY;
+
+    const nextScaleTarget = 1.18 + Math.sin(time * 1.4) * 0.02 + pulse * 0.1;
+    const nextScale = THREE.MathUtils.lerp(group.current.scale.x, nextScaleTarget, 0.08);
+    group.current.scale.set(nextScale, nextScale, nextScale);
+
+    const baseY = Math.sin(time * 1.1) * 0.05 + pulse * 0.12;
+    group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, baseY, 0.1);
 
     const eyeOffsetX = THREE.MathUtils.lerp(0, x * 0.2, 0.6);
     const eyeOffsetY = THREE.MathUtils.lerp(0, -y * 0.2, 0.6);
@@ -43,11 +59,33 @@ function Robot({ pointer }: { pointer: PointerRef }) {
       leftEye.current.position.y = 0.2 + eyeOffsetY;
       rightEye.current.position.y = 0.2 + eyeOffsetY;
     }
+
+    const pulseGlow = 0.85 + pulse * 1.4 + Math.sin(time * 3) * 0.08;
+    if (leftEyeMaterial.current) {
+      leftEyeMaterial.current.emissiveIntensity = pulseGlow;
+    }
+    if (rightEyeMaterial.current) {
+      rightEyeMaterial.current.emissiveIntensity = pulseGlow * 1.05;
+    }
+    if (facePlateMaterial.current) {
+      facePlateMaterial.current.emissiveIntensity = 0.5 + pulse * 0.8;
+      facePlateMaterial.current.opacity = 0.26 + pulse * 0.15;
+    }
+    if (faceGlowMaterial.current) {
+      faceGlowMaterial.current.emissiveIntensity = 0.45 + pulse * 1.1;
+      faceGlowMaterial.current.opacity = 0.3 + pulse * 0.2;
+    }
+    if (chestBarMaterial.current) {
+      chestBarMaterial.current.emissiveIntensity = 0.6 + pulse * 1.5;
+    }
+    if (voiceBarMaterial.current) {
+      voiceBarMaterial.current.emissiveIntensity = 0.5 + pulse * 1.2;
+    }
   });
 
   return (
     <group ref={group} position={[0, 0.1, 0]} scale={1.18}>
-      <Float speed={1.1} rotationIntensity={0.22} floatIntensity={0.55}>
+      <Float speed={1.05} rotationIntensity={0.18} floatIntensity={0.5}>
         <mesh geometry={headGeometry} position={[0, 1.2, 0]}>
           <meshStandardMaterial color="#111c2f" metalness={0.25} roughness={0.35} />
         </mesh>
@@ -70,6 +108,7 @@ function Robot({ pointer }: { pointer: PointerRef }) {
           rotation={[0, 0, Math.PI / 2]}
         >
           <meshStandardMaterial
+            ref={faceGlowMaterial}
             color="#38bdf8"
             emissive="#38bdf8"
             emissiveIntensity={0.45}
@@ -80,6 +119,7 @@ function Robot({ pointer }: { pointer: PointerRef }) {
 
         <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.71]}>
           <meshStandardMaterial
+            ref={facePlateMaterial}
             color="#0ea5e9"
             emissive="#38bdf8"
             emissiveIntensity={0.5}
@@ -96,11 +136,21 @@ function Robot({ pointer }: { pointer: PointerRef }) {
 
         <mesh ref={leftEye} position={[-0.45, 0.23, 0.74]}>
           <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={0.85} />
+          <meshStandardMaterial
+            ref={leftEyeMaterial}
+            color="#38bdf8"
+            emissive="#38bdf8"
+            emissiveIntensity={0.85}
+          />
         </mesh>
         <mesh ref={rightEye} position={[0.45, 0.23, 0.74]}>
           <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.85} />
+          <meshStandardMaterial
+            ref={rightEyeMaterial}
+            color="#a855f7"
+            emissive="#a855f7"
+            emissiveIntensity={0.85}
+          />
         </mesh>
 
         <mesh geometry={antennaGeometry} position={[0, 2.2, 0]}>
@@ -118,12 +168,22 @@ function Robot({ pointer }: { pointer: PointerRef }) {
 
         <mesh position={[0, 0.75, 0.85]}>
           <boxGeometry args={[0.9, 0.08, 0.1]} />
-          <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={0.6} />
+          <meshStandardMaterial
+            ref={chestBarMaterial}
+            color="#38bdf8"
+            emissive="#38bdf8"
+            emissiveIntensity={0.6}
+          />
         </mesh>
 
         <mesh position={[0, 0.05, 0.82]}>
           <boxGeometry args={[0.65, 0.05, 0.1]} />
-          <meshStandardMaterial color="#f472b6" emissive="#f472b6" emissiveIntensity={0.5} />
+          <meshStandardMaterial
+            ref={voiceBarMaterial}
+            color="#f472b6"
+            emissive="#f472b6"
+            emissiveIntensity={0.5}
+          />
         </mesh>
       </Float>
     </group>
@@ -131,21 +191,130 @@ function Robot({ pointer }: { pointer: PointerRef }) {
 }
 
 export default function HeroScene() {
-  const pointer = useRef({ x: 0, y: 0 });
+  const pointer = useRef<PointerState>({ x: 0, y: 0, pulse: 0 });
+  const pointerTarget = useRef({ x: 0, y: 0 });
+  const isIdle = useRef(true);
+  const animationFrame = useRef<number | null>(null);
+  const idleTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   useEffect(() => {
-    const handlePointerMove = (event: PointerEvent) => {
-      pointer.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = (event.clientY / window.innerHeight) * 2 - 1;
+    const mql = window.matchMedia("(pointer: coarse)");
+    const handleChange = (event: MediaQueryListEvent | MediaQueryList) => {
+      setIsCoarsePointer(event.matches);
     };
 
-    window.addEventListener("pointermove", handlePointerMove);
-    return () => window.removeEventListener("pointermove", handlePointerMove);
+    handleChange(mql);
+
+    if (typeof mql.addEventListener === "function") {
+      mql.addEventListener("change", handleChange);
+      return () => mql.removeEventListener("change", handleChange);
+    }
+
+    if (typeof mql.addListener === "function") {
+      mql.addListener(handleChange);
+      return () => mql.removeListener(handleChange);
+    }
+
+    return () => {};
   }, []);
+
+  useEffect(() => {
+    const updatePointerTarget = (clientX: number, clientY: number) => {
+      pointerTarget.current.x = (clientX / window.innerWidth) * 2 - 1;
+      pointerTarget.current.y = (clientY / window.innerHeight) * 2 - 1;
+    };
+
+    const activate = () => {
+      isIdle.current = false;
+      if (idleTimeout.current) {
+        window.clearTimeout(idleTimeout.current);
+      }
+      idleTimeout.current = window.setTimeout(() => {
+        isIdle.current = true;
+        idleTimeout.current = null;
+      }, 4000);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      updatePointerTarget(event.clientX, event.clientY);
+      activate();
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      pointer.current.pulse = 1.2;
+      updatePointerTarget(event.clientX, event.clientY);
+      activate();
+    };
+
+    const handlePointerLeave = () => {
+      pointerTarget.current.x = 0;
+      pointerTarget.current.y = 0;
+    };
+
+    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+      if (event.beta == null || event.gamma == null) return;
+      const tiltX = THREE.MathUtils.clamp(event.gamma / 45, -1, 1);
+      const tiltY = THREE.MathUtils.clamp(event.beta / 45, -1, 1);
+      pointerTarget.current.x = tiltX;
+      pointerTarget.current.y = tiltY;
+      activate();
+    };
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        pointer.current.pulse = 1.2;
+        activate();
+      }
+    };
+
+    const animatePointer = () => {
+      const now = Date.now() * 0.001;
+      const autoX = Math.sin(now * 0.45) * 0.25;
+      const autoY = Math.cos(now * 0.35) * 0.2;
+      const targetX = isIdle.current ? autoX : pointerTarget.current.x;
+      const targetY = isIdle.current ? autoY : pointerTarget.current.y;
+
+      pointer.current.x = THREE.MathUtils.lerp(pointer.current.x, targetX, 0.07);
+      pointer.current.y = THREE.MathUtils.lerp(pointer.current.y, targetY, 0.07);
+      pointer.current.pulse = THREE.MathUtils.lerp(pointer.current.pulse, 0, 0.06);
+
+      animationFrame.current = window.requestAnimationFrame(animatePointer);
+    };
+
+    animatePointer();
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("keydown", handleKeydown);
+
+    if (isCoarsePointer && "DeviceOrientationEvent" in window) {
+      window.addEventListener("deviceorientation", handleDeviceOrientation);
+    }
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("keydown", handleKeydown);
+      if (isCoarsePointer && "DeviceOrientationEvent" in window) {
+        window.removeEventListener("deviceorientation", handleDeviceOrientation);
+      }
+      if (idleTimeout.current) {
+        window.clearTimeout(idleTimeout.current);
+        idleTimeout.current = null;
+      }
+      if (animationFrame.current !== null) {
+        window.cancelAnimationFrame(animationFrame.current);
+        animationFrame.current = null;
+      }
+    };
+  }, [isCoarsePointer]);
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0.7, 4.2], fov: 38 }}>
+      <Canvas camera={{ position: [0, 0.7, 4.2], fov: 38 }} dpr={[1, 1.75]}>
         <color attach="background" args={["#020617"]} />
         <ambientLight intensity={0.8} />
         <spotLight
@@ -162,11 +331,11 @@ export default function HeroScene() {
         <Stars
           radius={60}
           depth={40}
-          count={4000}
-          factor={3}
+          count={3600}
+          factor={isCoarsePointer ? 2.4 : 3}
           saturation={0}
           fade
-          speed={0.2}
+          speed={0.18}
         />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]}>
           <planeGeometry args={[50, 50]} />
