@@ -194,8 +194,8 @@ export default function HeroScene() {
   const pointer = useRef<PointerState>({ x: 0, y: 0, pulse: 0 });
   const pointerTarget = useRef({ x: 0, y: 0 });
   const isIdle = useRef(true);
-  const animationFrame = useRef<number>();
-  const idleTimeout = useRef<ReturnType<typeof window.setTimeout>>();
+  const animationFrame = useRef<number | null>(null);
+  const idleTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   useEffect(() => {
@@ -206,13 +206,17 @@ export default function HeroScene() {
 
     handleChange(mql);
 
-    if ("addEventListener" in mql) {
+    if (typeof mql.addEventListener === "function") {
       mql.addEventListener("change", handleChange);
       return () => mql.removeEventListener("change", handleChange);
     }
 
-    mql.addListener(handleChange);
-    return () => mql.removeListener(handleChange);
+    if (typeof mql.addListener === "function") {
+      mql.addListener(handleChange);
+      return () => mql.removeListener(handleChange);
+    }
+
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -223,9 +227,12 @@ export default function HeroScene() {
 
     const activate = () => {
       isIdle.current = false;
-      window.clearTimeout(idleTimeout.current);
+      if (idleTimeout.current) {
+        window.clearTimeout(idleTimeout.current);
+      }
       idleTimeout.current = window.setTimeout(() => {
         isIdle.current = true;
+        idleTimeout.current = null;
       }, 4000);
     };
 
@@ -294,9 +301,13 @@ export default function HeroScene() {
       if (isCoarsePointer && "DeviceOrientationEvent" in window) {
         window.removeEventListener("deviceorientation", handleDeviceOrientation);
       }
-      window.clearTimeout(idleTimeout.current);
-      if (animationFrame.current) {
+      if (idleTimeout.current) {
+        window.clearTimeout(idleTimeout.current);
+        idleTimeout.current = null;
+      }
+      if (animationFrame.current !== null) {
         window.cancelAnimationFrame(animationFrame.current);
+        animationFrame.current = null;
       }
     };
   }, [isCoarsePointer]);
