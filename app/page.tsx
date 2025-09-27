@@ -4,7 +4,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Phone,
   ExternalLink,
   ArrowRight,
   Brain,
@@ -221,13 +220,6 @@ export default function Portfolio() {
       icon: Github,
       helper: "View my code",
     },
-    // {
-    //   label: "Phone",
-    //   value: "+6285817540995",
-    //   href: "tel:+6285817540995",
-    //   icon: Phone,
-    //   helper: "Give me a call",
-    // },
   ];
 
   return (
@@ -503,7 +495,10 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8">
+      <section
+        id="projects"
+        className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
             Featured Projects
