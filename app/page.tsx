@@ -221,13 +221,13 @@ export default function Portfolio() {
       icon: Github,
       helper: "View my code",
     },
-    {
-      label: "Phone",
-      value: "+6285817540995",
-      href: "tel:+6285817540995",
-      icon: Phone,
-      helper: "Give me a call",
-    },
+    // {
+    //   label: "Phone",
+    //   value: "+6285817540995",
+    //   href: "tel:+6285817540995",
+    //   icon: Phone,
+    //   helper: "Give me a call",
+    // },
   ];
 
   return (
@@ -248,9 +248,6 @@ export default function Portfolio() {
                   href="#top"
                   className="cursor-hover flex items-center gap-3 text-left"
                 >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500/80 to-purple-500/80 text-lg font-bold text-white shadow-[0_0_25px_rgba(56,189,248,0.45)]">
-                    JW
-                  </span>
                   <div className="leading-tight">
                     <p className="text-sm font-semibold text-slate-100">
                       Jeremy Wijaya

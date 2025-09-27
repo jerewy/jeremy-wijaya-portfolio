@@ -26,7 +26,10 @@ function Robot({ pointer }: { pointer: PointerRef }) {
   const voiceBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
 
   const headGeometry = useMemo(() => new THREE.BoxGeometry(2.1, 1.7, 1.5), []);
-  const bodyGeometry = useMemo(() => new THREE.BoxGeometry(1.65, 1.95, 1.2), []);
+  const bodyGeometry = useMemo(
+    () => new THREE.BoxGeometry(1.65, 1.95, 1.2),
+    []
+  );
   const jawGeometry = useMemo(() => new THREE.BoxGeometry(1.7, 0.55, 1.15), []);
   const shoulderGeometry = useMemo(
     () => new THREE.BoxGeometry(3.1, 0.45, 1.25),
@@ -82,7 +85,8 @@ function Robot({ pointer }: { pointer: PointerRef }) {
     group.current.scale.set(nextScale, nextScale, nextScale);
 
     const baseY =
-      Math.sin(time * 0.95) * 0.07 + Math.sin(time * 0.35 + x * 0.4) * 0.03 +
+      Math.sin(time * 0.95) * 0.07 +
+      Math.sin(time * 0.35 + x * 0.4) * 0.03 +
       pulse * 0.1;
     group.current.position.y = THREE.MathUtils.lerp(
       group.current.position.y,
@@ -335,8 +339,16 @@ function ShootingStarField({ count = 6 }: { count?: number }) {
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const origins = useMemo(() => {
     return Array.from({ length: count }, () => ({
-      start: new THREE.Vector3(-6 + Math.random() * 2, 2.4 + Math.random() * 1.6, -2.5),
-      end: new THREE.Vector3(4.5 + Math.random() * 1.5, -0.6 + Math.random() * 0.8, -1.5),
+      start: new THREE.Vector3(
+        -6 + Math.random() * 2,
+        2.4 + Math.random() * 1.6,
+        -2.5
+      ),
+      end: new THREE.Vector3(
+        4.5 + Math.random() * 1.5,
+        -0.6 + Math.random() * 0.8,
+        -1.5
+      ),
       speed: 0.2 + Math.random() * 0.25,
       offset: Math.random(),
     }));
@@ -346,7 +358,7 @@ function ShootingStarField({ count = 6 }: { count?: number }) {
     if (!mesh.current) return;
     const time = clock.elapsedTime;
     origins.forEach((config, index) => {
-      const progress = ((time * config.speed) + config.offset) % 1;
+      const progress = (time * config.speed + config.offset) % 1;
       const position = config.start.clone().lerp(config.end, progress);
       dummy.position.copy(position);
       dummy.rotation.set(-Math.PI / 5, Math.PI / 9, Math.PI / 8);
@@ -522,9 +534,21 @@ export default function HeroScene() {
           color="#fcb383"
           penumbra={0.55}
         />
-        <pointLight position={[3.2, 3.4, 3.6]} intensity={1.05} color="#6edbff" />
-        <pointLight position={[-3.4, 1.8, 4.2]} intensity={0.95} color="#f59f9f" />
-        <pointLight position={[0.4, 0.4, 2.8]} intensity={0.8} color="#ffe58f" />
+        <pointLight
+          position={[3.2, 3.4, 3.6]}
+          intensity={1.05}
+          color="#6edbff"
+        />
+        <pointLight
+          position={[-3.4, 1.8, 4.2]}
+          intensity={0.95}
+          color="#f59f9f"
+        />
+        <pointLight
+          position={[0.4, 0.4, 2.8]}
+          intensity={0.8}
+          color="#ffe58f"
+        />
         <AuroraBackdrop />
         <Sparkles
           color="#9fdcff"

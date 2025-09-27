@@ -39,7 +39,10 @@ export default function SkillSlider({ slides }: SkillSliderProps) {
           </span>
         </div>
         <div className="hidden md:flex items-center gap-2 text-xs text-slate-300/80">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+          <span
+            className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"
+            aria-hidden="true"
+          />
           Hover to pause • Use arrows to change direction
         </div>
       </div>
@@ -53,7 +56,10 @@ export default function SkillSlider({ slides }: SkillSliderProps) {
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-950 via-gray-950/95 to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-950 via-gray-950/95 to-transparent" />
 
-          <div className="flex min-w-max items-stretch gap-6" style={marqueeStyle}>
+          <div
+            className="flex min-w-max items-stretch gap-6"
+            style={marqueeStyle}
+          >
             {marqueeSlides.map((slide, index) => (
               <article
                 key={`${slide.name}-${index}`}
@@ -63,9 +69,12 @@ export default function SkillSlider({ slides }: SkillSliderProps) {
                   <span className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-blue-300/70">
                     {slide.category ?? "Core Skill"}
                   </span>
-                  <h4 className="text-xl font-semibold leading-tight text-slate-100">{slide.name}</h4>
+                  <h4 className="text-xl font-semibold leading-tight text-slate-100">
+                    {slide.name}
+                  </h4>
                   <p className="text-sm leading-relaxed text-slate-300/80">
-                    {slide.description ?? "Add a description to highlight projects or experience with this skill."}
+                    {slide.description ??
+                      "Add a description to highlight projects or experience with this skill."}
                   </p>
                 </div>
               </article>
