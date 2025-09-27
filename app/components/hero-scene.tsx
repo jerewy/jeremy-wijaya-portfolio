@@ -2,7 +2,13 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Stars } from "@react-three/drei";
-import { useEffect, useMemo, useRef, useState, type MutableRefObject } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MutableRefObject,
+} from "react";
 import * as THREE from "three";
 
 type PointerState = { x: number; y: number; pulse: number };
@@ -22,10 +28,22 @@ function Robot({ pointer }: { pointer: PointerRef }) {
   const headGeometry = useMemo(() => new THREE.BoxGeometry(1.9, 1.6, 1.4), []);
   const bodyGeometry = useMemo(() => new THREE.BoxGeometry(1.5, 1.8, 1.1), []);
   const jawGeometry = useMemo(() => new THREE.BoxGeometry(1.6, 0.6, 1.1), []);
-  const shoulderGeometry = useMemo(() => new THREE.BoxGeometry(2.8, 0.5, 1.2), []);
-  const antennaGeometry = useMemo(() => new THREE.CylinderGeometry(0.05, 0.05, 0.9, 24), []);
-  const facePlateGeometry = useMemo(() => new THREE.PlaneGeometry(1.45, 1.05, 16, 16), []);
-  const faceGlowGeometry = useMemo(() => new THREE.RingGeometry(0.68, 0.82, 64), []);
+  const shoulderGeometry = useMemo(
+    () => new THREE.BoxGeometry(2.8, 0.5, 1.2),
+    []
+  );
+  const antennaGeometry = useMemo(
+    () => new THREE.CylinderGeometry(0.05, 0.05, 0.9, 24),
+    []
+  );
+  const facePlateGeometry = useMemo(
+    () => new THREE.PlaneGeometry(1.45, 1.05, 16, 16),
+    []
+  );
+  const faceGlowGeometry = useMemo(
+    () => new THREE.RingGeometry(0.68, 0.82, 64),
+    []
+  );
 
   useFrame((state) => {
     if (!group.current) return;
@@ -33,7 +51,11 @@ function Robot({ pointer }: { pointer: PointerRef }) {
     const { x, y, pulse } = pointer.current;
     const time = state.clock.elapsedTime;
 
-    const hoverX = THREE.MathUtils.lerp(group.current.rotation.y, x * 0.6, 0.08);
+    const hoverX = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      x * 0.6,
+      0.08
+    );
     const hoverY = THREE.MathUtils.lerp(
       group.current.rotation.x,
       -y * 0.35 + Math.sin(time * 0.8) * 0.08,
@@ -44,11 +66,19 @@ function Robot({ pointer }: { pointer: PointerRef }) {
     group.current.rotation.x = hoverY;
 
     const nextScaleTarget = 1.18 + Math.sin(time * 1.4) * 0.02 + pulse * 0.1;
-    const nextScale = THREE.MathUtils.lerp(group.current.scale.x, nextScaleTarget, 0.08);
+    const nextScale = THREE.MathUtils.lerp(
+      group.current.scale.x,
+      nextScaleTarget,
+      0.08
+    );
     group.current.scale.set(nextScale, nextScale, nextScale);
 
     const baseY = Math.sin(time * 1.1) * 0.05 + pulse * 0.12;
-    group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, baseY, 0.1);
+    group.current.position.y = THREE.MathUtils.lerp(
+      group.current.position.y,
+      baseY,
+      0.1
+    );
 
     const eyeOffsetX = THREE.MathUtils.lerp(0, x * 0.2, 0.6);
     const eyeOffsetY = THREE.MathUtils.lerp(0, -y * 0.2, 0.6);
@@ -87,19 +117,35 @@ function Robot({ pointer }: { pointer: PointerRef }) {
     <group ref={group} position={[0, 0.1, 0]} scale={1.18}>
       <Float speed={1.05} rotationIntensity={0.18} floatIntensity={0.5}>
         <mesh geometry={headGeometry} position={[0, 1.2, 0]}>
-          <meshStandardMaterial color="#111c2f" metalness={0.25} roughness={0.35} />
+          <meshStandardMaterial
+            color="#111c2f"
+            metalness={0.25}
+            roughness={0.35}
+          />
         </mesh>
 
         <mesh geometry={jawGeometry} position={[0, 0.55, 0.02]}>
-          <meshStandardMaterial color="#0f172a" metalness={0.4} roughness={0.25} />
+          <meshStandardMaterial
+            color="#0f172a"
+            metalness={0.4}
+            roughness={0.25}
+          />
         </mesh>
 
         <mesh geometry={bodyGeometry} position={[0, -0.15, 0]}>
-          <meshStandardMaterial color="#1e293b" metalness={0.32} roughness={0.38} />
+          <meshStandardMaterial
+            color="#1e293b"
+            metalness={0.32}
+            roughness={0.38}
+          />
         </mesh>
 
         <mesh geometry={shoulderGeometry} position={[0, -1, 0]}>
-          <meshStandardMaterial color="#0f172a" metalness={0.28} roughness={0.5} />
+          <meshStandardMaterial
+            color="#0f172a"
+            metalness={0.28}
+            roughness={0.5}
+          />
         </mesh>
 
         <mesh
@@ -154,16 +200,28 @@ function Robot({ pointer }: { pointer: PointerRef }) {
         </mesh>
 
         <mesh geometry={antennaGeometry} position={[0, 2.2, 0]}>
-          <meshStandardMaterial color="#38bdf8" metalness={0.6} roughness={0.3} />
+          <meshStandardMaterial
+            color="#38bdf8"
+            metalness={0.6}
+            roughness={0.3}
+          />
         </mesh>
         <mesh position={[0, 2.7, 0]}>
           <sphereGeometry args={[0.12, 24, 24]} />
-          <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.8} />
+          <meshStandardMaterial
+            color="#a855f7"
+            emissive="#a855f7"
+            emissiveIntensity={0.8}
+          />
         </mesh>
 
         <mesh position={[0, -1.35, 0]}>
           <boxGeometry args={[2.8, 0.35, 1.2]} />
-          <meshStandardMaterial color="#0f172a" metalness={0.32} roughness={0.6} />
+          <meshStandardMaterial
+            color="#0f172a"
+            metalness={0.32}
+            roughness={0.6}
+          />
         </mesh>
 
         <mesh position={[0, 0.75, 0.85]}>
@@ -195,7 +253,7 @@ export default function HeroScene() {
   const pointerTarget = useRef({ x: 0, y: 0 });
   const isIdle = useRef(true);
   const animationFrame = useRef<number | null>(null);
-  const idleTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleTimeout = useRef<number | null>(null);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   useEffect(() => {
@@ -275,9 +333,21 @@ export default function HeroScene() {
       const targetX = isIdle.current ? autoX : pointerTarget.current.x;
       const targetY = isIdle.current ? autoY : pointerTarget.current.y;
 
-      pointer.current.x = THREE.MathUtils.lerp(pointer.current.x, targetX, 0.07);
-      pointer.current.y = THREE.MathUtils.lerp(pointer.current.y, targetY, 0.07);
-      pointer.current.pulse = THREE.MathUtils.lerp(pointer.current.pulse, 0, 0.06);
+      pointer.current.x = THREE.MathUtils.lerp(
+        pointer.current.x,
+        targetX,
+        0.07
+      );
+      pointer.current.y = THREE.MathUtils.lerp(
+        pointer.current.y,
+        targetY,
+        0.07
+      );
+      pointer.current.pulse = THREE.MathUtils.lerp(
+        pointer.current.pulse,
+        0,
+        0.06
+      );
 
       animationFrame.current = window.requestAnimationFrame(animatePointer);
     };
@@ -299,7 +369,10 @@ export default function HeroScene() {
       window.removeEventListener("pointerleave", handlePointerLeave);
       window.removeEventListener("keydown", handleKeydown);
       if (isCoarsePointer && "DeviceOrientationEvent" in window) {
-        window.removeEventListener("deviceorientation", handleDeviceOrientation);
+        window.removeEventListener(
+          "deviceorientation",
+          handleDeviceOrientation
+        );
       }
       if (idleTimeout.current) {
         window.clearTimeout(idleTimeout.current);
@@ -339,7 +412,11 @@ export default function HeroScene() {
         />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]}>
           <planeGeometry args={[50, 50]} />
-          <meshStandardMaterial color="#020617" emissive="#0f172a" emissiveIntensity={0.2} />
+          <meshStandardMaterial
+            color="#020617"
+            emissive="#0f172a"
+            emissiveIntensity={0.2}
+          />
         </mesh>
       </Canvas>
       <div className="absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/70 to-gray-950" />
