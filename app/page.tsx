@@ -238,7 +238,7 @@ export default function Portfolio() {
       <AnimatedBackground />
 
       {/* Navigation */}
-      <nav className="fixed inset-x-0 top-4 z-50 px-4">
+      <nav className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-3">
           <div className="hidden md:block">
             <div className="rounded-full bg-gradient-to-r from-sky-500/50 via-indigo-500/40 to-purple-500/50 p-[1px] shadow-[0_12px_60px_-25px_rgba(59,130,246,0.65)]">
@@ -309,10 +309,10 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center pt-28 md:pt-32">
+      <section className="relative flex min-h-screen items-center justify-center px-4 pt-28 sm:px-6 md:pt-32">
         <HeroScene />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),_transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-0 text-center sm:px-4">
           <div className="mx-auto mb-8 flex w-fit items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-5 py-2 text-sm font-medium text-blue-200 shadow-lg backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
             Building intelligent products with empathy
@@ -329,10 +329,10 @@ export default function Portfolio() {
             passion for developing full-stack AI solutions to solve real-world
             problems and drive positive societal change.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white cursor-hover transform hover:scale-105 transition-all"
+              className="w-full bg-blue-600 text-white transition-all hover:scale-105 hover:bg-blue-700 cursor-hover sm:w-auto"
             >
               <a href="#projects" className="flex items-center gap-2">
                 Explore My Work
@@ -342,7 +342,7 @@ export default function Portfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-gray-600 text-gray-300 hover:bg-gray-800 cursor-hover transform hover:scale-105 transition-all"
+              className="w-full border-gray-600 text-gray-300 transition-all hover:scale-105 hover:bg-gray-800 cursor-hover sm:w-auto"
             >
               <a
                 href="https://linkedin.com/in/jeremy-wijaya"
@@ -359,7 +359,7 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative px-4 py-20">
+      <section id="about" className="relative px-4 py-20 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
             About Me
@@ -367,11 +367,11 @@ export default function Portfolio() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Stats Section - Replacing the image */}
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {stats.map((stat, index) => (
                   <Card
                     key={index}
-                    className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-hover transform hover:scale-105"
+                    className="bg-gray-900/80 border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
                   >
                     <CardContent className="p-6 text-center">
                       <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
@@ -407,8 +407,8 @@ export default function Portfolio() {
               </div>
 
               {/* Animated Code Terminal */}
-              <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800 font-mono text-sm">
-                <div className="flex items-center gap-2 mb-4">
+              <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 font-mono text-sm">
+                <div className="mb-4 flex items-center gap-2">
                   <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -453,7 +453,7 @@ export default function Portfolio() {
               </div>
 
               <div className="space-y-6">
-                <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
+                <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6">
                   <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
                     <Cpu className="w-5 h-5" />
                     Technical Skills
@@ -479,7 +479,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
+              <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6">
                 <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
                   <Brain className="w-5 h-5" />
                   Soft Skills
@@ -502,7 +502,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 bg-gray-900/30 relative">
+      <section id="projects" className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
             Featured Projects
@@ -511,7 +511,7 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="bg-gray-900/80 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 cursor-hover transform pt-0"
+                className="flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
               >
                 {/* <CardHeader className="p-0">
                   <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-t-lg flex items-center justify-center">
@@ -527,7 +527,7 @@ export default function Portfolio() {
                     className="w-full h-auto object-cover rounded-t-lg"
                   />
                 </CardHeader>
-                <CardContent className="pt-0">
+                <CardContent className="flex flex-1 flex-col pt-0">
                   <CardTitle className="text-xl mb-3 text-gray-100">
                     {project.title}
                   </CardTitle>
@@ -545,7 +545,7 @@ export default function Portfolio() {
                       </Badge>
                     ))}
                   </div>
-                  <div className="flex gap-3">
+                  <div className="mt-auto flex gap-3">
                     {project.liveLink && (
                       <Button
                         size="sm"
@@ -586,7 +586,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 relative">
+      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8 text-blue-400">
             Get In Touch
@@ -597,7 +597,7 @@ export default function Portfolio() {
             to reach out through any of the channels below!
           </p>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {contactMethods.map((method) => {
               const Icon = method.icon;
               const isExternal = method.href.startsWith("http");
@@ -636,7 +636,7 @@ export default function Portfolio() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-gray-800 relative">
+      <footer className="relative border-t border-gray-800 py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">
             © 2024 Jeremy Wijaya. Built with Next.js and Tailwind CSS.
