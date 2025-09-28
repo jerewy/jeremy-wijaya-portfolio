@@ -284,7 +284,10 @@ export default function Portfolio() {
 
           <div className="flex items-center justify-between rounded-full border border-slate-800/70 bg-gray-950/90 px-4 py-2 shadow-md md:hidden">
             <span className="text-lg font-semibold text-blue-200">JW</span>
-            <div className="flex items-center gap-4 text-sm text-slate-200">
+            <div className="flex items-center gap-3 text-sm text-slate-200">
+              <a href="#about" className="cursor-hover">
+                About
+              </a>
               <a href="#projects" className="cursor-hover">
                 Work
               </a>
