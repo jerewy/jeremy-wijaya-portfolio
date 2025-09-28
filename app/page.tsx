@@ -7,7 +7,6 @@ import {
   ExternalLink,
   ArrowRight,
   Brain,
-  Cpu,
   Award,
   BookOpen,
   Code,
@@ -29,6 +28,7 @@ import CustomCursor from "./components/custom-cursor";
 import HeroScene from "./components/hero-scene";
 import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
+import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
 import Image from "next/image";
 
 export default function Portfolio() {
@@ -192,6 +192,81 @@ export default function Portfolio() {
     "Java",
   ];
 
+  const marqueeSkills: SkillTickerItem[] = [
+    {
+      name: "Python",
+      short: "Py",
+      color: "#3776AB",
+      emphasis: "AI pipelines",
+    },
+    {
+      name: "TypeScript",
+      short: "TS",
+      color: "#3178C6",
+      emphasis: "typed React",
+    },
+    {
+      name: "JavaScript",
+      short: "JS",
+      color: "#F7DF1E",
+      emphasis: "frontend UX",
+    },
+    {
+      name: "Next.js",
+      short: "Nx",
+      color: "#000000",
+      emphasis: "full-stack",
+    },
+    {
+      name: "TensorFlow",
+      short: "TF",
+      color: "#FF6F00",
+      emphasis: "deep learning",
+    },
+    {
+      name: "PyTorch",
+      short: "PT",
+      color: "#EE4C2C",
+      emphasis: "model ops",
+    },
+    {
+      name: "Supabase",
+      short: "SB",
+      color: "#3ECF8E",
+      emphasis: "backend",
+    },
+    {
+      name: "Git",
+      short: "Gt",
+      color: "#F05032",
+      emphasis: "collaboration",
+    },
+    {
+      name: "Figma",
+      short: "Fg",
+      color: "#F24E1E",
+      emphasis: "design systems",
+    },
+    {
+      name: "HTML",
+      short: "H5",
+      color: "#E34F26",
+      emphasis: "semantics",
+    },
+    {
+      name: "CSS",
+      short: "CS",
+      color: "#1572B6",
+      emphasis: "responsive UI",
+    },
+    {
+      name: "Java",
+      short: "Jv",
+      color: "#5382A1",
+      emphasis: "OOP",
+    },
+  ];
+
   const softSkills = [
     "Problem-Solving & Analytical Thinking",
     "Adaptability & Continuous Learning",
@@ -259,6 +334,12 @@ export default function Portfolio() {
                     About
                   </a>
                   <a
+                    href="#skills"
+                    className="cursor-hover rounded-full px-3 py-1 transition hover:bg-sky-500/20 hover:text-sky-100"
+                  >
+                    Skills
+                  </a>
+                  <a
                     href="#projects"
                     className="cursor-hover rounded-full px-3 py-1 transition hover:bg-sky-500/20 hover:text-sky-100"
                   >
@@ -287,6 +368,9 @@ export default function Portfolio() {
             <div className="flex items-center gap-3 text-sm text-slate-200">
               <a href="#about" className="cursor-hover">
                 About
+              </a>
+              <a href="#skills" className="cursor-hover">
+                Skills
               </a>
               <a href="#projects" className="cursor-hover">
                 Work
@@ -365,6 +449,46 @@ export default function Portfolio() {
                 <FileText className="w-4 h-4" />
               </a>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="relative px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
+              Skills
+            </span>
+            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+              Hard Skills in Motion
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-gray-400">
+              A dedicated lane for the technologies I work with daily&mdash;streamlined into a single, flowing row.
+            </p>
+          </div>
+
+          <SkillTicker skills={marqueeSkills} />
+
+          <div className="rounded-3xl border border-blue-500/20 bg-gray-900/70 p-6 shadow-[0_25px_80px_-60px_rgba(59,130,246,0.8)]">
+            <SkillSlider slides={hardSkillSlides} />
+          </div>
+
+          <div className="rounded-3xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg">
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/80">
+              Quick View
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {quickSkills.map((skill) => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="bg-gray-800/80 text-gray-200 transition hover:bg-blue-500/80 cursor-hover"
+                >
+                  {skill}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -465,33 +589,6 @@ export default function Portfolio() {
                   <p>
                     I thrive in open, collaborative team environments where diverse perspectives are encouraged, fostering brainstorming that leads to innovative solutions and optimal outcomes. I view challenges as invaluable opportunities for personal and professional growth.
                   </p>
-                </div>
-              </div>
-
-              <div className="grid gap-6 lg:grid-cols-1">
-                <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 shadow-lg">
-                  <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-300">
-                    <Cpu className="w-5 h-5" />
-                    Technical Skills
-                  </h3>
-                  <SkillSlider slides={hardSkillSlides} />
-                </div>
-
-                <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg">
-                  <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/80">
-                    Quick View
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {quickSkills.map((skill) => (
-                      <Badge
-                        key={skill}
-                        variant="secondary"
-                        className="bg-gray-800/80 text-gray-200 transition hover:bg-blue-500/80 cursor-hover"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
                 </div>
               </div>
 
