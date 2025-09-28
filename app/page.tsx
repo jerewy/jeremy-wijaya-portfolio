@@ -12,6 +12,8 @@ import {
   BookOpen,
   Code,
   Users,
+  FileText,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -347,17 +349,38 @@ export default function Portfolio() {
                 <Linkedin className="w-4 h-4" />
               </a>
             </Button>
+            <Button
+              size="lg"
+              className="w-full bg-purple-600 text-white transition-all hover:scale-105 hover:bg-purple-700 cursor-hover sm:w-auto"
+            >
+              <a
+                href="/jeremy-wijaya-cv.pdf"
+                download
+                className="flex items-center gap-2"
+              >
+                Download CV
+                <FileText className="w-4 h-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* About Section */}
       <section id="about" className="relative px-4 py-20 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
-            About Me
-          </h2>
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
+              About
+            </span>
+            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+              About Me
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-gray-400">
+              A quick snapshot of my journey, experience, and the skills I bring to collaborative AI-driven projects.
+            </p>
+          </div>
+          <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] xl:gap-14">
             {/* Stats Section - Replacing the image */}
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -426,36 +449,33 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="space-y-8">
-              <div className="space-y-6 text-gray-300 leading-relaxed">
-                <p>
-                  A driven Computer Science student (Intelligent Systems
-                  specialization) at BINUS University, completing my third year
-                  with a passion for building impactful AI solutions. My journey
-                  into AI is fueled by a deep belief in its transformative power
-                  to enhance human efficiency, responsibly harness resources,
-                  and fundamentally improve society.
-                </p>
-                <p>
-                  I thrive in open, collaborative team environments where
-                  diverse perspectives are encouraged, fostering brainstorming
-                  that leads to innovative solutions and optimal outcomes. I
-                  view challenges as invaluable opportunities for personal and
-                  professional growth.
-                </p>
+            <div className="flex flex-col gap-6">
+              <div className="rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/15 via-slate-900/50 to-purple-500/15 p-8 shadow-lg">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-200">
+                  <Sparkles className="h-5 w-5" />
+                  Who I Am
+                </h3>
+                <div className="space-y-4 text-base leading-relaxed text-gray-200">
+                  <p>
+                    A driven Computer Science student (Intelligent Systems specialization) at BINUS University, completing my third year with a passion for building impactful AI solutions. My journey into AI is fueled by a deep belief in its transformative power to enhance human efficiency, responsibly harness resources, and fundamentally improve society.
+                  </p>
+                  <p>
+                    I thrive in open, collaborative team environments where diverse perspectives are encouraged, fostering brainstorming that leads to innovative solutions and optimal outcomes. I view challenges as invaluable opportunities for personal and professional growth.
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
+              <div className="grid gap-6 lg:grid-cols-1">
+                <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 shadow-lg">
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-300">
                     <Cpu className="w-5 h-5" />
                     Technical Skills
                   </h3>
                   <SkillSlider slides={hardSkillSlides} />
                 </div>
 
-                <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-6">
-                  <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/70">
+                <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg">
+                  <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/80">
                     Quick View
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -472,18 +492,18 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6">
-                <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center gap-2">
+              <div className="rounded-xl border border-gray-800 bg-gray-900/85 p-6 shadow-lg">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-300">
                   <Brain className="w-5 h-5" />
                   Soft Skills
                 </h3>
-                <div className="grid gap-2">
+                <div className="grid gap-2 text-gray-200">
                   {softSkills.map((skill, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2 text-gray-300"
+                      className="flex items-center gap-2"
                     >
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                      <div className="h-2 w-2 animate-pulse rounded-full bg-blue-400"></div>
                       {skill}
                     </div>
                   ))}
