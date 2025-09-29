@@ -64,12 +64,6 @@ lib/utils.ts                     # `cn` helper
   - Direction buttons flip the animation direction; hover pauses the ticker.
   - Uses Tailwind + CSS custom animation (`skill-marquee`) defined in `globals.css`.
 
-- **ScrollFloat**
-  - Wrap any headline or group of elements in `<ScrollFloat>` and mark the children you want animated with `[data-float]`.
-  - Defaults to a drifted reveal timeline that eases each element from a blurred offset into view, then adds a subtle parallax sway while the section is in frame.
-  - Accepts props for `start`, `end`, `duration`, `stagger`, `offsetY`, `drift`, `ease`, `scrub`, `rotate`, and `blur` to fine-tune the scroll trigger when needed.
-  - Example usage: `<ScrollFloat><span data-float>Craft</span><span data-float>memorable</span><span data-float>products</span></ScrollFloat>`.
-
 ## Styling & UX Notes
 
 - Tailwind tokens keep spacing consistent; gradient borders/glass panels are built with utility classes.
