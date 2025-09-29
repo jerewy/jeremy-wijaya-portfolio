@@ -65,7 +65,7 @@ export default function SkillSlider({ slides }: SkillSliderProps) {
             {marqueeSlides.map((slide, index) => (
               <article
                 key={`${slide.name}-${index}`}
-                className="min-w-[240px] max-w-[280px] rounded-2xl border border-blue-500/20 bg-gradient-to-br from-slate-900/70 via-slate-900/40 to-slate-900/20 p-5 text-left text-slate-100 shadow-[0_10px_30px_-20px_rgba(59,130,246,0.45)] backdrop-blur-sm"
+                className="cursor-hover min-w-[240px] max-w-[280px] rounded-2xl border border-blue-500/20 bg-gradient-to-br from-slate-900/70 via-slate-900/40 to-slate-900/20 p-5 text-left text-slate-100 shadow-[0_10px_30px_-20px_rgba(59,130,246,0.45)] backdrop-blur-sm"
               >
                 <div className="flex flex-col gap-3">
                   <span className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-blue-300/70">
