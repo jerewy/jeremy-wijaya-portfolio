@@ -45,7 +45,7 @@ import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
 import { useScrollReveal } from "./components/use-scroll-reveal";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function Portfolio() {
@@ -498,8 +498,8 @@ export default function Portfolio() {
                 About Me
               </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-400">
-                A quick snapshot of my journey, experience, and the skills I bring
-                to collaborative AI-driven projects.
+                A quick snapshot of my journey, experience, and the skills I
+                bring to collaborative AI-driven projects.
               </p>
             </div>
             <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] xl:gap-14">
@@ -534,8 +534,8 @@ export default function Portfolio() {
                   <div className="space-y-3 text-gray-300">
                     <p>
                       <strong>Education:</strong> Bachelor of Computer Science
-                      (Intelligent Systems), BINUS University (2023-Present), GPA:
-                      3.96/4.00
+                      (Intelligent Systems), BINUS University (2023-Present),
+                      GPA: 3.96/4.00
                     </p>
                     <p>
                       <strong>Certifications:</strong> Microsoft Azure AI
@@ -581,18 +581,18 @@ export default function Portfolio() {
                     <p>
                       A driven Computer Science student (Intelligent Systems
                       specialization) at BINUS University, completing my third
-                      year with a passion for building impactful AI solutions. My
-                      journey into AI is fueled by a deep belief in its
+                      year with a passion for building impactful AI solutions.
+                      My journey into AI is fueled by a deep belief in its
                       transformative power to enhance human efficiency,
                       responsibly harness resources, and fundamentally improve
                       society.
                     </p>
                     <p>
                       I thrive in open, collaborative team environments where
-                      diverse perspectives are encouraged, fostering brainstorming
-                      that leads to innovative solutions and optimal outcomes. I
-                      view challenges as invaluable opportunities for personal and
-                      professional growth.
+                      diverse perspectives are encouraged, fostering
+                      brainstorming that leads to innovative solutions and
+                      optimal outcomes. I view challenges as invaluable
+                      opportunities for personal and professional growth.
                     </p>
                   </div>
                 </div>
@@ -762,7 +762,7 @@ export default function Portfolio() {
               free to reach out through any of the channels below!
             </p>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {contactMethods.map((method) => {
                 const Icon = method.icon;
                 const isExternal = method.href.startsWith("http");
