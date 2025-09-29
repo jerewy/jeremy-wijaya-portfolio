@@ -24,6 +24,10 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 94.1%;
     --radius: 0.5rem;
+    --reveal-duration: 650ms;
+    --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --reveal-distance: 28px;
+    --reveal-blur: 14px;
   }
 }
 
@@ -73,11 +77,19 @@ html.cursor-hidden * {
 }
 
 @layer utilities {
-  [data-reveal="false"] {
-    @apply opacity-0 translate-y-6;
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance)) scale(0.98);
+    filter: blur(var(--reveal-blur));
+    transition-property: opacity, transform, filter;
+    transition-duration: var(--reveal-duration);
+    transition-timing-function: var(--reveal-ease);
+    transition-delay: var(--reveal-delay, 0s);
   }
 
   [data-reveal="true"] {
-    @apply opacity-100 translate-y-0 transition-opacity transition-transform duration-700 ease-out;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
