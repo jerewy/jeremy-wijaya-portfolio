@@ -3,6 +3,7 @@
 import { type ComponentType, useMemo } from "react";
 
 import LogoLoop from "@/components/logo-loop";
+import { useInView } from "@/lib/use-in-view";
 
 export type SkillTickerItem = {
   name: string;
@@ -17,6 +18,7 @@ type SkillTickerProps = {
 };
 
 export default function SkillTicker({ skills }: SkillTickerProps) {
+  const { ref: inViewRef, isInView } = useInView<HTMLDivElement>();
   const logoItems = useMemo(
     () =>
       skills.map((skill) => {
@@ -51,7 +53,7 @@ export default function SkillTicker({ skills }: SkillTickerProps) {
   );
 
   return (
-    <div className="space-y-6">
+    <div ref={inViewRef} className="space-y-6">
       <div className="flex items-center justify-between text-xs text-slate-300/80">
         <div className="flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 uppercase tracking-[0.4em] text-blue-200">
           Marquee
@@ -64,7 +66,7 @@ export default function SkillTicker({ skills }: SkillTickerProps) {
       <div className="relative overflow-hidden rounded-3xl border border-blue-500/20 bg-gray-950/80 shadow-[0_20px_50px_-45px_rgba(59,130,246,0.9)]">
         <LogoLoop
           logos={logoItems}
-          speed={100}
+          speed={isInView ? 100 : 0}
           direction="left"
           logoHeight={72}
           gap={32}
