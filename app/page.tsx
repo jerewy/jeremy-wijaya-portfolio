@@ -167,12 +167,6 @@ export default function Portfolio() {
       category: "Software Foundations",
     },
     {
-      name: "Add your next skill",
-      description:
-        "Duplicate this slide and update the copy to keep showcasing new technologies you learn.",
-      category: "Future Highlight",
-    },
-    {
       name: "HTML & CSS",
       description:
         "Delivering responsive, accessible interfaces with Tailwind CSS and semantic markup.",
@@ -468,7 +462,11 @@ export default function Portfolio() {
               size="lg"
               className="w-full bg-purple-600 text-white transition-all hover:scale-105 hover:bg-purple-700 cursor-hover sm:w-auto"
             >
-              <a href="/JeremyWijaya_CV_ATS.pdf" download className="flex items-center gap-2">
+              <a
+                href="/JeremyWijaya_CV_ATS.pdf"
+                download
+                className="flex items-center gap-2"
+              >
                 Download CV
                 <FileText className="w-4 h-4" />
               </a>
