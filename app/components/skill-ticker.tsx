@@ -73,7 +73,7 @@ export default function SkillTicker({ skills }: SkillTickerProps) {
           pauseOnHover
           scaleOnHover
           fadeOut
-          fadeOutColor="rgba(15, 23, 42, 0.95)"
+          fadeOutColor="rgba(2, 6, 23, 0.95)"
           ariaLabel="Technology partners"
           className="px-4 py-5"
         />
