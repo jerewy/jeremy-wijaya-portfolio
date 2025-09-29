@@ -3,6 +3,7 @@
 import { type CSSProperties, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/lib/use-in-view";
 
 export type SkillSlide = {
   name: string;
@@ -17,6 +18,7 @@ type SkillSliderProps = {
 export default function SkillSlider({ slides }: SkillSliderProps) {
   const [direction, setDirection] = useState<"left" | "right">("left");
   const [isPaused, setIsPaused] = useState(false);
+  const { ref: inViewRef, isInView } = useInView<HTMLDivElement>();
 
   const marqueeSlides = useMemo(() => [...slides, ...slides], [slides]);
 
@@ -24,13 +26,13 @@ export default function SkillSlider({ slides }: SkillSliderProps) {
     () => ({
       animation: "skill-marquee 26s linear infinite",
       animationDirection: direction === "left" ? "normal" : "reverse",
-      animationPlayState: isPaused ? "paused" : "running",
+      animationPlayState: isPaused || !isInView ? "paused" : "running",
     }),
-    [direction, isPaused]
+    [direction, isPaused, isInView]
   );
 
   return (
-    <div className="space-y-5">
+    <div ref={inViewRef} className="space-y-5">
       <div className="flex items-center justify-between gap-3 text-sm text-blue-100">
         <div className="flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5">
           <Sparkles className="h-4 w-4" />
