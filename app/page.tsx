@@ -43,6 +43,7 @@ import HeroScene from "./components/hero-scene";
 import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
+import ScrollFloat from "./components/scroll-float";
 import Image from "next/image";
 
 export default function Portfolio() {
@@ -486,9 +487,11 @@ export default function Portfolio() {
             <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
               About
             </span>
-            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
-              About Me
-            </h2>
+            <ScrollFloat>
+              <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+                About Me
+              </h2>
+            </ScrollFloat>
             <p className="mt-4 text-base leading-relaxed text-gray-400">
               A quick snapshot of my journey, experience, and the skills I bring
               to collaborative AI-driven projects.
@@ -615,9 +618,11 @@ export default function Portfolio() {
             <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
               Skills
             </span>
-            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
-              Hard Skills in Motion
-            </h2>
+            <ScrollFloat>
+              <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+                Hard Skills in Motion
+              </h2>
+            </ScrollFloat>
             <p className="mt-4 text-base leading-relaxed text-gray-400">
               A dedicated lane for the technologies I work with
               daily&mdash;streamlined into a single, flowing row.
@@ -654,12 +659,14 @@ export default function Portfolio() {
         id="projects"
         className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8"
       >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
-            Featured Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+          <div className="max-w-7xl mx-auto">
+            <ScrollFloat>
+              <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
+                Featured Projects
+              </h2>
+            </ScrollFloat>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
               <Card
                 key={index}
                 className="flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
@@ -738,13 +745,15 @@ export default function Portfolio() {
 
       {/* Contact Section */}
       <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-blue-400">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            I&apos;m always excited to connect, collaborate on innovative AI
-            projects, or discuss new opportunities in AI engineering. Feel free
+          <div className="max-w-4xl mx-auto text-center">
+            <ScrollFloat>
+              <h2 className="text-4xl font-bold mb-8 text-blue-400">
+                Get In Touch
+              </h2>
+            </ScrollFloat>
+            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              I&apos;m always excited to connect, collaborate on innovative AI
+              projects, or discuss new opportunities in AI engineering. Feel free
             to reach out through any of the channels below!
           </p>
 
