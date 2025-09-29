@@ -27,7 +27,6 @@ import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
 import HeroScene from "./components/hero-scene";
 import { BlurRevealText } from "./components/blur-reveal-text";
-import ScrollFloat from "./components/scroll-float";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
 import Image from "next/image";
@@ -452,23 +451,6 @@ export default function Portfolio() {
             </Button>
           </div>
         </div>
-      </section>
-
-      <section
-        aria-label="Floating headline"
-        className="relative px-4 py-16 sm:px-6 lg:px-8"
-      >
-        <ScrollFloat
-          containerClassName="mx-auto max-w-5xl text-center"
-          textClassName="bg-gradient-to-r from-sky-300 via-purple-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(56,189,248,0.25)]"
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="top bottom"
-          scrollEnd="bottom center"
-          stagger={0.035}
-        >
-          Crafting Intelligent Experiences with Code &amp; Curiosity
-        </ScrollFloat>
       </section>
 
       {/* About Section */}
