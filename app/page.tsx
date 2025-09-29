@@ -44,9 +44,15 @@ import ScrollReveal from "./components/scroll-reveal";
 import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
+import { useScrollReveal } from "./components/use-scroll-reveal";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function Portfolio() {
+  const statsReveal = useScrollReveal();
+  const projectsReveal = useScrollReveal();
+  const contactReveal = useScrollReveal();
+
   const projects = [
     {
       title: "Jernih - AI-powered Water Quality Analysis Platform",
