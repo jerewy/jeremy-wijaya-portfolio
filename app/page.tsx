@@ -40,6 +40,7 @@ import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./components/animated-background";
 import CustomCursor from "./components/custom-cursor";
 import HeroScene from "./components/hero-scene";
+import ScrollReveal from "./components/scroll-reveal";
 import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
@@ -480,311 +481,319 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mx-auto mb-16 max-w-3xl text-center">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
-              About
-            </span>
-            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
-              About Me
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-gray-400">
-              A quick snapshot of my journey, experience, and the skills I bring
-              to collaborative AI-driven projects.
-            </p>
-          </div>
-          <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] xl:gap-14">
-            {/* Stats Section - Replacing the image */}
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {stats.map((stat, index) => (
-                  <Card
-                    key={index}
-                    className="bg-gray-900/80 border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
-                  >
-                    <CardContent className="p-6 text-center">
-                      <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-                      <div className="text-2xl font-bold text-white mb-1">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm font-medium text-blue-400 mb-1">
-                        {stat.label}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {stat.description}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-blue-400">
-                  Qualifications
-                </h3>
-                <div className="space-y-3 text-gray-300">
-                  <p>
-                    <strong>Education:</strong> Bachelor of Computer Science
-                    (Intelligent Systems), BINUS University (2023-Present), GPA:
-                    3.96/4.00
-                  </p>
-                  <p>
-                    <strong>Certifications:</strong> Microsoft Azure AI
-                    Fundamentals (AI-900T00-A)
-                  </p>
-                </div>
-              </div>
-
-              {/* Animated Code Terminal */}
-              <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 font-mono text-sm">
-                <div className="mb-4 flex items-center gap-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-gray-400 ml-2">
-                    jeremy@ai-engineer:~$
-                  </span>
-                </div>
-                <div className="space-y-2 text-green-400">
-                  <div className="animate-pulse">
-                    {"> python train_model.py"}
-                  </div>
-                  <div className="text-gray-400">Training AI model...</div>
-                  <div className="text-blue-400">Accuracy: 85.37% ✓</div>
-                  <div className="animate-pulse">
-                    {"> git push origin main"}
-                  </div>
-                  <div className="text-gray-400">
-                    Deploying to production...
-                  </div>
-                  <div className="text-green-400">Success! 🚀</div>
-                </div>
-              </div>
+      <ScrollReveal asChild>
+        <section id="about" className="relative px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mx-auto mb-16 max-w-3xl text-center">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
+                About
+              </span>
+              <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+                About Me
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-gray-400">
+                A quick snapshot of my journey, experience, and the skills I bring
+                to collaborative AI-driven projects.
+              </p>
             </div>
-
-            <div className="flex flex-col gap-6">
-              <div className="rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/15 via-slate-900/50 to-purple-500/15 p-8 shadow-lg">
-                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-200">
-                  <Sparkles className="h-5 w-5" />
-                  Who I Am
-                </h3>
-                <div className="space-y-4 text-base leading-relaxed text-gray-200">
-                  <p>
-                    A driven Computer Science student (Intelligent Systems
-                    specialization) at BINUS University, completing my third
-                    year with a passion for building impactful AI solutions. My
-                    journey into AI is fueled by a deep belief in its
-                    transformative power to enhance human efficiency,
-                    responsibly harness resources, and fundamentally improve
-                    society.
-                  </p>
-                  <p>
-                    I thrive in open, collaborative team environments where
-                    diverse perspectives are encouraged, fostering brainstorming
-                    that leads to innovative solutions and optimal outcomes. I
-                    view challenges as invaluable opportunities for personal and
-                    professional growth.
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-gray-800 bg-gray-900/85 p-6 shadow-lg">
-                <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-300">
-                  <Brain className="w-5 h-5" />
-                  Soft Skills
-                </h3>
-                <div className="grid gap-2 text-gray-200">
-                  {softSkills.map((skill, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="h-2 w-2 animate-pulse rounded-full bg-blue-400"></div>
-                      {skill}
-                    </div>
+            <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] xl:gap-14">
+              {/* Stats Section - Replacing the image */}
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {stats.map((stat, index) => (
+                    <Card
+                      key={index}
+                      className="bg-gray-900/80 border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
+                    >
+                      <CardContent className="p-6 text-center">
+                        <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+                        <div className="text-2xl font-bold text-white mb-1">
+                          {stat.value}
+                        </div>
+                        <div className="text-sm font-medium text-blue-400 mb-1">
+                          {stat.label}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {stat.description}
+                        </div>
+                      </CardContent>
+                    </Card>
                   ))}
                 </div>
+
+                <div className="bg-gray-900/80 p-6 rounded-xl border border-gray-800">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-400">
+                    Qualifications
+                  </h3>
+                  <div className="space-y-3 text-gray-300">
+                    <p>
+                      <strong>Education:</strong> Bachelor of Computer Science
+                      (Intelligent Systems), BINUS University (2023-Present), GPA:
+                      3.96/4.00
+                    </p>
+                    <p>
+                      <strong>Certifications:</strong> Microsoft Azure AI
+                      Fundamentals (AI-900T00-A)
+                    </p>
+                  </div>
+                </div>
+
+                {/* Animated Code Terminal */}
+                <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 font-mono text-sm">
+                  <div className="mb-4 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span className="text-gray-400 ml-2">
+                      jeremy@ai-engineer:~$
+                    </span>
+                  </div>
+                  <div className="space-y-2 text-green-400">
+                    <div className="animate-pulse">
+                      {"> python train_model.py"}
+                    </div>
+                    <div className="text-gray-400">Training AI model...</div>
+                    <div className="text-blue-400">Accuracy: 85.37% ✓</div>
+                    <div className="animate-pulse">
+                      {"> git push origin main"}
+                    </div>
+                    <div className="text-gray-400">
+                      Deploying to production...
+                    </div>
+                    <div className="text-green-400">Success! 🚀</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-6">
+                <div className="rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/15 via-slate-900/50 to-purple-500/15 p-8 shadow-lg">
+                  <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-200">
+                    <Sparkles className="h-5 w-5" />
+                    Who I Am
+                  </h3>
+                  <div className="space-y-4 text-base leading-relaxed text-gray-200">
+                    <p>
+                      A driven Computer Science student (Intelligent Systems
+                      specialization) at BINUS University, completing my third
+                      year with a passion for building impactful AI solutions. My
+                      journey into AI is fueled by a deep belief in its
+                      transformative power to enhance human efficiency,
+                      responsibly harness resources, and fundamentally improve
+                      society.
+                    </p>
+                    <p>
+                      I thrive in open, collaborative team environments where
+                      diverse perspectives are encouraged, fostering brainstorming
+                      that leads to innovative solutions and optimal outcomes. I
+                      view challenges as invaluable opportunities for personal and
+                      professional growth.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-gray-800 bg-gray-900/85 p-6 shadow-lg">
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-300">
+                    <Brain className="w-5 h-5" />
+                    Soft Skills
+                  </h3>
+                  <div className="grid gap-2 text-gray-200">
+                    {softSkills.map((skill, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <div className="h-2 w-2 animate-pulse rounded-full bg-blue-400"></div>
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Skills Section */}
-      <section id="skills" className="relative px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
-              Skills
-            </span>
-            <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
-              Hard Skills in Motion
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-gray-400">
-              A dedicated lane for the technologies I work with
-              daily&mdash;streamlined into a single, flowing row.
-            </p>
-          </div>
+      <ScrollReveal asChild>
+        <section id="skills" className="relative px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-6xl flex-col gap-12">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.4em] text-blue-300">
+                Skills
+              </span>
+              <h2 className="text-4xl font-bold text-blue-100 sm:text-5xl">
+                Hard Skills in Motion
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-gray-400">
+                A dedicated lane for the technologies I work with
+                daily&mdash;streamlined into a single, flowing row.
+              </p>
+            </div>
 
-          <SkillTicker skills={marqueeSkills} />
+            <SkillTicker skills={marqueeSkills} />
 
-          <div className="rounded-3xl border border-blue-500/20 bg-gray-900/70 p-6 shadow-[0_25px_80px_-60px_rgba(59,130,246,0.8)]">
-            <SkillSlider slides={hardSkillSlides} />
-          </div>
+            <div className="rounded-3xl border border-blue-500/20 bg-gray-900/70 p-6 shadow-[0_25px_80px_-60px_rgba(59,130,246,0.8)]">
+              <SkillSlider slides={hardSkillSlides} />
+            </div>
 
-          <div className="rounded-3xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg">
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/80">
-              Quick View
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {quickSkills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant="secondary"
-                  className="bg-gray-800/80 text-gray-200 transition hover:bg-blue-500/80 cursor-hover"
-                >
-                  {skill}
-                </Badge>
-              ))}
+            <div className="rounded-3xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg">
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-blue-400/80">
+                Quick View
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {quickSkills.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="bg-gray-800/80 text-gray-200 transition hover:bg-blue-500/80 cursor-hover"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Projects Section */}
-      <section
-        id="projects"
-        className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8"
-      >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
-            Featured Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card
-                key={index}
-                className="flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
-              >
-                {/* <CardHeader className="p-0">
-                  <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-t-lg flex items-center justify-center">
-                    <Code className="w-16 h-16 text-blue-400" />
-                  </div>
-                </CardHeader> */}
-                <CardHeader className="p-0 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={project.width}
-                    height={project.height}
-                    className="w-full h-auto object-cover rounded-t-lg"
-                  />
-                </CardHeader>
-                <CardContent className="flex flex-1 flex-col pt-0">
-                  <CardTitle className="text-xl mb-3 text-gray-100">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-400 mb-4 leading-relaxed">
-                    {project.summary}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, tagIndex) => (
-                      <Badge
-                        key={tagIndex}
-                        variant="outline"
-                        className="border-blue-500 text-blue-400 cursor-hover"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="mt-auto flex gap-3">
-                    {project.liveLink && (
+      <ScrollReveal asChild>
+        <section
+          id="projects"
+          className="relative bg-gray-900/30 py-20 px-4 sm:px-6 lg:px-8"
+        >
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
+              Featured Projects
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <Card
+                  key={index}
+                  className="flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
+                >
+                  {/* <CardHeader className="p-0">
+                    <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-t-lg flex items-center justify-center">
+                      <Code className="w-16 h-16 text-blue-400" />
+                    </div>
+                  </CardHeader> */}
+                  <CardHeader className="p-0 overflow-hidden rounded-t-lg">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={project.width}
+                      height={project.height}
+                      className="w-full h-auto object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="flex flex-1 flex-col pt-0">
+                    <CardTitle className="text-xl mb-3 text-gray-100">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-gray-400 mb-4 leading-relaxed">
+                      {project.summary}
+                    </CardDescription>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag, tagIndex) => (
+                        <Badge
+                          key={tagIndex}
+                          variant="outline"
+                          className="border-blue-500 text-blue-400 cursor-hover"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="mt-auto flex gap-3">
+                      {project.liveLink && (
+                        <Button
+                          size="sm"
+                          className="bg-blue-600 hover:bg-blue-700 cursor-hover"
+                        >
+                          <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      )}
                       <Button
                         size="sm"
-                        className="bg-blue-600 hover:bg-blue-700 cursor-hover"
+                        variant="outline"
+                        className="border-gray-600 text-gray-300 hover:bg-gray-800 cursor-hover"
                       >
                         <a
-                          href={project.liveLink}
+                          href={project.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1"
                         >
-                          <ExternalLink className="w-3 h-3" />
-                          Live Demo
+                          <Github className="w-3 h-3" />
+                          GitHub
                         </a>
                       </Button>
-                    )}
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-gray-600 text-gray-300 hover:bg-gray-800 cursor-hover"
-                    >
-                      <a
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1"
-                      >
-                        <Github className="w-3 h-3" />
-                        GitHub
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-blue-400">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            I&apos;m always excited to connect, collaborate on innovative AI
-            projects, or discuss new opportunities in AI engineering. Feel free
-            to reach out through any of the channels below!
-          </p>
+      <ScrollReveal asChild>
+        <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8 text-blue-400">
+              Get In Touch
+            </h2>
+            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              I&apos;m always excited to connect, collaborate on innovative AI
+              projects, or discuss new opportunities in AI engineering. Feel
+              free to reach out through any of the channels below!
+            </p>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {contactMethods.map((method) => {
-              const Icon = method.icon;
-              const isExternal = method.href.startsWith("http");
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {contactMethods.map((method) => {
+                const Icon = method.icon;
+                const isExternal = method.href.startsWith("http");
 
-              return (
-                <a
-                  key={method.label}
-                  href={method.href}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  className="group h-full"
-                >
-                  <Card className="h-full border-gray-700 bg-gray-900/80 transition-all group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-hover">
-                    <CardContent className="flex h-full flex-col items-center gap-3 p-6 text-center">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 shadow-inner">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="mb-1 text-lg font-semibold text-gray-100">
-                          {method.label}
-                        </h3>
-                        {/* <p className="text-sm uppercase tracking-[0.3em] text-blue-400/60">
-                          {method.helper}
-                        </p> */}
-                      </div>
-                      <p className="break-all text-gray-300 transition group-hover:text-blue-200">
-                        {method.value}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </a>
-              );
-            })}
+                return (
+                  <a
+                    key={method.label}
+                    href={method.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className="group h-full"
+                  >
+                    <Card className="h-full border-gray-700 bg-gray-900/80 transition-all group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-hover">
+                      <CardContent className="flex h-full flex-col items-center gap-3 p-6 text-center">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 shadow-inner">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <h3 className="mb-1 text-lg font-semibold text-gray-100">
+                            {method.label}
+                          </h3>
+                          {/* <p className="text-sm uppercase tracking-[0.3em] text-blue-400/60">
+                            {method.helper}
+                          </p> */}
+                        </div>
+                        <p className="break-all text-gray-300 transition group-hover:text-blue-200">
+                          {method.value}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Footer */}
       <footer className="relative border-t border-gray-800 py-8 px-4 sm:px-6">
