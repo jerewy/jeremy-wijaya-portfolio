@@ -43,9 +43,15 @@ import HeroScene from "./components/hero-scene";
 import { BlurRevealText } from "./components/blur-reveal-text";
 import SkillSlider, { type SkillSlide } from "./components/skill-slider";
 import SkillTicker, { type SkillTickerItem } from "./components/skill-ticker";
+import { useScrollReveal } from "./components/use-scroll-reveal";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function Portfolio() {
+  const statsReveal = useScrollReveal();
+  const projectsReveal = useScrollReveal();
+  const contactReveal = useScrollReveal();
+
   const projects = [
     {
       title: "Jernih - AI-powered Water Quality Analysis Platform",
@@ -497,11 +503,24 @@ export default function Portfolio() {
           <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] xl:gap-14">
             {/* Stats Section - Replacing the image */}
             <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div
+                ref={statsReveal.ref}
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+              >
                 {stats.map((stat, index) => (
                   <Card
                     key={index}
-                    className="bg-gray-900/80 border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
+                    className={cn(
+                      "bg-gray-900/80 border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover",
+                      statsReveal.isRevealed
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                    style={
+                      statsReveal.isRevealed && !statsReveal.prefersReducedMotion
+                        ? { transitionDelay: `${index * 60}ms` }
+                        : undefined
+                    }
                   >
                     <CardContent className="p-6 text-center">
                       <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
@@ -658,11 +677,24 @@ export default function Portfolio() {
           <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">
             Featured Projects
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            ref={projectsReveal.ref}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover"
+                className={cn(
+                  "flex h-full flex-col border-gray-700 bg-gray-900/80 pt-0 transition-all duration-300 hover:scale-[1.02] hover:border-blue-500 cursor-hover",
+                  projectsReveal.isRevealed
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                )}
+                style={
+                  projectsReveal.isRevealed && !projectsReveal.prefersReducedMotion
+                    ? { transitionDelay: `${index * 60}ms` }
+                    : undefined
+                }
               >
                 {/* <CardHeader className="p-0">
                   <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-t-lg flex items-center justify-center">
@@ -748,8 +780,11 @@ export default function Portfolio() {
             to reach out through any of the channels below!
           </p>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {contactMethods.map((method) => {
+          <div
+            ref={contactReveal.ref}
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {contactMethods.map((method, index) => {
               const Icon = method.icon;
               const isExternal = method.href.startsWith("http");
 
@@ -761,7 +796,19 @@ export default function Portfolio() {
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   className="group h-full"
                 >
-                  <Card className="h-full border-gray-700 bg-gray-900/80 transition-all group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-hover">
+                  <Card
+                    className={cn(
+                      "h-full border-gray-700 bg-gray-900/80 transition-all group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-hover",
+                      contactReveal.isRevealed
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    )}
+                    style={
+                      contactReveal.isRevealed && !contactReveal.prefersReducedMotion
+                        ? { transitionDelay: `${index * 60}ms` }
+                        : undefined
+                    }
+                  >
                     <CardContent className="flex h-full flex-col items-center gap-3 p-6 text-center">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 shadow-inner">
                         <Icon className="h-6 w-6" />
