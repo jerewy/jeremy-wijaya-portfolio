@@ -142,6 +142,8 @@ export default function CustomCursor() {
             className="absolute h-3 w-3 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]"
             style={{
               transform: `scale(${isHovering ? 0.9 : 1})`,
+              opacity: isHovering ? 0 : 1,
+              transition: "opacity 0.2s ease-out, transform 0.2s ease-out",
             }}
           />
           <div className="absolute h-16 w-16 rounded-full bg-sky-400/20 blur-2xl" />
