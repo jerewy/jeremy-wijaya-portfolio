@@ -26,8 +26,8 @@ import {
   SiSupabase,
   SiTensorflow,
   SiTypescript,
-  SiOpenjdk,
 } from "react-icons/si";
+import { DiJava } from "react-icons/di";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -288,7 +288,7 @@ export default function Portfolio() {
       name: "Java",
       short: "Jv",
       color: "#5382A1",
-      icon: SiOpenjdk,
+      icon: DiJava,
       emphasis: "OOP",
     },
   ];
