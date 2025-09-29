@@ -468,11 +468,7 @@ export default function Portfolio() {
               size="lg"
               className="w-full bg-purple-600 text-white transition-all hover:scale-105 hover:bg-purple-700 cursor-hover sm:w-auto"
             >
-              <a
-                href="/jeremy-wijaya-cv.pdf"
-                download
-                className="flex items-center gap-2"
-              >
+              <a href="" download className="flex items-center gap-2">
                 Download CV
                 <FileText className="w-4 h-4" />
               </a>
