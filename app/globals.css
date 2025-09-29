@@ -71,3 +71,13 @@ html.cursor-hidden * {
     transform: translateX(-50%);
   }
 }
+
+@layer utilities {
+  [data-reveal="false"] {
+    @apply opacity-0 translate-y-6;
+  }
+
+  [data-reveal="true"] {
+    @apply opacity-100 translate-y-0 transition-opacity transition-transform duration-700 ease-out;
+  }
+}
