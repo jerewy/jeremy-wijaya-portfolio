@@ -85,7 +85,7 @@ const ScrollReveal = forwardRef<HTMLElement, ScrollRevealProps>(
       <Component
         ref={setRefs}
         data-reveal={isRevealed ? "true" : "false"}
-        className={cn("will-change-transform", className)}
+        className={cn("will-change-[transform,opacity,filter]", className)}
         {...props}
       >
         {children}
