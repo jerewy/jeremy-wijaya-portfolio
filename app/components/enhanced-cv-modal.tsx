@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
@@ -119,7 +119,7 @@ export function EnhancedCVPreviewModal({ isOpen, onClose }: CVPreviewModalProps)
   ];
 
   // Zoom levels
-  const zoomLevels = [25, 50, 75, 100, 125, 150, 200];
+  const zoomLevels = useMemo(() => [25, 50, 75, 100, 125, 150, 200], []);
 
   // Handle PDF loading
   useEffect(() => {
@@ -135,36 +135,36 @@ export function EnhancedCVPreviewModal({ isOpen, onClose }: CVPreviewModalProps)
   }, [isOpen]);
 
   // Zoom controls
-  const handleZoomIn = () => {
+  const handleZoomIn = useCallback(() => {
     const currentIndex = zoomLevels.indexOf(zoomLevel);
     if (currentIndex < zoomLevels.length - 1) {
       setZoomLevel(zoomLevels[currentIndex + 1]);
     }
-  };
+  }, [zoomLevel, zoomLevels]);
 
-  const handleZoomOut = () => {
+  const handleZoomOut = useCallback(() => {
     const currentIndex = zoomLevels.indexOf(zoomLevel);
     if (currentIndex > 0) {
       setZoomLevel(zoomLevels[currentIndex - 1]);
     }
-  };
+  }, [zoomLevel, zoomLevels]);
 
   const handleZoomReset = () => {
     setZoomLevel(100);
   };
 
   // Page navigation
-  const handlePreviousPage = () => {
+  const handlePreviousPage = useCallback(() => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  };
+  }, [currentPage]);
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
-  };
+  }, [currentPage, totalPages]);
 
   // Handle keyboard shortcuts
   useEffect(() => {

@@ -13,7 +13,6 @@ interface AccessibleCVModalProps {
 export function AccessibleCVModal({
   isOpen,
   onClose,
-  title = "Jeremy Wijaya - Curriculum Vitae",
   description = "Professional CV preview and download options for Jeremy Wijaya, AI Engineer & Full-Stack Developer",
 }: AccessibleCVModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -193,7 +192,7 @@ export const responsive = {
   },
 
   // Responsive value helpers
-  value: (mobile: any, tablet?: any, desktop?: any) => {
+  value: function <T>(mobile: T, tablet?: T, desktop?: T): T {
     if (responsive.isDesktop() && desktop !== undefined) return desktop;
     if (responsive.isTablet() && tablet !== undefined) return tablet;
     return mobile;
@@ -220,10 +219,10 @@ export const responsive = {
 // Performance optimization utilities
 export const performance = {
   // Debounce function for search/filter operations
-  debounce: <T extends (...args: any[]) => any>(
+  debounce: function <T extends (...args: unknown[]) => unknown>(
     func: T,
     wait: number
-  ): ((...args: Parameters<T>) => void) => {
+  ): ((...args: Parameters<T>) => void) {
     let timeout: NodeJS.Timeout;
     return (...args: Parameters<T>) => {
       clearTimeout(timeout);
@@ -232,10 +231,10 @@ export const performance = {
   },
 
   // Throttle function for scroll events
-  throttle: <T extends (...args: any[]) => any>(
+  throttle: function <T extends (...args: unknown[]) => unknown>(
     func: T,
     limit: number
-  ): ((...args: Parameters<T>) => void) => {
+  ): ((...args: Parameters<T>) => void) {
     let inThrottle: boolean;
     return (...args: Parameters<T>) => {
       if (!inThrottle) {
