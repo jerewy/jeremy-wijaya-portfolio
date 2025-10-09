@@ -33,11 +33,11 @@ export function ExperienceTimeline({
   return (
     <div className={`relative max-w-4xl mx-auto ${className}`}>
       {/* Vertical timeline line */}
-      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2" />
+      <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-px" />
 
       {/* Progress indicator line */}
       <div
-        className="absolute left-8 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-primary to-primary/30 transform md:-translate-x-1/2 transition-all duration-1000 ease-out"
+        className="absolute left-6 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-primary to-primary/30 transform md:-translate-x-px transition-all duration-1000 ease-out"
         style={{
           height: `${Math.min(100, sortedExperiences.length * 25)}%`,
         }}
@@ -102,9 +102,9 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
       viewport={{ once: true }}
     >
       {/* Timeline dot */}
-      <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 z-10">
+      <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 z-10 flex items-center justify-center">
         <motion.div
-          className={`w-6 h-6 md:w-8 md:h-8 rounded-full border-4 ${getTypeColor(
+          className={`w-4 h-4 md:w-6 md:h-6 rounded-full border-4 ${getTypeColor(
             experience.type
           )} bg-background cursor-hover shadow-lg`}
           whileHover={{ scale: 1.3 }}
@@ -121,7 +121,7 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
               ? "md:pr-12 md:mr-auto md:text-right"
               : "md:pl-12 md:ml-auto md:text-left"
           }
-          ml-20 md:ml-0
+          ml-16 md:ml-0
         `}
       >
         <motion.div

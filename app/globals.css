@@ -35,6 +35,20 @@
     /* Terminal animation variables */
     --terminal-color: #bd5d3a;
     --terminal-glitch: #3d3929;
+
+    /* Mobile menu overlay variables */
+    --mobile-menu-backdrop: hsl(47 18% 96% / 0.92);
+    --mobile-menu-backdrop-blur: blur(12px);
+    --mobile-menu-backdrop-filter: blur(8px) saturate(1.8);
+    --mobile-menu-sidebar: hsl(47 18% 96%);
+    --mobile-menu-border: hsl(47 12% 82%);
+    --mobile-menu-shadow: 0 25px 50px -12px hsl(30 16% 18% / 0.25);
+    --mobile-menu-text-shadow: 0 1px 2px hsl(30 16% 18% / 0.1);
+    --mobile-menu-item-hover: hsl(47 12% 88%);
+    --mobile-menu-item-active: hsl(18 59% 58%);
+    --mobile-menu-item-text: hsl(30 16% 18%);
+    --mobile-menu-header-text: hsl(30 16% 18%);
+    --mobile-menu-glass-effect: blur(20px) saturate(1.2);
   }
 
   .dark {
@@ -62,6 +76,20 @@
     /* Dark terminal colors */
     --terminal-color: #d17a5a;
     --terminal-glitch: #eeece2;
+
+    /* Mobile menu overlay variables - Dark theme */
+    --mobile-menu-backdrop: hsl(222 84% 5% / 0.94);
+    --mobile-menu-backdrop-blur: blur(16px);
+    --mobile-menu-backdrop-filter: blur(12px) saturate(1.5);
+    --mobile-menu-sidebar: hsl(222 84% 5%);
+    --mobile-menu-border: hsl(217 33% 17%);
+    --mobile-menu-shadow: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    --mobile-menu-text-shadow: 0 1px 2px hsl(0 0% 0% / 0.8);
+    --mobile-menu-item-hover: hsl(217 33% 17%);
+    --mobile-menu-item-active: hsl(18 91% 60%);
+    --mobile-menu-item-text: hsl(210 40% 98%);
+    --mobile-menu-header-text: hsl(210 40% 98%);
+    --mobile-menu-glass-effect: blur(24px) saturate(1.1);
   }
 }
 
@@ -271,6 +299,69 @@ html.target-cursor * {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
   opacity: 0.8;
+}
+
+/* Mobile menu utility classes */
+@layer utilities {
+  .mobile-menu-backdrop {
+    background-color: var(--mobile-menu-backdrop);
+    backdrop-filter: var(--mobile-menu-backdrop-filter);
+    -webkit-backdrop-filter: var(--mobile-menu-backdrop-filter);
+  }
+
+  .mobile-menu-sidebar {
+    background-color: var(--mobile-menu-sidebar);
+    border-color: var(--mobile-menu-border);
+    box-shadow: var(--mobile-menu-shadow);
+  }
+
+  .mobile-menu-text-shadow {
+    text-shadow: var(--mobile-menu-text-shadow);
+  }
+
+  .mobile-menu-glass {
+    backdrop-filter: var(--mobile-menu-glass-effect);
+    -webkit-backdrop-filter: var(--mobile-menu-glass-effect);
+  }
+
+  .mobile-menu-item {
+    color: var(--mobile-menu-item-text);
+    text-shadow: var(--mobile-menu-text-shadow);
+  }
+
+  .mobile-menu-item:hover {
+    background-color: var(--mobile-menu-item-hover);
+  }
+
+  .mobile-menu-item:focus {
+    background-color: var(--mobile-menu-item-hover);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+
+  .mobile-menu-item:active {
+    background-color: var(--mobile-menu-item-active);
+    color: hsl(var(--primary-foreground));
+  }
+
+  .mobile-menu-header {
+    color: var(--mobile-menu-header-text);
+    text-shadow: var(--mobile-menu-text-shadow);
+  }
+
+  /* Enhanced backdrop blur support */
+  .supports-backdrop-filter .mobile-menu-backdrop {
+    backdrop-filter: blur(16px) saturate(1.8) contrast(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.8) contrast(1.2);
+  }
+
+  /* Fallback for browsers without backdrop-filter support */
+  .no-backdrop-filter .mobile-menu-backdrop {
+    background: linear-gradient(
+      to bottom,
+      var(--mobile-menu-backdrop),
+      var(--mobile-menu-backdrop)
+    );
+  }
 }
 
 /* Reduce motion for accessibility */

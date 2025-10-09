@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "./components/theme-toggle";
+import { MobileMenu } from "./components/mobile-menu";
 import { TargetCursor } from "./components/target-cursor";
 import { FaultyTerminal } from "./components/faulty-terminal";
 import { LogoLoop } from "./components/logo-loop";
@@ -33,6 +34,16 @@ import HeroScene from "./components/hero-scene";
 
 export default function Portfolio() {
   const { theme } = useTheme();
+
+  const navigationItems = [
+    "About",
+    "CV",
+    "Skills",
+    "Projects",
+    "Experience",
+    "Certifications",
+    "Contact",
+  ];
 
   const projects = [
     {
@@ -161,15 +172,7 @@ export default function Portfolio() {
             </motion.a>
 
             <div className="hidden md:flex items-center space-x-8">
-              {[
-                "About",
-                "CV",
-                "Skills",
-                "Projects",
-                "Experience",
-                "Certifications",
-                "Contact",
-              ].map((item) => (
+              {navigationItems.map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -182,13 +185,11 @@ export default function Portfolio() {
               ))}
             </div>
 
-            <ThemeToggle />
-
-            {/* Mobile menu placeholder */}
-            <div className="md:hidden">
-              <Button variant="ghost" size="sm">
-                Menu
-              </Button>
+            <div className="flex items-center gap-2">
+              <div className="hidden md:block">
+                <ThemeToggle />
+              </div>
+              <MobileMenu navigationItems={navigationItems} />
             </div>
           </div>
         </div>
