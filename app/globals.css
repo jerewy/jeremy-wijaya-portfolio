@@ -4,30 +4,64 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
-    --radius: 0.5rem;
+    /* Claude AI Light Theme */
+    --background: 47 18% 96%;
+    --foreground: 30 16% 18%;
+    --card: 47 18% 96%;
+    --card-foreground: 30 16% 18%;
+    --popover: 47 18% 96%;
+    --popover-foreground: 30 16% 18%;
+    --primary: 18 59% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 47 12% 88%;
+    --secondary-foreground: 30 16% 18%;
+    --muted: 47 12% 88%;
+    --muted-foreground: 30 8% 45%;
+    --accent: 18 59% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 31%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 47 12% 82%;
+    --input: 47 12% 82%;
+    --ring: 18 59% 58%;
+    --radius: 0.75rem;
+
+    /* Animation variables */
     --reveal-duration: 650ms;
     --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
     --reveal-distance: 28px;
     --reveal-blur: 14px;
+
+    /* Terminal animation variables */
+    --terminal-color: #bd5d3a;
+    --terminal-glitch: #3d3929;
+  }
+
+  .dark {
+    /* Dark Theme */
+    --background: 222 84% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 18 91% 60%;
+    --primary-foreground: 222 84% 5%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 18 91% 60%;
+    --accent-foreground: 222 84% 5%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 94%;
+
+    /* Dark terminal colors */
+    --terminal-color: #d17a5a;
+    --terminal-glitch: #eeece2;
   }
 }
 
@@ -91,5 +125,161 @@ html.cursor-hidden * {
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
+  }
+}
+
+/* Custom animations */
+@keyframes glitch {
+  0%, 100% {
+    text-shadow:
+      2px 2px 0 var(--terminal-glitch),
+      -2px -2px 0 var(--terminal-color);
+  }
+  25% {
+    text-shadow:
+      -2px 2px 0 var(--terminal-color),
+      2px -2px 0 var(--terminal-glitch);
+  }
+  50% {
+    text-shadow:
+      2px -2px 0 var(--terminal-glitch),
+      -2px 2px 0 var(--terminal-color);
+  }
+  75% {
+    text-shadow:
+      -2px -2px 0 var(--terminal-color),
+      2px 2px 0 var(--terminal-glitch);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(189, 93, 58, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(189, 93, 58, 0.6);
+  }
+}
+
+@keyframes logo-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Target cursor styles */
+html.target-cursor,
+html.target-cursor * {
+  cursor: none !important;
+}
+
+.target-cursor-element {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--terminal-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+  transform: translate(-50%, -50%);
+}
+
+.target-cursor-element::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--terminal-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.target-cursor-element.hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: rgba(189, 93, 58, 0.1);
+}
+
+/* Terminal background styles */
+.terminal-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Typography glitch effect */
+.glitch-text {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  animation: glitch 0.3s infinite;
+  color: var(--terminal-color);
+  z-index: -1;
+}
+
+.glitch-text::after {
+  animation: glitch 0.3s infinite reverse;
+  color: var(--terminal-glitch);
+  z-index: -2;
+}
+
+/* Smooth theme transition */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+  opacity: 0.8;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

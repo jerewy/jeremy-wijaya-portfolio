@@ -1,290 +1,293 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Sparkles, Stars } from "@react-three/drei";
+import { Sparkles, Stars } from "@react-three/drei";
+// import { Float } from "@react-three/drei"; // Temporarily disabled with Robot
 import {
   useEffect,
   useMemo,
   useRef,
   useState,
-  type MutableRefObject,
+  // type MutableRefObject, // Temporarily disabled with Robot
 } from "react";
 import * as THREE from "three";
+import { useTheme } from "./theme-provider";
 
 type PointerState = { x: number; y: number; pulse: number };
-type PointerRef = MutableRefObject<PointerState>;
+// type PointerRef = MutableRefObject<PointerState>; // Temporarily disabled with Robot
 
-function Robot({ pointer }: { pointer: PointerRef }) {
-  const group = useRef<THREE.Group>(null);
-  const leftEye = useRef<THREE.Mesh>(null);
-  const rightEye = useRef<THREE.Mesh>(null);
-  const leftEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const rightEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const facePlateMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const faceGlowMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const chestBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const voiceBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+// Robot component temporarily disabled
+// function Robot({ pointer }: { pointer: PointerRef }) {
+//   const group = useRef<THREE.Group>(null);
+//   const leftEye = useRef<THREE.Mesh>(null);
+//   const rightEye = useRef<THREE.Mesh>(null);
+//   const leftEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+//   const rightEyeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+//   const facePlateMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+//   const faceGlowMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+//   const chestBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
+//   const voiceBarMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
 
-  const headGeometry = useMemo(() => new THREE.BoxGeometry(2.1, 1.7, 1.5), []);
-  const bodyGeometry = useMemo(
-    () => new THREE.BoxGeometry(1.65, 1.95, 1.2),
-    []
-  );
-  const jawGeometry = useMemo(() => new THREE.BoxGeometry(1.7, 0.55, 1.15), []);
-  const shoulderGeometry = useMemo(
-    () => new THREE.BoxGeometry(3.1, 0.45, 1.25),
-    []
-  );
-  const antennaGeometry = useMemo(
-    () => new THREE.CylinderGeometry(0.06, 0.06, 1, 24),
-    []
-  );
-  const facePlateGeometry = useMemo(
-    () => new THREE.PlaneGeometry(1.62, 1.18, 20, 20),
-    []
-  );
-  const faceGlowGeometry = useMemo(
-    () => new THREE.RingGeometry(0.65, 0.92, 72),
-    []
-  );
+//   const headGeometry = useMemo(() => new THREE.BoxGeometry(2.1, 1.7, 1.5), []);
+//   const bodyGeometry = useMemo(
+//     () => new THREE.BoxGeometry(1.65, 1.95, 1.2),
+//     []
+//   );
+//   const jawGeometry = useMemo(() => new THREE.BoxGeometry(1.7, 0.55, 1.15), []);
+//   const shoulderGeometry = useMemo(
+//     () => new THREE.BoxGeometry(3.1, 0.45, 1.25),
+//     []
+//   );
+//   const antennaGeometry = useMemo(
+//     () => new THREE.CylinderGeometry(0.06, 0.06, 1, 24),
+//     []
+//   );
+//   const facePlateGeometry = useMemo(
+//     () => new THREE.PlaneGeometry(1.62, 1.18, 20, 20),
+//     []
+//   );
+//   const faceGlowGeometry = useMemo(
+//     () => new THREE.RingGeometry(0.65, 0.92, 72),
+//     []
+//   );
 
-  useFrame((state) => {
-    if (!group.current) return;
+//   useFrame((state: { clock: { elapsedTime: number } }) => {
+//     if (!group.current) return;
 
-    const { x, y, pulse } = pointer.current;
-    const time = state.clock.elapsedTime;
+//     const { x, y, pulse } = pointer.current;
+//     const time = state.clock.elapsedTime;
 
-    const orbit = Math.sin(time * 0.25) * 0.2;
-    const hoverX = THREE.MathUtils.lerp(
-      group.current.rotation.y,
-      x * 0.55 + orbit * 0.2,
-      0.1
-    );
-    const hoverY = THREE.MathUtils.lerp(
-      group.current.rotation.x,
-      -y * 0.32 + Math.cos(time * 0.6) * 0.05,
-      0.1
-    );
-    const hoverZ = THREE.MathUtils.lerp(
-      group.current.rotation.z,
-      Math.sin(time * 0.4 + x * 0.8) * 0.08,
-      0.08
-    );
+//     const orbit = Math.sin(time * 0.25) * 0.2;
+//     const hoverX = THREE.MathUtils.lerp(
+//       group.current.rotation.y,
+//       x * 0.55 + orbit * 0.2,
+//       0.1
+//     );
+//     const hoverY = THREE.MathUtils.lerp(
+//       group.current.rotation.x,
+//       -y * 0.32 + Math.cos(time * 0.6) * 0.05,
+//       0.1
+//     );
+//     const hoverZ = THREE.MathUtils.lerp(
+//       group.current.rotation.z,
+//       Math.sin(time * 0.4 + x * 0.8) * 0.08,
+//       0.08
+//     );
 
-    group.current.rotation.y = hoverX;
-    group.current.rotation.x = hoverY;
-    group.current.rotation.z = hoverZ;
+//     group.current.rotation.y = hoverX;
+//     group.current.rotation.x = hoverY;
+//     group.current.rotation.z = hoverZ;
 
-    const nextScaleTarget =
-      1.15 + Math.sin(time * 1.9 + pulse * 0.6) * 0.035 + pulse * 0.12;
-    const nextScale = THREE.MathUtils.lerp(
-      group.current.scale.x,
-      nextScaleTarget,
-      0.12
-    );
-    group.current.scale.set(nextScale, nextScale, nextScale);
+//     const nextScaleTarget =
+//       1.15 + Math.sin(time * 1.9 + pulse * 0.6) * 0.035 + pulse * 0.12;
+//     const nextScale = THREE.MathUtils.lerp(
+//       group.current.scale.x,
+//       nextScaleTarget,
+//       0.12
+//     );
+//     group.current.scale.set(nextScale, nextScale, nextScale);
 
-    const baseY =
-      Math.sin(time * 0.95) * 0.07 +
-      Math.sin(time * 0.35 + x * 0.4) * 0.03 +
-      pulse * 0.1;
-    group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      baseY,
-      0.12
-    );
+//     const baseY =
+//       Math.sin(time * 0.95) * 0.07 +
+//       Math.sin(time * 0.35 + x * 0.4) * 0.03 +
+//       pulse * 0.1;
+//     group.current.position.y = THREE.MathUtils.lerp(
+//       group.current.position.y,
+//       baseY,
+//       0.12
+//     );
 
-    const swayX = THREE.MathUtils.lerp(
-      group.current.position.x,
-      Math.sin(time * 0.5 + y) * 0.08,
-      0.08
-    );
-    const swayZ = THREE.MathUtils.lerp(
-      group.current.position.z,
-      Math.cos(time * 0.45 + x) * 0.06,
-      0.08
-    );
-    group.current.position.x = swayX;
-    group.current.position.z = swayZ;
+//     const swayX = THREE.MathUtils.lerp(
+//       group.current.position.x,
+//       Math.sin(time * 0.5 + y) * 0.08,
+//       0.08
+//     );
+//     const swayZ = THREE.MathUtils.lerp(
+//       group.current.position.z,
+//       Math.cos(time * 0.45 + x) * 0.06,
+//       0.08
+//     );
+//     group.current.position.x = swayX;
+//     group.current.position.z = swayZ;
 
-    const eyeOffsetX = THREE.MathUtils.lerp(0, x * 0.24, 0.65);
-    const eyeOffsetY = THREE.MathUtils.lerp(0, -y * 0.22, 0.65);
+//     const eyeOffsetX = THREE.MathUtils.lerp(0, x * 0.24, 0.65);
+//     const eyeOffsetY = THREE.MathUtils.lerp(0, -y * 0.22, 0.65);
 
-    if (leftEye.current && rightEye.current) {
-      leftEye.current.position.x = -0.45 + eyeOffsetX;
-      rightEye.current.position.x = 0.45 + eyeOffsetX;
-      leftEye.current.position.y = 0.2 + eyeOffsetY;
-      rightEye.current.position.y = 0.2 + eyeOffsetY;
-    }
+//     if (leftEye.current && rightEye.current) {
+//       leftEye.current.position.x = -0.45 + eyeOffsetX;
+//       rightEye.current.position.x = 0.45 + eyeOffsetX;
+//       leftEye.current.position.y = 0.2 + eyeOffsetY;
+//       rightEye.current.position.y = 0.2 + eyeOffsetY;
+//     }
 
-    const pulseGlow = 0.75 + pulse * 1.5 + Math.sin(time * 2.6) * 0.12;
-    if (leftEyeMaterial.current) {
-      leftEyeMaterial.current.emissiveIntensity = pulseGlow;
-    }
-    if (rightEyeMaterial.current) {
-      rightEyeMaterial.current.emissiveIntensity = pulseGlow * 1.08;
-    }
-    if (facePlateMaterial.current) {
-      facePlateMaterial.current.emissiveIntensity = 0.6 + pulse * 0.9;
-      facePlateMaterial.current.opacity = 0.34 + pulse * 0.22;
-    }
-    if (faceGlowMaterial.current) {
-      faceGlowMaterial.current.emissiveIntensity = 0.48 + pulse * 1.35;
-      faceGlowMaterial.current.opacity = 0.36 + pulse * 0.28;
-    }
-    if (chestBarMaterial.current) {
-      chestBarMaterial.current.emissiveIntensity = 0.55 + pulse * 1.6;
-    }
-    if (voiceBarMaterial.current) {
-      voiceBarMaterial.current.emissiveIntensity = 0.48 + pulse * 1.3;
-    }
-  });
+//     const pulseGlow = 0.75 + pulse * 1.5 + Math.sin(time * 2.6) * 0.12;
+//     if (leftEyeMaterial.current) {
+//       leftEyeMaterial.current.emissiveIntensity = pulseGlow;
+//     }
+//     if (rightEyeMaterial.current) {
+//       rightEyeMaterial.current.emissiveIntensity = pulseGlow * 1.08;
+//     }
+//     if (facePlateMaterial.current) {
+//       facePlateMaterial.current.emissiveIntensity = 0.6 + pulse * 0.9;
+//       facePlateMaterial.current.opacity = 0.34 + pulse * 0.22;
+//     }
+//     if (faceGlowMaterial.current) {
+//       faceGlowMaterial.current.emissiveIntensity = 0.48 + pulse * 1.35;
+//       faceGlowMaterial.current.opacity = 0.36 + pulse * 0.28;
+//     }
+//     if (chestBarMaterial.current) {
+//       chestBarMaterial.current.emissiveIntensity = 0.55 + pulse * 1.6;
+//     }
+//     if (voiceBarMaterial.current) {
+//       voiceBarMaterial.current.emissiveIntensity = 0.48 + pulse * 1.3;
+//     }
+//   });
 
-  return (
-    <group ref={group} position={[0, 0.1, 0]} scale={1.2}>
-      <Float speed={1.25} rotationIntensity={0.24} floatIntensity={0.7}>
-        <mesh geometry={headGeometry} position={[0, 1.2, 0]}>
-          <meshStandardMaterial
-            color="#1b1b3a"
-            metalness={0.34}
-            roughness={0.26}
-          />
-        </mesh>
+//   return (
+//     <group ref={group} position={[0, 0.1, 0]} scale={1.2}>
+//       <Float speed={1.25} rotationIntensity={0.24} floatIntensity={0.7}>
+//         <mesh geometry={headGeometry} position={[0, 1.2, 0]}>
+//           <meshStandardMaterial
+//             color="#1b1b3a"
+//             metalness={0.34}
+//             roughness={0.26}
+//           />
+//         </mesh>
 
-        <mesh geometry={jawGeometry} position={[0, 0.55, 0.02]}>
-          <meshStandardMaterial
-            color="#262552"
-            metalness={0.48}
-            roughness={0.2}
-          />
-        </mesh>
+//         <mesh geometry={jawGeometry} position={[0, 0.55, 0.02]}>
+//           <meshStandardMaterial
+//             color="#262552"
+//             metalness={0.48}
+//             roughness={0.2}
+//           />
+//         </mesh>
 
-        <mesh geometry={bodyGeometry} position={[0, -0.15, 0]}>
-          <meshStandardMaterial
-            color="#232654"
-            metalness={0.38}
-            roughness={0.32}
-          />
-        </mesh>
+//         <mesh geometry={bodyGeometry} position={[0, -0.15, 0]}>
+//           <meshStandardMaterial
+//             color="#232654"
+//             metalness={0.38}
+//             roughness={0.32}
+//           />
+//         </mesh>
 
-        <mesh geometry={shoulderGeometry} position={[0, -1, 0]}>
-          <meshStandardMaterial
-            color="#2d2f64"
-            metalness={0.32}
-            roughness={0.44}
-          />
-        </mesh>
+//         <mesh geometry={shoulderGeometry} position={[0, -1, 0]}>
+//           <meshStandardMaterial
+//             color="#2d2f64"
+//             metalness={0.32}
+//             roughness={0.44}
+//           />
+//         </mesh>
 
-        <mesh
-          geometry={faceGlowGeometry}
-          position={[0, 1.23, 0.73]}
-          rotation={[0, 0, Math.PI / 2]}
-        >
-          <meshStandardMaterial
-            ref={faceGlowMaterial}
-            color="#fcb383"
-            emissive="#fcb383"
-            emissiveIntensity={0.46}
-            transparent
-            opacity={0.42}
-          />
-        </mesh>
+//         <mesh
+//           geometry={faceGlowGeometry}
+//           position={[0, 1.23, 0.73]}
+//           rotation={[0, 0, Math.PI / 2]}
+//         >
+//           <meshStandardMaterial
+//             ref={faceGlowMaterial}
+//             color="#fcb383"
+//             emissive="#fcb383"
+//             emissiveIntensity={0.46}
+//             transparent
+//             opacity={0.42}
+//           />
+//         </mesh>
 
-        <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.71]}>
-          <meshStandardMaterial
-            ref={facePlateMaterial}
-            color="#58f3f3"
-            emissive="#58f3f3"
-            emissiveIntensity={0.6}
-            transparent
-            opacity={0.4}
-            metalness={0.28}
-            roughness={0.1}
-          />
-        </mesh>
+//         <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.71]}>
+//           <meshStandardMaterial
+//             ref={facePlateMaterial}
+//             color="#58f3f3"
+//             emissive="#58f3f3"
+//             emissiveIntensity={0.6}
+//             transparent
+//             opacity={0.4}
+//             metalness={0.28}
+//             roughness={0.1}
+//           />
+//         </mesh>
 
-        <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.68]}>
-          <meshStandardMaterial
-            color="#081024"
-            transparent
-            opacity={0.55}
-            metalness={0.12}
-            roughness={0.25}
-          />
-        </mesh>
+//         <mesh geometry={facePlateGeometry} position={[0, 1.23, 0.68]}>
+//           <meshStandardMaterial
+//             color="#081024"
+//             transparent
+//             opacity={0.55}
+//             metalness={0.12}
+//             roughness={0.25}
+//           />
+//         </mesh>
 
-        <mesh ref={leftEye} position={[-0.45, 0.23, 0.74]}>
-          <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial
-            ref={leftEyeMaterial}
-            color="#2a9d8f"
-            emissive="#2a9d8f"
-            emissiveIntensity={0.8}
-          />
-        </mesh>
-        <mesh ref={rightEye} position={[0.45, 0.23, 0.74]}>
-          <sphereGeometry args={[0.18, 32, 32]} />
-          <meshStandardMaterial
-            ref={rightEyeMaterial}
-            color="#e76f51"
-            emissive="#e76f51"
-            emissiveIntensity={0.82}
-          />
-        </mesh>
+//         <mesh ref={leftEye} position={[-0.45, 0.23, 0.74]}>
+//           <sphereGeometry args={[0.18, 32, 32]} />
+//           <meshStandardMaterial
+//             ref={leftEyeMaterial}
+//             color="#2a9d8f"
+//             emissive="#2a9d8f"
+//             emissiveIntensity={0.8}
+//           />
+//         </mesh>
+//         <mesh ref={rightEye} position={[0.45, 0.23, 0.74]}>
+//           <sphereGeometry args={[0.18, 32, 32]} />
+//           <meshStandardMaterial
+//             ref={rightEyeMaterial}
+//             color="#e76f51"
+//             emissive="#e76f51"
+//             emissiveIntensity={0.82}
+//           />
+//         </mesh>
 
-        <mesh geometry={antennaGeometry} position={[0, 2.2, 0]}>
-          <meshStandardMaterial
-            color="#f4a261"
-            metalness={0.58}
-            roughness={0.28}
-          />
-        </mesh>
-        <mesh position={[0, 2.7, 0]}>
-          <sphereGeometry args={[0.12, 24, 24]} />
-          <meshStandardMaterial
-            color="#e76f51"
-            emissive="#e76f51"
-            emissiveIntensity={0.78}
-          />
-        </mesh>
+//         <mesh geometry={antennaGeometry} position={[0, 2.2, 0]}>
+//           <meshStandardMaterial
+//             color="#f4a261"
+//             metalness={0.58}
+//             roughness={0.28}
+//           />
+//         </mesh>
+//         <mesh position={[0, 2.7, 0]}>
+//           <sphereGeometry args={[0.12, 24, 24]} />
+//           <meshStandardMaterial
+//             color="#e76f51"
+//             emissive="#e76f51"
+//             emissiveIntensity={0.78}
+//           />
+//         </mesh>
 
-        <mesh position={[0, -1.35, 0]}>
-          <boxGeometry args={[2.8, 0.35, 1.2]} />
-          <meshStandardMaterial
-            color="#272a66"
-            metalness={0.36}
-            roughness={0.52}
-          />
-        </mesh>
+//         <mesh position={[0, -1.35, 0]}>
+//           <boxGeometry args={[2.8, 0.35, 1.2]} />
+//           <meshStandardMaterial
+//             color="#272a66"
+//             metalness={0.36}
+//             roughness={0.52}
+//           />
+//         </mesh>
 
-        <mesh position={[0, 0.75, 0.85]}>
-          <boxGeometry args={[0.9, 0.08, 0.1]} />
-          <meshStandardMaterial
-            ref={chestBarMaterial}
-            color="#f8bfa0"
-            emissive="#f8bfa0"
-            emissiveIntensity={0.62}
-          />
-        </mesh>
+//         <mesh position={[0, 0.75, 0.85]}>
+//           <boxGeometry args={[0.9, 0.08, 0.1]} />
+//           <meshStandardMaterial
+//             ref={chestBarMaterial}
+//             color="#f8bfa0"
+//             emissive="#f8bfa0"
+//             emissiveIntensity={0.62}
+//           />
+//         </mesh>
 
-        <mesh position={[0, 0.05, 0.82]}>
-          <boxGeometry args={[0.65, 0.05, 0.1]} />
-          <meshStandardMaterial
-            ref={voiceBarMaterial}
-            color="#ffe58f"
-            emissive="#ffe58f"
-            emissiveIntensity={0.52}
-          />
-        </mesh>
-      </Float>
-    </group>
-  );
-}
+//         <mesh position={[0, 0.05, 0.82]}>
+//           <boxGeometry args={[0.65, 0.05, 0.1]} />
+//           <meshStandardMaterial
+//             ref={voiceBarMaterial}
+//             color="#ffe58f"
+//             emissive="#ffe58f"
+//             emissiveIntensity={0.52}
+//           />
+//         </mesh>
+//       </Float>
+//     </group>
+//   );
+// }
 
 function AuroraBackdrop() {
   const material = useRef<THREE.ShaderMaterial>(null);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock }: { clock: { elapsedTime: number } }) => {
     if (material.current) {
       material.current.uniforms.uTime.value = clock.elapsedTime;
     }
@@ -354,7 +357,7 @@ function ShootingStarField({ count = 6 }: { count?: number }) {
     }));
   }, [count]);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock }: { clock: { elapsedTime: number } }) => {
     if (!mesh.current) return;
     const time = clock.elapsedTime;
     origins.forEach((config, index) => {
@@ -386,6 +389,7 @@ function ShootingStarField({ count = 6 }: { count?: number }) {
 }
 
 export default function HeroScene() {
+  const { theme } = useTheme();
   const pointer = useRef<PointerState>({ x: 0, y: 0, pulse: 0 });
   const pointerTarget = useRef({ x: 0, y: 0 });
   const isIdle = useRef(true);
@@ -522,65 +526,78 @@ export default function HeroScene() {
     };
   }, [isCoarsePointer]);
 
+  // Theme-aware colors
+  const bgColor = theme === 'dark' ? '#0c1027' : '#f8fafc';
+  const meshColor = theme === 'dark' ? '#10163a' : '#e2e8f0';
+  const meshEmissive = theme === 'dark' ? '#1b285f' : '#cbd5e1';
+  const gradientOpacity = theme === 'dark' ? 'opacity-70' : 'opacity-30';
+
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0.7, 4.2], fov: 38 }} dpr={[1, 1.75]}>
-        <color attach="background" args={["#0c1027"]} />
-        <ambientLight intensity={0.92} color="#f3f0ff" />
+      <Canvas camera={{ position: [0, 0.7, 4.2], fov: 38 }} dpr={[1, 1.75]} className="w-full h-full absolute inset-0">
+        <color attach="background" args={[bgColor]} />
+        <ambientLight intensity={theme === 'dark' ? 0.92 : 0.6} color={theme === 'dark' ? "#f3f0ff" : "#ffffff"} />
         <spotLight
           position={[0, 2.4, 4.2]}
           angle={0.52}
-          intensity={1.2}
+          intensity={theme === 'dark' ? 1.2 : 0.8}
           color="#fcb383"
           penumbra={0.55}
         />
         <pointLight
           position={[3.2, 3.4, 3.6]}
-          intensity={1.05}
+          intensity={theme === 'dark' ? 1.05 : 0.7}
           color="#6edbff"
         />
         <pointLight
           position={[-3.4, 1.8, 4.2]}
-          intensity={0.95}
+          intensity={theme === 'dark' ? 0.95 : 0.6}
           color="#f59f9f"
         />
         <pointLight
           position={[0.4, 0.4, 2.8]}
-          intensity={0.8}
+          intensity={theme === 'dark' ? 0.8 : 0.5}
           color="#ffe58f"
         />
-        <AuroraBackdrop />
+        {theme === 'dark' && <AuroraBackdrop />}
         <Sparkles
-          color="#9fdcff"
-          count={80}
+          color={theme === 'dark' ? "#9fdcff" : "#64748b"}
+          count={theme === 'dark' ? 80 : 40}
           size={isCoarsePointer ? 2.2 : 3.2}
           scale={[9, 4, 2]}
           position={[0, 0.5, -1.8]}
           speed={0.2}
-          opacity={0.8}
+          opacity={theme === 'dark' ? 0.8 : 0.4}
         />
-        <Robot pointer={pointer} />
-        <Stars
-          radius={60}
-          depth={38}
-          count={4200}
-          factor={isCoarsePointer ? 2.1 : 2.8}
-          saturation={0}
-          fade
-          speed={0.32}
-        />
-        <ShootingStarField count={7} />
+        {/* Robot component temporarily disabled */}
+        {/* <Robot pointer={pointer} /> */}
+        {theme === 'dark' && (
+          <Stars
+            radius={60}
+            depth={38}
+            count={4200}
+            factor={isCoarsePointer ? 2.1 : 2.8}
+            saturation={0}
+            fade
+            speed={0.32}
+          />
+        )}
+        <ShootingStarField count={theme === 'dark' ? 7 : 3} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]}>
           <planeGeometry args={[50, 50]} />
           <meshStandardMaterial
-            color="#10163a"
-            emissive="#1b285f"
-            emissiveIntensity={0.3}
+            color={meshColor}
+            emissive={meshEmissive}
+            emissiveIntensity={theme === 'dark' ? 0.3 : 0.1}
           />
         </mesh>
       </Canvas>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(110,219,255,0.22),transparent_45%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b1c]/70 via-[#090b1f]/60 to-[#05060f]/85" />
+      {theme === 'dark' && (
+        <>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(110,219,255,0.22),transparent_45%)]" />
+          <div className={`absolute inset-0 bg-gradient-to-b from-[#0b0b1c]/70 via-[#090b1f]/60 to-[#05060f]/85 ${gradientOpacity}`} />
+        </>
+      )}
     </div>
   );
 }

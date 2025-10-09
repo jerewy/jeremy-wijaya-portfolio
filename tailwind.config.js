@@ -9,6 +9,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Claude AI inspired colors
+        claude: {
+          bg: "#eeece2",
+          text: "#3d3929",
+          accent: "#bd5d3a",
+          'accent-light': "#d17a5a",
+          'accent-dark': "#a34a2c",
+        },
+        // Dark mode variants
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -61,6 +70,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      screens: {
+        'screen': '100vw',
       },
     },
   },

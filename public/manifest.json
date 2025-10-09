@@ -1,0 +1,29 @@
+{
+  "name": "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
+  "short_name": "JW Portfolio",
+  "description": "Portfolio of Jeremy Wijaya, an aspiring AI Engineer and Full-Stack Developer specializing in intelligent systems and machine learning solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#D37B55",
+  "theme_color": "#D37B55",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,14 +1,34 @@
 # Jeremy Wijaya Portfolio
 
-A single-page portfolio site built with Next.js and Tailwind CSS to highlight Jeremy Wijaya's engineering journey. The landing page blends a responsive UI with a three.js hero scene so the robot guide follows your pointer without obscuring the copy.
+A clean, modern portfolio website built with Next.js 15, featuring Claude AI-inspired design aesthetics, interactive animations, and a focus on typography and user experience.
 
 ## Features
 
-- **Immersive hero** – A custom three.js robot (`HeroScene`) tracks the visitor's cursor, paired with a dark glassmorphism layout for readable hero messaging.
-- **Gradient navigation** – Fixed pill navigation emphasises "Let's collaborate" while collapsing into a compact mobile bar.
-- **Hard-skill marquee** – `SkillSlider` renders a continuous ticker with direction controls so every featured technology gets time in view.
-- **Projects & contact grid** – Project cards surface live demos and GitHub links; contact methods become full-card links that adapt from grid to stack layouts.
-- **Cursor & particle effects** – A trailing-glow cursor activates only when scripts load, while `AnimatedBackground` draws lightweight connective particles behind the content.
+### 🎨 Design System
+- **Claude AI aesthetic** - Clean pastel color palette with warm accents
+- **Typography focus** - Elegant typography with glitch effects and animations
+- **Light/Dark mode** - Smooth theme switching with system preference detection
+- **Responsive design** - Mobile-first approach with adaptive layouts
+
+### ✨ Interactive Elements
+- **Faulty Terminal Background** - Interactive particle system with cursor reaction and terminal-like glitch effects
+- **Target Cursor** - Custom animated cursor that follows mouse movement
+- **Scroll Reveal Animations** - Smooth scroll-triggered animations with Framer Motion
+- **Logo Loop** - Infinite scrolling technology showcase with hover effects
+
+### 📱 Sections
+- **Hero** - Typography-focused introduction with animated glitch text
+- **About** - Profile picture with detailed personal story and achievements
+- **Skills** - Animated technology logos in an infinite loop
+- **Projects** - Enhanced project cards with scroll animations and hover effects
+- **Experience Timeline** - Interactive horizontal timeline with detailed journey
+- **Certifications** - Preview cards with modal view and CV download
+- **Contact** - Clean contact methods with interactive cards
+
+### 🚀 Performance & Accessibility
+- **Optimized animations** - Hardware-accelerated CSS and respect for prefers-reduced-motion
+- **Mobile responsive** - Touch-friendly interfaces and adaptive animations
+- **Semantic HTML** - Proper accessibility structure and ARIA support
 
 ## Getting Started
 
