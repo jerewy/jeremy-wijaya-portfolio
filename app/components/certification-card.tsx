@@ -165,7 +165,9 @@ export function CertificationCard({
                       <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2 truncate">
                         {title}
                       </h2>
-                      <p className="text-sm text-muted-foreground font-medium mb-3">{issuer}</p>
+                      <p className="text-sm text-muted-foreground font-medium mb-3">
+                        {issuer}
+                      </p>
 
                       {/* Certificate details - improved spacing */}
                       <div className="space-y-2 text-xs sm:text-sm text-muted-foreground">
@@ -175,7 +177,10 @@ export function CertificationCard({
                         </div>
                         {credentialId && (
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs bg-muted/50">
+                            <Badge
+                              variant="outline"
+                              className="text-xs bg-muted/50"
+                            >
                               ID: {credentialId}
                             </Badge>
                           </div>
@@ -188,7 +193,10 @@ export function CertificationCard({
 
               {/* PDF Preview with Security */}
               <div className="p-4 sm:p-6 bg-card/20">
-                <div className="relative w-full h-[60vh] rounded-lg bg-muted/30 overflow-hidden" onContextMenu={(e) => e.preventDefault()}>
+                <div
+                  className="relative w-full h-[60vh] rounded-lg bg-muted/30 overflow-hidden"
+                  onContextMenu={(e) => e.preventDefault()}
+                >
                   {/* Subtle security overlay */}
                   <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none z-10" />
 
@@ -223,15 +231,21 @@ export function CertificationCard({
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-6 border-t bg-card/50">
                 <div className="text-sm text-muted-foreground max-w-md">
                   <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="outline" className="text-xs gap-1 bg-amber-50/80 text-amber-700 border-amber-200 dark:bg-amber-950/50 dark:text-amber-400 dark:border-amber-800/50">
+                    <Badge
+                      variant="outline"
+                      className="text-xs gap-1 bg-amber-50/80 text-amber-700 border-amber-200 dark:bg-amber-950/50 dark:text-amber-400 dark:border-amber-800/50"
+                    >
                       <Eye className="w-3 h-3" />
                       Preview Mode
                     </Badge>
                   </div>
-                  <p className="font-medium text-foreground mb-1">Credential Verification</p>
+                  <p className="font-medium text-foreground mb-1">
+                    Credential Verification
+                  </p>
                   <p className="text-xs md:text-sm">
-                    This certificate can be verified through the official issuer platform.
-                    Download functionality is disabled for security purposes.
+                    This certificate can be verified through the official issuer
+                    platform. Download functionality is disabled for security
+                    purposes.
                   </p>
                 </div>
 
@@ -335,7 +349,7 @@ function CVPreviewModal({
                       {currentDate}
                     </div>
                     <div className="flex items-center gap-1">
-                      <FileText className="w-3 h-3" />4 pages • PDF
+                      <FileText className="w-3 h-3" />1 pages • PDF
                     </div>
                   </div>
                 </div>
