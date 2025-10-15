@@ -72,12 +72,13 @@ export default function Portfolio() {
       title: "CodeJoin - Interactive Coding Environment",
       summary:
         "Developing web-based coding platform with AI chatbot integration and real-time collaboration features.",
-      image: "/code_join_cropped.png",
+      image: "/codejoin.vercel.app_.png",
       width: 500,
       height: 300,
       liveLink: null,
+      livelink: "https://codejoin.vercel.app/",
       githubLink: "https://github.com/jerewy/codejoin-new",
-      tags: ["React", "Monaco Editor", "AI Integration", "WebRTC"],
+      tags: ["React", "Monaco Editor", "AI Integration"],
     },
   ];
 
@@ -91,7 +92,8 @@ export default function Portfolio() {
       previewImage: "/msai900t00_JeremyWijaya.pdf",
       description:
         "Completed the Azure AI Fundamentals training aligned to Microsoft AI-900: core AI concepts, responsible AI, and Azure AI services (Azure ML, Computer Vision, Language & Speech, Azure OpenAI).",
-      credentialUrl: "https://www.greatnusa.com/product/microsoft-ai-900t00-a-azure-ai-fundamentals",
+      credentialUrl:
+        "https://www.greatnusa.com/product/microsoft-ai-900t00-a-azure-ai-fundamentals",
     },
     {
       id: "microsoft-ai-beginner-fundamental-greatnusa",
@@ -102,7 +104,8 @@ export default function Portfolio() {
       previewImage: "/sertifikat_jeremy.pdf",
       description:
         "Completed the Microsoft AI Beginner Fundamental course covering essential AI concepts and introductory hands-on labs.",
-      credentialUrl: "https://www.greatnusa.com/product/microsoft-ai-beginner-fundamental",
+      credentialUrl:
+        "https://www.greatnusa.com/product/microsoft-ai-beginner-fundamental",
     },
   ];
 
