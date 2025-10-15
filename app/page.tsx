@@ -75,7 +75,6 @@ export default function Portfolio() {
       image: "/codejoin.vercel.app_.png",
       width: 500,
       height: 300,
-      liveLink: null,
       livelink: "https://codejoin.vercel.app/",
       githubLink: "https://github.com/jerewy/codejoin-new",
       tags: ["React", "Monaco Editor", "AI Integration"],
