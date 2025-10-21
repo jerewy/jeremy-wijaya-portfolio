@@ -296,7 +296,7 @@ function CVPreviewModal({
   isPdfLoading: boolean;
   onPdfLoad: () => void;
 }) {
-  const pdfUrl = "/Jeremy_CV_ATS_81025.pdf";
+  const pdfUrl = "/Jeremy_Wijaya_CV_ATS.pdf";
   const currentDate = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
