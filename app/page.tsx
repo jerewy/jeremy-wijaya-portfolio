@@ -278,7 +278,7 @@ export default function Portfolio() {
               <div className="relative max-w-sm mx-auto lg:max-w-none">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
                   <Image
-                    src="/pp.png" // Add your profile picture here
+                    src="/jere_profile_linkedin.png" // Add your profile picture here
                     alt="Jeremy Wijaya"
                     width={400}
                     height={400}
