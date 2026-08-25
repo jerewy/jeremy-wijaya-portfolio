@@ -32,12 +32,15 @@ import Image from "next/image";
 import { useTheme } from "./components/theme-provider";
 import HeroScene from "./components/hero-scene";
 
+// Temporarily hidden: flip to true to restore the CV section and its nav link.
+const SHOW_CV_SECTION = false;
+
 export default function Portfolio() {
   const { theme } = useTheme();
 
   const navigationItems = [
     "About",
-    "CV",
+    ...(SHOW_CV_SECTION ? ["CV"] : []),
     "Skills",
     "Projects",
     "Experience",
@@ -278,11 +281,14 @@ export default function Portfolio() {
               <div className="relative max-w-sm mx-auto lg:max-w-none">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
                   <Image
-                    src="/jere_profile_linkedin.png" // Add your profile picture here
+                    src="/pasfoto_jere.jpeg"
                     alt="Jeremy Wijaya"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover"
+                    width={960}
+                    height={1280}
+                    priority
+                    // The source is a 3:4 portrait; anchor the square crop to the
+                    // top so the head stays in frame instead of being clipped.
+                    className="w-full h-full object-cover object-top"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src =
                         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face";
@@ -348,6 +354,7 @@ export default function Portfolio() {
       </ScrollReveal>
 
       {/* CV Section */}
+      {SHOW_CV_SECTION && (
       <ScrollReveal
         id="cv"
         className="relative px-4 py-20 sm:px-6 lg:px-8 bg-muted/30"
@@ -371,6 +378,7 @@ export default function Portfolio() {
           </ScrollReveal>
         </div>
       </ScrollReveal>
+      )}
 
       {/* Skills Section */}
       <ScrollReveal
