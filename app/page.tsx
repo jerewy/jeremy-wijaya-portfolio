@@ -275,16 +275,17 @@ export default function Portfolio() {
       {/* About Section */}
       <ScrollReveal id="about" className="relative px-4 py-20 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-[260px_1fr] gap-10 lg:gap-16 items-center">
             {/* Profile Picture */}
             <ScrollReveal direction="left">
-              <div className="relative max-w-sm mx-auto lg:max-w-none">
+              <div className="relative w-full max-w-[220px] sm:max-w-[260px] mx-auto">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
                   <Image
                     src="/pasfoto_jere.jpeg"
                     alt="Jeremy Wijaya"
                     width={960}
                     height={1280}
+                    sizes="(min-width: 640px) 260px, 220px"
                     priority
                     // The source is a 3:4 portrait; anchor the square crop to the
                     // top so the head stays in frame instead of being clipped.
@@ -295,14 +296,17 @@ export default function Portfolio() {
                     }}
                   />
                 </div>
-                <div className="absolute -bottom-3 -right-3 lg:-bottom-4 lg:-right-4 bg-primary text-primary-foreground px-3 py-1 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-semibold">
-                  Available for work
+                <div className="mt-4 flex justify-center">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Available for work
+                  </span>
                 </div>
               </div>
             </ScrollReveal>
 
             {/* About Content */}
-            <ScrollReveal direction="right" className="space-y-6">
+            <ScrollReveal direction="right" className="space-y-6 max-w-2xl">
               <div>
                 <Badge variant="secondary" className="mb-4">
                   About Me
