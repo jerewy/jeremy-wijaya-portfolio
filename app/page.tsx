@@ -29,14 +29,14 @@ import {
   CVDownloadButton,
 } from "./components/certification-card";
 import Image from "next/image";
-import { useTheme } from "./components/theme-provider";
 import HeroScene from "./components/hero-scene";
+import { useState } from "react";
 
 // Temporarily hidden: flip to true to restore the CV section and its nav link.
 const SHOW_CV_SECTION = false;
 
 export default function Portfolio() {
-  const { theme } = useTheme();
+  const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
 
   const navigationItems = [
     "About",
@@ -223,9 +223,6 @@ export default function Portfolio() {
           <motion.h1
             variants={textVariants}
             className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-            style={{
-              fontFamily: theme === "dark" ? "Inter, serif" : "Inter, serif",
-            }}
           >
             <span className="glitch-text" data-text="Jeremy Wijaya">
               Jeremy Wijaya
@@ -252,14 +249,14 @@ export default function Portfolio() {
             variants={textVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-2xl mx-auto"
           >
-            <Button size="lg" className="group w-full sm:w-auto">
+            <Button asChild size="lg" className="group w-full sm:w-auto">
               <a href="#projects" className="flex items-center gap-2">
                 Explore My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
 
-            <Button size="lg" variant="outline" className="w-full sm:w-auto">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <a href="#contact" className="flex items-center gap-2">
                 Get In Touch
                 <Mail className="w-4 h-4" />
@@ -290,10 +287,6 @@ export default function Portfolio() {
                     // The source is a 3:4 portrait; anchor the square crop to the
                     // top so the head stays in frame instead of being clipped.
                     className="w-full h-full object-cover object-top"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face";
-                    }}
                   />
                 </div>
                 <div className="mt-4 flex justify-center">
@@ -437,28 +430,26 @@ export default function Portfolio() {
               >
                 <CardHeader className="p-0 overflow-hidden rounded-t-lg">
                   <div className="relative h-48 bg-muted">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={500}
-                      height={300}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                        const parent = target.parentElement;
-                        if (parent) {
-                          parent.innerHTML = `
-                            <div class="w-full h-full flex items-center justify-center text-muted-foreground">
-                              <div class="text-center">
-                                <div class="text-4xl mb-2">🚀</div>
-                                <div class="text-sm">Project Preview</div>
-                              </div>
-                            </div>
-                          `;
+                    {brokenImages[project.image] ? (
+                      <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+                        <span className="text-sm">Preview unavailable</span>
+                      </div>
+                    ) : (
+                      <Image
+                        src={project.image}
+                        alt={`Screenshot of ${project.title}`}
+                        width={500}
+                        height={300}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={() =>
+                          setBrokenImages((prev) => ({
+                            ...prev,
+                            [project.image]: true,
+                          }))
                         }
-                      }}
-                    />
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </CardHeader>
@@ -486,7 +477,7 @@ export default function Portfolio() {
 
                   <div className="flex gap-3">
                     {project.liveLink && (
-                      <Button size="sm" className="group">
+                      <Button asChild size="sm" className="group">
                         <a
                           href={project.liveLink}
                           target="_blank"
@@ -499,7 +490,7 @@ export default function Portfolio() {
                       </Button>
                     )}
 
-                    <Button size="sm" variant="outline">
+                    <Button asChild size="sm" variant="outline">
                       <a
                         href={project.githubLink}
                         target="_blank"
@@ -626,8 +617,8 @@ export default function Portfolio() {
       <footer className="relative border-t border-border/50 py-8 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-muted-foreground">
-            © 2024 Jeremy Wijaya. Built with Next.js, TypeScript, and passion
-            for AI.
+            © {new Date().getFullYear()} Jeremy Wijaya. Built with Next.js,
+            TypeScript, and passion for AI.
           </p>
         </div>
       </footer>

@@ -1,14 +1,43 @@
 "use client";
 
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, ReactNode } from 'react';
-import { useInView as useInViewObserver } from 'react-intersection-observer';
+import {
+  motion,
+  useAnimation,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+import { Children, useEffect, type ReactNode } from "react";
+import { useInView as useInViewObserver } from "react-intersection-observer";
+
+type Direction = "up" | "down" | "left" | "right" | "fade";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * Offsets for the hidden state. `fade` is the reduced-motion target too: the
+ * global CSS `prefers-reduced-motion` rule only neutralises CSS animations,
+ * and Framer Motion drives inline styles from JS, so it has to opt out here.
+ */
+function hiddenState(direction: Direction, distance: number) {
+  switch (direction) {
+    case "up":
+      return { opacity: 0, y: distance };
+    case "down":
+      return { opacity: 0, y: -distance };
+    case "left":
+      return { opacity: 0, x: -distance };
+    case "right":
+      return { opacity: 0, x: distance };
+    case "fade":
+      return { opacity: 0 };
+  }
+}
 
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+  direction?: Direction;
   duration?: number;
   once?: boolean;
   threshold?: number;
@@ -20,79 +49,52 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  direction = 'up',
+  direction = "up",
   duration = 0.6,
   once = true,
   threshold = 0.1,
   staggerChildren = 0,
-  id
+  id,
 }: ScrollRevealProps) {
   const controls = useAnimation();
+  const prefersReducedMotion = useReducedMotion();
   const { ref, inView } = useInViewObserver({
     threshold,
     triggerOnce: once,
   });
 
-  const getInitialVariant = () => {
-    switch (direction) {
-      case 'up':
-        return { opacity: 0, y: 60 };
-      case 'down':
-        return { opacity: 0, y: -60 };
-      case 'left':
-        return { opacity: 0, x: -60 };
-      case 'right':
-        return { opacity: 0, x: 60 };
-      case 'fade':
-        return { opacity: 0 };
-      default:
-        return { opacity: 0, y: 60 };
-    }
-  };
+  // Reduced motion keeps the fade (so the reveal still reads as intentional)
+  // but drops the travel that triggers vestibular discomfort.
+  const effectiveDirection: Direction = prefersReducedMotion
+    ? "fade"
+    : direction;
+  const effectiveDuration = prefersReducedMotion ? 0.01 : duration;
 
-  const getFinalVariant = () => {
-    switch (direction) {
-      case 'up':
-        return { opacity: 1, y: 0 };
-      case 'down':
-        return { opacity: 1, y: 0 };
-      case 'left':
-        return { opacity: 1, x: 0 };
-      case 'right':
-        return { opacity: 1, x: 0 };
-      case 'fade':
-        return { opacity: 1 };
-      default:
-        return { opacity: 1, y: 0 };
-    }
-  };
-
-  const containerVariants = {
-    hidden: {},
+  const itemVariants: Variants = {
+    hidden: hiddenState(effectiveDirection, 60),
     visible: {
-      transition: {
-        staggerChildren: staggerChildren,
-        delayChildren: delay,
-      },
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { duration: effectiveDuration, ease: EASE, delay },
     },
   };
 
-  const itemVariants = {
-    hidden: getInitialVariant(),
+  const containerVariants: Variants = {
+    hidden: {},
     visible: {
-      ...getFinalVariant(),
       transition: {
-        duration,
-        ease: [0.22, 1, 0.36, 1] as const,
+        staggerChildren: prefersReducedMotion ? 0 : staggerChildren,
+        delayChildren: delay,
       },
     },
   };
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start("visible");
     } else if (!once) {
-      controls.start('hidden');
+      controls.start("hidden");
     }
   }, [inView, controls, once]);
 
@@ -106,7 +108,14 @@ export function ScrollReveal({
         variants={containerVariants}
         id={id}
       >
-        {children}
+        {/* Children are plain elements at every call site, so they cannot
+            inherit the stagger on their own. Wrap each one in a motion item
+            that carries the variants the container drives. */}
+        {Children.map(children, (child, index) => (
+          <ScrollRevealItem key={index} direction={effectiveDirection}>
+            {child}
+          </ScrollRevealItem>
+        ))}
       </motion.div>
     );
   }
@@ -125,7 +134,6 @@ export function ScrollReveal({
   );
 }
 
-// Staggered container for multiple children
 interface ScrollRevealStaggeredProps {
   children: ReactNode;
   className?: string;
@@ -159,54 +167,38 @@ export function ScrollRevealStaggered({
   );
 }
 
-// Individual item for staggered animations
 export function ScrollRevealItem({
   children,
   className = "",
-  direction = 'up',
+  direction = "up",
   delay = 0,
 }: {
   children: ReactNode;
   className?: string;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+  direction?: Direction;
   delay?: number;
 }) {
-  const getInitialVariant = () => {
-    switch (direction) {
-      case 'up':
-        return { opacity: 0, y: 40 };
-      case 'down':
-        return { opacity: 0, y: -40 };
-      case 'left':
-        return { opacity: 0, x: -40 };
-      case 'right':
-        return { opacity: 0, x: 40 };
-      case 'fade':
-        return { opacity: 0 };
-      default:
-        return { opacity: 0, y: 40 };
-    }
-  };
+  const prefersReducedMotion = useReducedMotion();
+  const effectiveDirection: Direction = prefersReducedMotion
+    ? "fade"
+    : direction;
 
-  const variants = {
-    hidden: getInitialVariant(),
+  const variants: Variants = {
+    hidden: hiddenState(effectiveDirection, 40),
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: prefersReducedMotion ? 0.01 : 0.6,
         delay,
-        ease: [0.22, 1, 0.36, 1] as const,
+        ease: EASE,
       },
     },
   };
 
   return (
-    <motion.div
-      className={className}
-      variants={variants}
-    >
+    <motion.div className={className} variants={variants}>
       {children}
     </motion.div>
   );
