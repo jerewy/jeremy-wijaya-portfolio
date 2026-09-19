@@ -2,46 +2,50 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
+import { siteConfig, siteUrl } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
-  description:
-    "Portfolio of Jeremy Wijaya, an aspiring AI Engineer and Full-Stack Developer specializing in intelligent systems and machine learning solutions.",
-  keywords:
-    "AI Engineer, Machine Learning, Full-Stack Developer, Computer Science, Next.js, Python, TensorFlow",
-  authors: [{ name: "Jeremy Wijaya" }],
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/apple-touch-icon.svg',
-    other: [
-      {
-        rel: 'manifest',
-        url: '/manifest.json',
-      },
-    ],
+  // Absolute URLs for OG/Twitter cards are resolved against this. Hardcoding
+  // localhost here silently breaks every shared link in production.
+  metadataBase: new URL(siteUrl),
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: [
+    "AI Engineer",
+    "Machine Learning",
+    "Full-Stack Developer",
+    "Computer Science",
+    "Next.js",
+    "Python",
+    "TensorFlow",
+  ],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  alternates: {
+    canonical: "/",
   },
-  metadataBase: new URL('http://localhost:3003'),
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/apple-touch-icon.svg",
+  },
+  manifest: "/manifest.json",
   openGraph: {
-    title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
-    description: "Portfolio showcasing AI and full-stack development projects",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: "/",
+    siteName: siteConfig.name,
+    locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: '/opengraph-image.svg',
-        width: 1200,
-        height: 630,
-        alt: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
-      },
-    ],
+    // images are supplied by app/opengraph-image.tsx
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
-    description: "Portfolio showcasing AI and full-stack development projects",
-    images: ['/twitter-image.svg'],
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    // images are supplied by app/twitter-image.tsx
   },
 };
 
@@ -51,11 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth scroll-pt-20" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth scroll-pt-20"
+      suppressHydrationWarning
+    >
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

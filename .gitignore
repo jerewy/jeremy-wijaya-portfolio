@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 .claude
+# Keep the documented template committed
+!.env.example
