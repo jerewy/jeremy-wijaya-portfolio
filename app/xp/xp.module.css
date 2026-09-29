@@ -1,0 +1,484 @@
+/* XP-inspired chrome. Colors approximate the Luna theme; no Microsoft assets. */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Tahoma, Verdana, "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #000;
+  user-select: none;
+}
+
+/* Our own rolling-hills wallpaper, drawn with gradients. */
+.desktop {
+  position: relative;
+  flex: 1;
+  background:
+    radial-gradient(ellipse 90% 45% at 30% 100%, #4f9a2c 0 60%, transparent 61%),
+    radial-gradient(ellipse 80% 40% at 85% 105%, #6cb83a 0 60%, transparent 61%),
+    radial-gradient(ellipse 30% 8% at 70% 22%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(ellipse 22% 6% at 25% 15%, rgba(255, 255, 255, 0.7), transparent 70%),
+    linear-gradient(#2a6fd6 0%, #5b9ae8 45%, #a9cdf2 75%);
+}
+
+.icons {
+  position: absolute;
+  top: 12px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.desktopIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 76px;
+  padding: 4px 2px;
+  background: none;
+  border: 1px solid transparent;
+  color: #fff;
+  font: inherit;
+  text-shadow: 1px 1px 2px #000;
+  cursor: default;
+}
+
+.desktopIcon:focus-visible,
+.desktopIcon:focus span {
+  outline: 1px dotted #fff;
+}
+
+.desktopIcon:focus span {
+  background: #316ac5;
+}
+
+/* ---------- Windows ---------- */
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 20px);
+  background: #ece9d8;
+  border: 3px solid #0831d9;
+  border-top: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.windowInactive {
+  border-color: #7b96d9;
+}
+
+.windowInactive .titleBar {
+  background: linear-gradient(#9db8eb, #7f9fe0 60%, #93aee8);
+}
+
+.windowMax {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100%;
+  max-height: none;
+  border-radius: 0;
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 4px 0 8px;
+  margin: 0 -3px;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(#0a5cf2, #0053e1 8%, #0a64f5 40%, #0048c8 88%, #003bb0);
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  text-shadow: 1px 1px #0f1089;
+  touch-action: none;
+  cursor: default;
+}
+
+.titleText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.titleControls {
+  display: flex;
+  gap: 2px;
+}
+
+.ctrl {
+  width: 21px;
+  height: 21px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #3c8bff, #1e5ee6);
+  color: #fff;
+  font: bold 13px/1 Tahoma, sans-serif;
+  cursor: pointer;
+}
+
+.ctrlClose {
+  background: linear-gradient(135deg, #e97a5b, #c73a12);
+}
+
+.windowBody {
+  overflow: auto;
+  padding: 10px;
+  user-select: text;
+}
+
+/* ---------- Buttons ---------- */
+
+.xpButton {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  background: linear-gradient(#fff, #ecebe6 85%, #d6d0c5);
+  color: #000;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.xpButton:hover {
+  box-shadow: inset 0 0 0 2px #f8b636;
+}
+
+/* ---------- Welcome ---------- */
+
+.welcome {
+  display: flex;
+  gap: 16px;
+  line-height: 1.5;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border: 3px solid #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px #7f9db9;
+}
+
+.welcomeName {
+  margin: 0;
+  font-size: 20px;
+  color: #0b3d91;
+}
+
+.welcomeRole {
+  margin: 0 0 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.welcomeButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.hint {
+  margin-top: 12px;
+  color: #666;
+  font-size: 11px;
+}
+
+/* ---------- Explorer (projects) ---------- */
+
+.explorer {
+  display: flex;
+  margin: -10px;
+  min-height: 260px;
+}
+
+.explorerSide {
+  width: 170px;
+  padding: 10px;
+  background: linear-gradient(#7ba2e7, #6375d6);
+}
+
+.sidePanel {
+  background: #d6dff7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sidePanel p {
+  margin: 0;
+  padding: 8px;
+  color: #215dc6;
+}
+
+.sidePanelTitle {
+  padding: 5px 8px;
+  background: linear-gradient(90deg, #fff, #c6d3f7);
+  color: #215dc6;
+  font-weight: bold;
+}
+
+.explorerFiles {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: #fff;
+}
+
+.fileItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 88px;
+  padding: 4px;
+  background: none;
+  border: 1px solid transparent;
+  font: inherit;
+  cursor: default;
+}
+
+.fileItem:focus {
+  outline: none;
+  border: 1px dotted #316ac5;
+}
+
+.fileItem:focus span {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* ---------- Project detail ---------- */
+
+.projectDetail {
+  line-height: 1.5;
+}
+
+.projectDetail h2 {
+  margin: 10px 0 4px;
+  font-size: 14px;
+}
+
+.projectImage {
+  width: 100%;
+  height: auto;
+  border: 1px solid #7f9db9;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  padding: 1px 6px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+}
+
+/* ---------- About / Contact ---------- */
+
+.about {
+  line-height: 1.5;
+}
+
+.fieldset {
+  border: 1px solid #d0d0bf;
+  border-radius: 4px;
+}
+
+.fieldset legend {
+  color: #0046d5;
+}
+
+.specs {
+  margin: 0;
+}
+
+.specs div {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+.specs dt {
+  color: #444;
+}
+
+.specs dd {
+  margin: 0;
+}
+
+/* ---------- Start menu ---------- */
+
+.startMenu {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  z-index: 10000;
+  width: 300px;
+  border: 2px solid #0831d9;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.startHeader {
+  padding: 12px;
+  background: linear-gradient(#1868ce, #0e60cb 60%, #0a4fb4);
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow: 1px 1px #0f1089;
+}
+
+.startBody {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  background: #fff;
+}
+
+.startItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.startItem:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.startFooter {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  background: linear-gradient(#4282d6, #3c77cc);
+}
+
+.startFooterLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.startFooterLink:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Taskbar ---------- */
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background: linear-gradient(#1f5fd6, #245edb 10%, #3f8cf3 14%, #245edb 30%, #1941a5);
+}
+
+.startButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 18px 0 10px;
+  border: 0;
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(#3a9a3a, #3c9f3c 15%, #4fbf4f 30%, #2f8a2f 85%, #227722);
+  color: #fff;
+  font: italic bold 17px Tahoma, sans-serif;
+  text-shadow: 1px 1px 1px #1a4a1a;
+  cursor: pointer;
+}
+
+.taskButtons {
+  flex: 1;
+  display: flex;
+  gap: 3px;
+  padding: 0 6px;
+  overflow: hidden;
+}
+
+.taskButton {
+  width: 150px;
+  min-width: 0;
+  height: 23px;
+  padding: 0 8px;
+  border: 1px solid #1941a5;
+  border-radius: 3px;
+  background: #3c81f3;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.taskButtonActive {
+  background: #1e52b7;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.tray {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-left: 1px solid #092e8a;
+  background: linear-gradient(#0c8ae8, #0f9ef0 20%, #0b77d9);
+  color: #fff;
+}
+
+/* ---------- Phones: every window goes full-screen, no dragging ---------- */
+
+@media (max-width: 640px) {
+  .window {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .welcome {
+    flex-direction: column;
+  }
+
+  .explorerSide {
+    display: none;
+  }
+
+  .taskButton {
+    width: auto;
+    max-width: 110px;
+  }
+}

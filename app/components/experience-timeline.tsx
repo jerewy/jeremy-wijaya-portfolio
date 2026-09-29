@@ -196,11 +196,24 @@ function ExperienceCard({ experience, index }: ExperienceCardProps) {
 export const sampleExperiences: ExperienceItem[] = [
   // WORK / LEADERSHIP
   {
+    id: "exp-bca-frontend-intern",
+    title: "Frontend Developer Intern",
+    company: "BCA (Bank Central Asia)",
+    location: "Indonesia",
+    period: "Feb 2026 – Present",
+    type: "work",
+    description: [
+      "Build and fix frontend features for a merchant management web app: multi-step forms, group and user settings, and OTP flows.",
+      "Resolve UAT (user acceptance testing) findings each release cycle: form validation, unsaved-changes prompts, browser back/refresh behavior, and responsive navigation.",
+      "Support environment migration and regression testing to keep the app stable before release.",
+    ],
+  },
+  {
     id: "exp-sasc-senior-mentor",
     title: "SASC Scholarship Senior Mentor",
     company: "BINUS University",
     location: "Alam Sutera, Indonesia",
-    period: "Sep 2025 – Present",
+    period: "Sep 2025 – Jan 2026",
     type: "work",
     description: [
       "Mentored 2 students across the semester on complex technical concepts",

@@ -278,7 +278,7 @@ export function EnhancedCVPreviewModal({ isOpen, onClose }: CVPreviewModalProps)
                     Jeremy Wijaya
                   </h1>
                   <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <span>AI Engineer & Full-Stack Developer</span>
+                    <span>Full-Stack Developer & AI Enthusiast</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
@@ -290,7 +290,7 @@ export function EnhancedCVPreviewModal({ isOpen, onClose }: CVPreviewModalProps)
                   <div className="flex items-center gap-2 mt-2">
                     <Badge variant="secondary" className="text-xs">
                       <Award className="w-3 h-3 mr-1" />
-                      3.96 GPA
+                      3.95 GPA
                     </Badge>
                     <Badge variant="outline" className="text-xs">
                       <CheckCircle className="w-3 h-3 mr-1" />

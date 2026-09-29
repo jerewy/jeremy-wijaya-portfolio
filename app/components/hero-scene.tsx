@@ -527,9 +527,22 @@ export default function HeroScene() {
   }, [isCoarsePointer]);
 
   // Theme-aware colors
-  const bgColor = theme === 'dark' ? '#0c1027' : '#f8fafc';
-  const meshColor = theme === 'dark' ? '#10163a' : '#e2e8f0';
-  const meshEmissive = theme === 'dark' ? '#1b285f' : '#cbd5e1';
+  // The canvas clear colour is read from the --background token rather than
+  // hardcoded, so the hero never tints differently from the rest of the page.
+  const [bgColor, setBgColor] = useState(
+    theme === 'dark' ? '#020817' : '#f7f5f0'
+  );
+
+  useEffect(() => {
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue('--background')
+      .trim();
+    // Token is space-separated HSL channels ("47 18% 96%"); three.js wants commas.
+    if (raw) setBgColor(`hsl(${raw.split(/\s+/).join(', ')})`);
+  }, [theme]);
+
+  const meshColor = '#10163a';
+  const meshEmissive = '#1b285f';
   const gradientOpacity = theme === 'dark' ? 'opacity-70' : 'opacity-30';
 
   return (
@@ -583,14 +596,16 @@ export default function HeroScene() {
           />
         )}
         <ShootingStarField count={theme === 'dark' ? 7 : 3} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]}>
-          <planeGeometry args={[50, 50]} />
-          <meshStandardMaterial
-            color={meshColor}
-            emissive={meshEmissive}
-            emissiveIntensity={theme === 'dark' ? 0.3 : 0.1}
-          />
-        </mesh>
+        {theme === 'dark' && (
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]}>
+            <planeGeometry args={[50, 50]} />
+            <meshStandardMaterial
+              color={meshColor}
+              emissive={meshEmissive}
+              emissiveIntensity={0.3}
+            />
+          </mesh>
+        )}
       </Canvas>
       {theme === 'dark' && (
         <>

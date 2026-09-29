@@ -340,7 +340,7 @@ function CVPreviewModal({
                     Jeremy Wijaya - Curriculum Vitae
                   </h2>
                   <p className="text-sm text-muted-foreground truncate">
-                    AI Engineer & Full-Stack Developer
+                    Full-Stack Developer & AI Enthusiast
                   </p>
                   <div className="flex items-center gap-3 md:gap-4 mt-1 text-xs text-muted-foreground">
                     <div className="flex items-center gap-1">
@@ -414,8 +414,8 @@ function CVPreviewModal({
                   Professional Overview
                 </p>
                 <p className="text-xs md:text-sm">
-                  Complete overview of my experience in AI engineering,
-                  full-stack development, and technical leadership.
+                  Complete overview of my experience in full-stack development,
+                  AI projects, and technical leadership.
                 </p>
               </div>
 
@@ -480,7 +480,7 @@ export function CVDownloadButton() {
                   Jeremy Wijaya - Curriculum Vitae
                 </CardTitle>
                 <CardDescription className="text-sm font-medium text-muted-foreground">
-                  AI Engineer & Full-Stack Developer
+                  Full-Stack Developer & AI Enthusiast
                 </CardDescription>
               </div>
               <div className="flex-shrink-0">
@@ -512,7 +512,7 @@ export function CVDownloadButton() {
 
             <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
               Complete overview of my professional experience, technical skills,
-              and achievements in AI engineering and full-stack development.
+              and achievements in full-stack development and AI.
             </p>
 
             <div className="flex items-center justify-between">

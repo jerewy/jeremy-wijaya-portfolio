@@ -6,11 +6,11 @@ import { ThemeProvider } from "./components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
+  title: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
   description:
-    "Portfolio of Jeremy Wijaya, an aspiring AI Engineer and Full-Stack Developer specializing in intelligent systems and machine learning solutions.",
+    "Portfolio of Jeremy Wijaya, a full-stack developer and AI enthusiast studying Intelligent Systems at BINUS University.",
   keywords:
-    "AI Engineer, Machine Learning, Full-Stack Developer, Computer Science, Next.js, Python, TensorFlow",
+    "Full-Stack Developer, Frontend Developer, Machine Learning, AI, Computer Science, Next.js, Python, TensorFlow",
   authors: [{ name: "Jeremy Wijaya" }],
   icons: {
     icon: '/favicon.svg',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('http://localhost:3003'),
   openGraph: {
-    title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
+    title: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
     description: "Portfolio showcasing AI and full-stack development projects",
     type: "website",
     images: [
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
         url: '/opengraph-image.svg',
         width: 1200,
         height: 630,
-        alt: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
+        alt: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Jeremy Wijaya - AI Engineer & Full-Stack Developer",
+    title: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
     description: "Portfolio showcasing AI and full-stack development projects",
     images: ['/twitter-image.svg'],
   },

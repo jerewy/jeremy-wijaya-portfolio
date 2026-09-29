@@ -13,7 +13,7 @@ interface AccessibleCVModalProps {
 export function AccessibleCVModal({
   isOpen,
   onClose,
-  description = "Professional CV preview and download options for Jeremy Wijaya, AI Engineer & Full-Stack Developer",
+  description = "Professional CV preview and download options for Jeremy Wijaya, Full-Stack Developer & AI Enthusiast",
 }: AccessibleCVModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
