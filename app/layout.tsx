@@ -23,25 +23,27 @@ export const metadata: Metadata = {
       },
     ],
   },
-  metadataBase: new URL('http://localhost:3003'),
+  // Absolute base for link-preview URLs. Vercel sets this to the production domain;
+  // local builds fall back to the dev server.
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"
+  ),
+  // The preview image comes from app/opengraph-image.tsx (a PNG; platforms reject SVG).
   openGraph: {
     title: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
-    description: "Portfolio showcasing AI and full-stack development projects",
+    description:
+      "Explore my portfolio: projects, skills, and resume in an interactive pixel-art room.",
     type: "website",
-    images: [
-      {
-        url: '/opengraph-image.svg',
-        width: 1200,
-        height: 630,
-        alt: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
-      },
-    ],
+    url: "/",
+    siteName: "Jeremy Wijaya",
   },
   twitter: {
     card: 'summary_large_image',
     title: "Jeremy Wijaya - Full-Stack Developer & AI Enthusiast",
-    description: "Portfolio showcasing AI and full-stack development projects",
-    images: ['/twitter-image.svg'],
+    description:
+      "Explore my portfolio: projects, skills, and resume in an interactive pixel-art room.",
   },
 };
 
